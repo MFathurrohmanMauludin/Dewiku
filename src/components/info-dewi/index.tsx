@@ -58,6 +58,8 @@ const InfoDewi = () => {
             selectedKey={isSelected}
             onSelectionChange={setIsSelected}
           >
+
+            {/* acara */}
             <Tab
               key="acara"
               title={
@@ -78,6 +80,8 @@ const InfoDewi = () => {
                 </CardBody>
               </Card>
             </Tab>
+
+            {/* budaya */}
             <Tab
               key="budaya"
               title={
@@ -101,7 +105,7 @@ const InfoDewi = () => {
               </Card>
             </Tab>
 
-            {/*  */}
+            {/* kuliner */}
             <Tab
               key="kuliner"
               title={
