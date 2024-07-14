@@ -21,11 +21,10 @@ import {
 } from "@nextui-org/react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { formatShortIndonesiaDate } from "../../utils/changeDate";
 import {
   formatNumberViewer,
-  ThousandSeparators,
 } from "../../utils/changeNumber";
+import { formatShortIndonesiaDate } from "../../utils/changeDate";
 
 interface GaleryProps {
   title: string;
@@ -40,30 +39,13 @@ interface BannerCardProps {
   title: string;
 }
 
-interface ExhibitionCardProps {
-  title: string;
+interface RatingProps {
+  name: string;
   imgUrl: string;
-  school: {
-    name: string;
-    logo: string;
-  };
-  ticket: number;
-  date: string;
-}
-
-interface LiveShowCardProps {
-  title: string;
-  imgUrl: string;
-  viewer: number;
+  nominal: number;
+  comment: string;
   like: number;
-}
-
-interface MerchandiseCardProps {
-  title: string;
-  imgUrl: string;
-  price: number;
-  sold: number;
-  author: string;
+  date: string;
 }
 
 interface DesaCardProps {}
@@ -85,46 +67,72 @@ const BannerCard = (data: BannerCardProps) => {
   );
 };
 
-const LiveShowCard = (data: LiveShowCardProps) => {
+const RatingCard = (data: RatingProps) => {
   const [isLike, setIsLike] = useState(false);
+
   return (
     <>
-      <Card className="max-w-[200px] w-full h-[300px]">
-        <Image
-          removeWrapper
-          alt={data.title}
-          className="z-0 w-full h-full object-cover"
-          src={data.imgUrl}
-        />
+      <Card className="hover:shadow-md" shadow="none">
+        <CardHeader className="justify-between">
+          <div className="flex gap-3">
+            <Avatar
+              radius="full"
+              size="md"
+              src={data.imgUrl}
+              classNames={{ img: "object-top" }}
+            />
+            <div className="flex flex-col gap-1 items-start justify-center">
+              <div className="flex flex-row gap-x-2">
+                <span className="text-small font-semibold leading-none text-default-600 capitalize">
+                  {data.name}
+                </span>
+                <h5 className="text-xs tracking-tight text-default-400">
+                  {formatShortIndonesiaDate(data.date)}
+                </h5>
+              </div>
 
-        <div className="absolute z-10 right-0 top-2">
+              <Chip
+                className="bg-yellow-500 text-white"
+                size="sm"
+                variant="solid"
+              >
+              l
+              </Chip>
+            </div>
+          </div>
+        </CardHeader>
+        <CardBody className="px-3 py-0 text-small text-default-400">
+          <p className="line-clamp-4 text-gray-600">{data.comment}</p>
+        </CardBody>
+        <CardFooter className="flex justify-end gap-2">
           <Button
-            className={`bg-gray-950/10 backdrop-blur-sm text-white ${
-              isLike ? "text-rose-500" : "text-white"
-            } hover:text-rose-500`}
+            className={`hover:!bg-white ${
+              isLike ? "text-rose-600" : "text-gray-600"
+            }  hover:text-rose-500`}
             startContent={
               <div className="flex items-center gap-x-2">
                 <FontAwesomeIcon
                   icon={isLike ? faHeartSolid : faHeart}
-                  fontSize={18}
+                  fontSize={14}
                 />
                 <span>{isLike ? data.like + 1 : data.like}</span>
               </div>
             }
             onClick={() => setIsLike(!isLike)}
-            variant="solid"
+            variant="light"
             size="sm"
             radius="full"
           />
-        </div>
+          <Button
+            className="hover:!bg-white hover:text-gray-950 text-gray-600 hover:border-gray-600 capitalize text-[12px]"
+            variant="light"
+            size="sm"
+            radius="full"
+          >
+            baca selengkapnya
+          </Button>
+        </CardFooter>
       </Card>
-
-      <div className="flex flex-col max-w-[200px]">
-        <span className="text-md line-clamp-1">{data.title}</span>
-        <span className="text-tiny">
-          {formatNumberViewer(data.viewer)} Watching Now
-        </span>
-      </div>
     </>
   );
 };
@@ -223,115 +231,6 @@ const GaleryCard = (data: GaleryProps) => {
             {data.category}
           </Button>
         </div>
-      </Card>
-    </>
-  );
-};
-
-const MerchandiseCard = (data: MerchandiseCardProps) => {
-  return (
-    <>
-      <Card className="w-full max-w-[246px]" shadow="sm" isPressable>
-        <CardBody className="overflow-visible p-0">
-          <Image
-            shadow="sm"
-            radius="lg"
-            width="100%"
-            alt={data.title}
-            className="w-full object-cover h-[200px]"
-            src={data.imgUrl}
-          />
-        </CardBody>
-        <CardFooter className="flex flex-col">
-          <span className="text-left self-start capitalize line-clamp-1 font-semibold">
-            {data.title}
-          </span>
-
-          <div className="flex flex-row justify-between w-full text-sm">
-            <span>Rp{ThousandSeparators(data.price)}</span>
-            <span className="text-default-500">
-              {formatNumberViewer(data.sold)} Terjual
-            </span>
-          </div>
-        </CardFooter>
-      </Card>
-    </>
-  );
-};
-
-const ExhibitionCard = (data: ExhibitionCardProps) => {
-  const [showInfo, setShowInfo] = useState(false);
-
-  const handleMouseEnterCard = () => {
-    setShowInfo(true);
-  };
-
-  const handleMouseOutCard = () => {
-    setShowInfo(false);
-  };
-
-  const handleFocusCard = () => {
-    setShowInfo(!showInfo);
-  };
-
-  return (
-    <>
-      <Card
-        isFooterBlurred
-        className="w-full max-w-[300px] h-[300px] relative"
-        shadow="sm"
-        onMouseEnter={handleMouseEnterCard}
-        onMouseLeave={handleMouseOutCard}
-        onFocus={handleFocusCard}
-      >
-        <CardHeader
-          className={`absolute z-10 flex-col items-start bg-black/40 backdrop-blur-sm ${
-            showInfo ? "translate-y-0" : "-translate-y-[100px]"
-          } transition-all ease-in duration-300`}
-        >
-          <Chip
-            className="!text-[10px] bg-gray-950/30 backdrop-blur-sm text-white uppercase tracking-wide"
-            variant="solid"
-            size="sm"
-          >
-            {formatShortIndonesiaDate(data.date)}
-          </Chip>
-          <p className="text-white font-medium text-md line-clamp-1">
-            {data.title}
-          </p>
-        </CardHeader>
-        <Image
-          removeWrapper
-          alt={data.title}
-          className="z-0 w-full h-full object-cover object-top"
-          src={data.imgUrl}
-        />
-        <CardFooter
-          className={`absolute bg-black/40 bottom-0 z-10 ${
-            showInfo ? "translate-y-0" : "translate-y-[100px]"
-          } transition-all ease-in duration-300`}
-        >
-          <div className="flex flex-grow gap-2 items-center">
-            <Avatar
-              className="p-1 bg-gray-950/30 backdrop-blur-md"
-              src={data.school.logo}
-              alt={`logo-${data.school.name}`}
-            />
-            <div className="flex flex-col">
-              <span className="text-sm text-white">{data.school.name}</span>
-              <span className="text-xs text-white">
-                {ThousandSeparators(data.ticket)} Tiket Tersedia
-              </span>
-            </div>
-          </div>
-          <Button
-            className="bg-gray-950/30 backdrop-blur-md text-white"
-            radius="full"
-            size="sm"
-          >
-            Get Now
-          </Button>
-        </CardFooter>
       </Card>
     </>
   );
@@ -464,8 +363,6 @@ const BudayaCard = () => {
 export {
   BannerCard,
   GaleryCard,
-  ExhibitionCard,
-  LiveShowCard,
-  MerchandiseCard,
+  RatingCard,
   DesaCard,
 };

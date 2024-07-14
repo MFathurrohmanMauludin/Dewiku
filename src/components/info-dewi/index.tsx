@@ -7,6 +7,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Card, CardBody, Image, Tab, Tabs } from "@nextui-org/react";
 import { useState } from "react";
+import { RatingCard } from "../card";
 
 const InfoDewi = () => {
   const [isSelected, setIsSelected] = useState("acara");
@@ -49,7 +50,7 @@ const InfoDewi = () => {
         </Card>
       </div>
 
-      <div className="flex gap-x-4 py-[80px]">
+      <div className="flex flex-wrap gap-x-4 py-[80px]">
         {/* left */}
         <div className="flex-shrink flex-col w-full z-0">
           <Tabs
@@ -58,7 +59,6 @@ const InfoDewi = () => {
             selectedKey={isSelected}
             onSelectionChange={setIsSelected}
           >
-
             {/* acara */}
             <Tab
               key="acara"
@@ -143,14 +143,16 @@ const InfoDewi = () => {
                 </div>
               }
             >
-              <Card>
-                <CardBody>
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur.
-                </CardBody>
-              </Card>
+              <div className="flex flex-wrap">
+                <RatingCard
+                  name={"Hatsune Miku"}
+                  imgUrl={"https://i.pinimg.com/736x/5f/03/5f/5f035fab60d92fa74c6f9546da140497.jpg"}
+                  nominal={4}
+                  comment={"Sangat enak"}
+                  like={495}
+                  date={"7/10/2024"}
+                />
+              </div>
             </Tab>
 
             {/* tentang */}
