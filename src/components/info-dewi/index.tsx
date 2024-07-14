@@ -8,7 +8,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Card, CardBody, Image, Tab, Tabs } from "@nextui-org/react";
 import { useState } from "react";
-import { BudayaCard, KulinerCard, RatingCard } from "../card";
+import { AlamCard, BudayaCard, KulinerCard, RatingCard } from "../card";
 
 const InfoDewi = () => {
   const [isSelected, setIsSelected] = useState("acara");
@@ -70,7 +70,7 @@ const InfoDewi = () => {
                   } space-x-2`}
                 >
                   <FontAwesomeIcon icon={faCalendar} fontSize={16} />
-                  <span>Acara</span>
+                  <span>Event</span>
                 </div>
               }
             >
@@ -97,7 +97,7 @@ const InfoDewi = () => {
               }
             >
               <div className="grid grid-cols-3 gap-4">
-                <BudayaCard />
+                <AlamCard />
               </div>
             </Tab>
 

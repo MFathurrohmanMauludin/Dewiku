@@ -387,9 +387,9 @@ const KulinerCard = () => {
             }
           />
         </CardBody>
-        <CardFooter className="flex flex-col items-start text-small">
+        <CardFooter className="flex flex-col items-start">
           <b>Dawet Sambel Khas Jatimulyo</b>
-          <p className="text-default-500">Rp4.000</p>
+          <p className="text-default-500 text-sm">Rp4.000</p>
         </CardFooter>
       </Card>
 
@@ -481,9 +481,9 @@ const AlamCard = () => {
           }
         />
       </CardBody>
-      <CardFooter className="flex flex-col items-start text-small">
-        <b className="capitalize">Grojogan Sewu</b>
-        <span className="text-default-500">Rp22.000</span>
+      <CardFooter className="flex flex-col items-start">
+        <b className="capitalize">Air Terjun Grojogan Sewu</b>
+        <span className="text-default-500 text-sm">Rp22.000</span>
       </CardFooter>
     </Card>
 
@@ -538,11 +538,20 @@ const AlamCard = () => {
   )
 }
 
+const EventCard = () => {
+  return (
+    <>
+
+    </>
+  ) 
+}
+
 export {
   BannerCard,
   GaleryCard,
   KulinerCard,
   RatingCard,
   DesaCard,
+  AlamCard,
   BudayaCard,
 };
