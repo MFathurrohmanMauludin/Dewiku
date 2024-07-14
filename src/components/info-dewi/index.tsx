@@ -2,12 +2,13 @@ import { faCalendar, faStar } from "@fortawesome/free-regular-svg-icons";
 import {
   faInfoCircle,
   faMasksTheater,
+  faTree,
   faUtensils,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Card, CardBody, Image, Tab, Tabs } from "@nextui-org/react";
 import { useState } from "react";
-import { RatingCard } from "../card";
+import { BudayaCard, KulinerCard, RatingCard } from "../card";
 
 const InfoDewi = () => {
   const [isSelected, setIsSelected] = useState("acara");
@@ -50,7 +51,7 @@ const InfoDewi = () => {
         </Card>
       </div>
 
-      <div className="flex flex-wrap gap-x-4 py-[80px]">
+      <div className="flex xs:flex-wrap sm:flex-wrap gap-x-4 py-[80px]">
         {/* left */}
         <div className="flex-shrink flex-col w-full z-0">
           <Tabs
@@ -81,6 +82,25 @@ const InfoDewi = () => {
               </Card>
             </Tab>
 
+            {/* alam */}
+            <Tab
+              key="alam"
+              title={
+                <div
+                  className={`flex items-center ${
+                    isSelected === "alam" && "text-green-600"
+                  } space-x-2`}
+                >
+                  <FontAwesomeIcon icon={faTree} fontSize={16} />
+                  <span>Alam</span>
+                </div>
+              }
+            >
+              <div className="grid grid-cols-3 gap-4">
+                <BudayaCard />
+              </div>
+            </Tab>
+
             {/* budaya */}
             <Tab
               key="budaya"
@@ -95,14 +115,9 @@ const InfoDewi = () => {
                 </div>
               }
             >
-              <Card>
-                <CardBody>
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur.
-                </CardBody>
-              </Card>
+              <div className="grid grid-cols-3 gap-4">
+                <BudayaCard />
+              </div>
             </Tab>
 
             {/* kuliner */}
@@ -119,14 +134,11 @@ const InfoDewi = () => {
                 </div>
               }
             >
-              <Card>
-                <CardBody>
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur.
-                </CardBody>
-              </Card>
+              <div className="grid grid-cols-3 gap-4">
+                <KulinerCard />
+                <KulinerCard />
+                <KulinerCard />
+              </div>
             </Tab>
 
             {/* testimoni */}
@@ -143,10 +155,32 @@ const InfoDewi = () => {
                 </div>
               }
             >
-              <div className="flex flex-wrap">
+              <div className="flex flex-wrap gap-4">
                 <RatingCard
                   name={"Hatsune Miku"}
-                  imgUrl={"https://i.pinimg.com/736x/5f/03/5f/5f035fab60d92fa74c6f9546da140497.jpg"}
+                  imgUrl={
+                    "https://i.pinimg.com/736x/5f/03/5f/5f035fab60d92fa74c6f9546da140497.jpg"
+                  }
+                  nominal={4}
+                  comment={"Sangat enak"}
+                  like={495}
+                  date={"7/10/2024"}
+                />
+                <RatingCard
+                  name={"Hatsune Miku"}
+                  imgUrl={
+                    "https://i.pinimg.com/736x/5f/03/5f/5f035fab60d92fa74c6f9546da140497.jpg"
+                  }
+                  nominal={4}
+                  comment={"Sangat enak"}
+                  like={495}
+                  date={"7/10/2024"}
+                />
+                <RatingCard
+                  name={"Hatsune Miku"}
+                  imgUrl={
+                    "https://i.pinimg.com/736x/5f/03/5f/5f035fab60d92fa74c6f9546da140497.jpg"
+                  }
                   nominal={4}
                   comment={"Sangat enak"}
                   like={495}

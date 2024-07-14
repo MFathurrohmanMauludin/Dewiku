@@ -2,10 +2,12 @@ import {
   faCloud,
   faHeart as faHeartSolid,
   faPalette,
-  faStar,
+  faStar as faStarSolid,
   faSuitcaseRolling,
   faSun,
 } from "@fortawesome/free-solid-svg-icons";
+import { faStar } from "@fortawesome/free-regular-svg-icons";
+
 import { faHeart, faMap } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -17,14 +19,19 @@ import {
   CardHeader,
   Chip,
   Image,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
   Tooltip,
+  useDisclosure,
 } from "@nextui-org/react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import {
-  formatNumberViewer,
-} from "../../utils/changeNumber";
+import { formatNumberViewer } from "../../utils/changeNumber";
 import { formatShortIndonesiaDate } from "../../utils/changeDate";
+import Rating from "react-rating";
 
 interface GaleryProps {
   title: string;
@@ -72,7 +79,10 @@ const RatingCard = (data: RatingProps) => {
 
   return (
     <>
-      <Card className="hover:shadow-md" shadow="none">
+      <Card
+        className="border-1 hover:shadow-[0_4px_30px_4px_rgba(0,0,0,0.1)]"
+        shadow="none"
+      >
         <CardHeader className="justify-between">
           <div className="flex gap-3">
             <Avatar
@@ -91,20 +101,31 @@ const RatingCard = (data: RatingProps) => {
                 </h5>
               </div>
 
-              <Chip
-                className="bg-yellow-500 text-white"
-                size="sm"
-                variant="solid"
-              >
-              l
-              </Chip>
+              <Rating
+                emptySymbol={
+                  <FontAwesomeIcon
+                    icon={faStar}
+                    fontSize={16}
+                    className="text-yellow-400"
+                  />
+                }
+                fullSymbol={
+                  <FontAwesomeIcon
+                    icon={faStarSolid}
+                    fontSize={16}
+                    className="text-yellow-400"
+                  />
+                }
+                initialRating={4}
+                readonly
+              />
             </div>
           </div>
         </CardHeader>
         <CardBody className="px-3 py-0 text-small text-default-400">
           <p className="line-clamp-4 text-gray-600">{data.comment}</p>
         </CardBody>
-        <CardFooter className="flex justify-end gap-2">
+        <CardFooter className="flex justify-start gap-2">
           <Button
             className={`hover:!bg-white ${
               isLike ? "text-rose-600" : "text-gray-600"
@@ -123,14 +144,6 @@ const RatingCard = (data: RatingProps) => {
             size="sm"
             radius="full"
           />
-          <Button
-            className="hover:!bg-white hover:text-gray-950 text-gray-600 hover:border-gray-600 capitalize text-[12px]"
-            variant="light"
-            size="sm"
-            radius="full"
-          >
-            baca selengkapnya
-          </Button>
         </CardFooter>
       </Card>
     </>
@@ -353,16 +366,183 @@ const DesaCard = (data: DesaCardProps) => {
 };
 
 const KulinerCard = () => {
-  
-}
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const history = `<p><span style="background-color:rgb(255,255,255);color:rgb(60,72,88);font-family:Montserrat;font-size:18px;"><span style="-webkit-text-stroke-width:0px;display:inline !important;float:none;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:300;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">Di Jatimulyolah Makanan tradisional warisan nenek moyang ini bisa ditemukan. ‘Dawet Sambel’ namanya, sekitar 60 tahun yang lalu, ketika Dawet Sambel dicetuskan oleh seorang penjual Pecel, namanya adalah ‘Dawet Pecel’, Singkat cerita, ada salah satu warga Jatimulyo namanya Simbah Wagiyem, warga Asli padukuhan Sokomoyo, Kalurahan Jatimulyo, Kapanewon Girimulyo. Mbah wagiyem yang berprofesi sebagai Penjual Pecel, Pecel adalah makanan dari sayuran yang direbus dengan di tambahkan Sambal kelapa dan nira kelapa sebagai pemanis. Mbah wagiyem selalu berjulan di pasar traditional setiap rabu dan Sabtu,Terkadang juga berjualan di setiap Even yang di adakan di desa.&nbsp;</span></span></p>
+<p>&nbsp;</p>
+<p><span style="background-color:rgb(255,255,255);color:rgb(60,72,88);font-family:Montserrat;font-size:18px;"><span style="-webkit-text-stroke-width:0px;display:inline !important;float:none;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:300;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">Jatimulyo berada di deretan Pegunungan Menoreh, tanah di Jatimulyo sangatlah subur, cocok untuk segala macam tanaman, apalagi jenis umbi umbian, tumbuhan Ganyong pada tahun 1950 an banyak ditemukan, Umbi yang kaya akan Gizi dan Berserat tinggi ini hampir setiap masyarakat di Jatimulyo menanamnya.&nbsp;</span></span></p>
+<p><span style="background-color:rgb(255,255,255);color:rgb(60,72,88);font-family:Montserrat;font-size:18px;"><span style="-webkit-text-stroke-width:0px;display:inline !important;float:none;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:300;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">Melihat potensi tersebut mbah Wagiyem memcoba untuk membuat sesuatu dari ganyong, awalnya simbah Wagiyem ingin membuat jenang ganyong, dengan cara memarut umbi ganyong, kemudian di peras untuk diambil sari patinya, dan dimasak dengan air mendidih, percobaan yang dilakukan Mbah Wagiyem ahirnya berhasil, tetapi tidak sampai situ saja, karena Mbah Wagiyem seorang pedagang, beliau haus akan inovasi untuk Ganyong untuk bias menjadi nilai Ekonomi.</span></span></p>`;
+
+  return (
+    <>
+      <Card shadow="sm" isPressable onPress={onOpen}>
+        <CardBody className="overflow-visible p-0">
+          <Image
+            shadow="sm"
+            radius="lg"
+            width="100%"
+            alt=""
+            className="w-full object-cover h-[200px]"
+            src={
+              "https://www.desawisatajatimulyo.com/wp-content/uploads/2022/08/IMG_2521-360x240.jpg"
+            }
+          />
+        </CardBody>
+        <CardFooter className="flex flex-col items-start text-small">
+          <b>Dawet Sambel Khas Jatimulyo</b>
+          <p className="text-default-500">Rp4.000</p>
+        </CardFooter>
+      </Card>
+
+      {/* sejarah makanan */}
+      <Modal
+        size="md"
+        isOpen={isOpen}
+        placement="center"
+        onClose={onClose}
+        scrollBehavior="inside"
+        classNames={{
+          backdrop: "z-[1000]",
+          wrapper: "z-[1000]",
+        }}
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col">
+                <div className="flex flex-row items-stretch gap-x-2">
+                  <Image
+                    className="w-[50px] h-[50px]"
+                    src="https://www.desawisatajatimulyo.com/wp-content/uploads/2022/08/IMG_2521-360x240.jpg"
+                    alt="image-1"
+                    radius="md"
+                    width={100}
+                  />
+                  <div className="flex flex-col">
+                    <b>Dawet Sambel Khas Jatimulyo</b>
+                    <p className="text-default-500 text-sm">Rp4.000</p>
+                  </div>
+                </div>
+              </ModalHeader>
+              <ModalBody>
+                <div dangerouslySetInnerHTML={{ __html: history }} />
+              </ModalBody>
+              <ModalFooter>
+                <Button
+                  color="danger"
+                  variant="light"
+                  radius="full"
+                  onPress={onClose}
+                >
+                  Tutup
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    </>
+  );
+};
 
 const BudayaCard = () => {
+  return (
+  <>
+     <Card className="h-[300px]">
+      <CardHeader className="absolute z-10">
+        <h4 className="text-white font-medium text-large text">Sendratari Sugriwa-Subali</h4>
+      </CardHeader>
+      <Image
+        removeWrapper
+        alt="Card background"
+        className="z-0 w-full h-full object-cover brightness-90 hover:brightness-100 focus-within:brightness-100"
+        src="https://visitingjogja.jogjaprov.go.id/wp-content/uploads/2020/04/422.jpg"
+        tabIndex={0}
+      />
+    </Card>
+  </>
+  )
+};
 
+const AlamCard = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  
+  return (
+    <>
+    <Card shadow="sm" isPressable onPress={onOpen}>
+      <CardBody className="overflow-visible p-0">
+        <Image
+          shadow="sm"
+          radius="lg"
+          width="100%"
+          alt=""
+          className="w-full object-cover h-[200px]"
+          src={
+            "https://asset.kompas.com/crops/b_2bessHbE6IXIqr-6_lRssr0II=/0x0:1800x1200/750x500/data/photo/2022/11/04/6364469a947cc.jpg"
+          }
+        />
+      </CardBody>
+      <CardFooter className="flex flex-col items-start text-small">
+        <b className="capitalize">Grojogan Sewu</b>
+        <span className="text-default-500">Rp22.000</span>
+      </CardFooter>
+    </Card>
+
+    {/* sejarah makanan */}
+    <Modal
+      size="md"
+      isOpen={isOpen}
+      placement="center"
+      onClose={onClose}
+      scrollBehavior="inside"
+      classNames={{
+        backdrop: "z-[1000]",
+        wrapper: "z-[1000]",
+      }}
+    >
+      <ModalContent>
+        {(onClose) => (
+          <>
+            <ModalHeader className="flex flex-col">
+              <div className="flex flex-row items-stretch gap-x-2">
+                <Image
+                  className="w-[50px] h-[50px]"
+                  src="https://www.desawisatajatimulyo.com/wp-content/uploads/2022/08/IMG_2521-360x240.jpg"
+                  alt="image-1"
+                  radius="md"
+                  width={100}
+                />
+                <div className="flex flex-col">
+                  <b>Dawet Sambel Khas Jatimulyo</b>
+                  <p className="text-default-500 text-sm">Rp4.000</p>
+                </div>
+              </div>
+            </ModalHeader>
+            <ModalBody>
+              <div dangerouslySetInnerHTML={{ __html: history }} />
+            </ModalBody>
+            <ModalFooter>
+              <Button
+                color="danger"
+                variant="light"
+                radius="full"
+                onPress={onClose}
+              >
+                Tutup
+              </Button>
+            </ModalFooter>
+          </>
+        )}
+      </ModalContent>
+    </Modal>
+  </>
+  )
 }
 
 export {
   BannerCard,
   GaleryCard,
+  KulinerCard,
   RatingCard,
   DesaCard,
+  BudayaCard,
 };
