@@ -389,7 +389,7 @@ const KulinerCard = () => {
         </CardBody>
         <CardFooter className="flex flex-col items-start">
           <b>Dawet Sambel Khas Jatimulyo</b>
-          <p className="text-default-500 text-sm">Rp4.000</p>
+          <p className="text-default-500 text-sm">Harga: Rp4.000</p>
         </CardFooter>
       </Card>
 
@@ -448,8 +448,8 @@ const BudayaCard = () => {
   return (
   <>
      <Card className="h-[300px]">
-      <CardHeader className="absolute z-10">
-        <h4 className="text-white font-medium text-large text">Sendratari Sugriwa-Subali</h4>
+      <CardHeader className="absolute bottom-0 z-10">
+        <h4 className="text-white font-medium text-large">Sendratari Sugriwa-Subali</h4>
       </CardHeader>
       <Image
         removeWrapper
@@ -483,7 +483,7 @@ const AlamCard = () => {
       </CardBody>
       <CardFooter className="flex flex-col items-start">
         <b className="capitalize">Air Terjun Grojogan Sewu</b>
-        <span className="text-default-500 text-sm">Rp22.000</span>
+        <span className="text-default-500 text-sm">Harga Tiket: Rp22.000</span>
       </CardFooter>
     </Card>
 
