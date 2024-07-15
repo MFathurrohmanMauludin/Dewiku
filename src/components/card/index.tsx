@@ -87,7 +87,7 @@ const RatingCard = (data: RatingProps) => {
           <div className="flex gap-3">
             <Avatar
               radius="full"
-              size="md"
+              size="lg"
               src={data.imgUrl}
               classNames={{ img: "object-top" }}
             />
@@ -389,13 +389,13 @@ const KulinerCard = () => {
         </CardBody>
         <CardFooter className="flex flex-col items-start">
           <b>Dawet Sambel Khas Jatimulyo</b>
-          <p className="text-default-500 text-sm">Harga: Rp4.000 /porsi</p>
+          <p className="text-default-500 text-sm">Rp4.000 /porsi</p>
         </CardFooter>
       </Card>
 
       {/* sejarah makanan */}
       <Modal
-        size="md"
+        size="lg"
         isOpen={isOpen}
         placement="center"
         onClose={onClose}
@@ -466,9 +466,9 @@ const BudayaCard = () => {
         />
       </Card>
 
-         {/* sejarah makanan */}
-         <Modal
-        size="md"
+      {/* sejarah makanan */}
+      <Modal
+        size="lg"
         isOpen={isOpen}
         placement="center"
         onClose={onClose}
@@ -538,14 +538,14 @@ const AlamCard = () => {
         <CardFooter className="flex flex-col items-start">
           <b className="capitalize">Air Terjun Grojogan Sewu</b>
           <span className="text-default-500 text-sm">
-            Harga Tiket: Rp22.000 /orang
+            Rp22.000 /orang
           </span>
         </CardFooter>
       </Card>
 
       {/* sejarah makanan */}
       <Modal
-        size="md"
+        size="lg"
         isOpen={isOpen}
         placement="center"
         onClose={onClose}
@@ -617,13 +617,15 @@ const EventCard = () => {
         </CardBody>
         <CardFooter className="flex flex-col items-start">
           <b className="capitalize">grebeg sampah</b>
-          <p className="text-default-500 text-sm">Dilaksanakan: 10 september 2022 </p>
+          <p className="text-default-500 text-sm">
+            Dilaksanakan: 10 september 2022{" "}
+          </p>
         </CardFooter>
       </Card>
 
       {/* sejarah makanan */}
       <Modal
-        size="md"
+        size="lg"
         isOpen={isOpen}
         placement="center"
         onClose={onClose}
@@ -647,12 +649,113 @@ const EventCard = () => {
                   />
                   <div className="flex flex-col">
                     <b>Grebeg Sampah</b>
-                    <p className="text-default-500 text-sm">Dilaksanakan: 10 September 2022</p>
+                    <p className="text-default-500 text-sm">
+                      Dilaksanakan: 10 September 2022
+                    </p>
                   </div>
                 </div>
               </ModalHeader>
               <ModalBody>
-                <div className="flex flex-col items-center gap-y-2 text-[14px]" dangerouslySetInnerHTML={{ __html: history }} />
+                <div
+                  className="flex flex-col items-center gap-y-2 text-[14px]"
+                  dangerouslySetInnerHTML={{ __html: history }}
+                />
+              </ModalBody>
+              <ModalFooter>
+                <Button
+                  color="danger"
+                  variant="light"
+                  radius="full"
+                  onPress={onClose}
+                >
+                  Tutup
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    </>
+  );
+};
+
+const AkomodasiCard = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const history = `<p><strong>Fasilitas</strong></p>
+<ul>
+    <li>Makan 1x</li>
+    <li>welcomedrink 1x</li>
+    <li>Mandi Air Hangat</li>
+    <li>Kamar Mandi Dalam</li>
+</ul>`;
+
+  return (
+    <>
+      <Card shadow="sm" isPressable onPress={onOpen}>
+        <CardBody className="overflow-visible p-0">
+          <Image
+            shadow="sm"
+            radius="lg"
+            width="100%"
+            alt=""
+            className="w-full object-cover h-[200px]"
+            src={
+              "https://www.desawisatajatimulyo.com/wp-content/uploads/2022/09/IMG_2526.jpg"
+            }
+          />
+        </CardBody>
+        <CardFooter className="flex flex-col items-start">
+          <b>Omah Watu Blencong</b>
+          <p className="text-default-500 text-sm">Rp200.000 /malam</p>
+        </CardFooter>
+      </Card>
+
+      {/* sejarah makanan */}
+      <Modal
+        size="lg"
+        isOpen={isOpen}
+        placement="center"
+        onClose={onClose}
+        scrollBehavior="inside"
+        classNames={{
+          backdrop: "z-[1000]",
+          wrapper: "z-[1000]",
+        }}
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col">
+                <div className="flex flex-row items-stretch gap-x-2">
+                  <Image
+                    className="w-[50px] h-[50px]"
+                    src="https://www.desawisatajatimulyo.com/wp-content/uploads/2022/09/IMG_2526.jpg"
+                    alt="image-1"
+                    radius="md"
+                    width={100}
+                  />
+                  <div className="flex flex-col">
+                    <b>Omah Watu Blencong</b>
+                    <p className="text-default-500 text-sm">Rp200.000 /malam</p>
+                  </div>
+                </div>
+              </ModalHeader>
+              <ModalBody className="flex flex-col gap-y-3">
+                <div dangerouslySetInnerHTML={{ __html: history }} />
+
+                <div className="space-y-2">
+                  <strong>Lokasi</strong>
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1976.679951964016!2d110.12964470000003!3d-7.751597899999987!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7aee24a41cb525%3A0xfc21dfaa13f7ef0e!2sOmah%20Watu%20Blencong!5e0!3m2!1sen!2sid!4v1721059533508!5m2!1sen!2sid"
+                    className="rounded-lg h-[300px] w-full"
+                    width="654"
+                    height="400"
+                    style={{ border: 0 }}
+                    allowFullScreen={true}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  ></iframe>
+                </div>
               </ModalBody>
               <ModalFooter>
                 <Button
@@ -681,4 +784,5 @@ export {
   AlamCard,
   EventCard,
   BudayaCard,
+  AkomodasiCard,
 };

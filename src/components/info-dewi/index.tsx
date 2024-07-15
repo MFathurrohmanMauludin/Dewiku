@@ -7,20 +7,65 @@ import {
   faUtensils,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Card, CardBody, Image, Tab, Tabs } from "@nextui-org/react";
+import {
+  Card,
+  CardBody,
+  Image,
+  Tab,
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+  Tabs,
+} from "@nextui-org/react";
 import { useState } from "react";
 import {
+  AkomodasiCard,
   AlamCard,
   BudayaCard,
   EventCard,
   KulinerCard,
   RatingCard,
 } from "../card";
+import { getDayOfWeekNumber } from "../../utils/changeDate";
 
 const InfoDewi = () => {
   const [isSelected, setIsSelected] = useState("acara");
   const description = `<p style="margin-left:0px;">Kalurahan Jatimulyo Kapanewon Girimulyo Kabupaten Kulon Progo merupakan penggabungan dua kalurahan, yaitu Kalurahan Jonggrangan dan Kalurahan Sokomoyo, yang mana penggabungan menjadi satu kalurahan tersebut terjadi pada tanggal 16 Maret 1947. Pada waktu itu Kalurahan Jonggrangan dipimpin oleh Lurah Pawiro Sentono dan Kalurahan Sokomoyo dipimpin oleh Lurah Djogo Diharjo.</p><br/>
 <p style="margin-left:0px;">Nama Jatimulyo adalah pemberian KRT. Noto Projo, ditandai dengan pemberian dan penanaman lima pohon jati oleh KRT. Noto Projo di Pedukuhan Sokomoyo. Penanaman lima pohon jati itu mengandung maksud setelah penggabungan dua kelurahan wilayah tersebut akan benar-benar menjadi “mulyo” apabila digarap dengan benar, sesuai dengan tujuan awal penggabungan dua kelurahan tersebut.<br>Setelah penggabungan dua kelurahan menjadi Kelurahan Jatimulyo, yang sekarang menjadi Desa Jatimulyo dipimpin oleh seorang Lurah<br><br>Desa wisata Jatimulyo terletak di ketinggian 500-800 mdpl di kawasan Pegunungan Menoreh, tepatnya di Kecamatan Girimulyo, Kabupaten Kulon Progo. Desa Wisata Jatimulyo merupakan salah satu desa yang masih menganut kebudayaan jawa yang kuat. Setiap bulan Sapar diadakan Merti Dusun Jatimulyo suatu upacara adat yang sarat dengan kearifan lokal. Untuk menuju Desa Wisata Jatimulyo dibutuhkan waktu 45 menit dari pusat kota Wates. Wisatawan dapat menggunakan kendaraan pribadi maupun kendaraan rental untuk menuju ke Desa Wisata Jatimulyo.</p>`;
+
+  const hours = [
+    {
+      day: "senin",
+      hour: "10.00 AM – 3.00 PM",
+    },
+    {
+      day: "selasa",
+      hour: "10.00 AM – 3.00 PM",
+    },
+    {
+      day: "rabu",
+      hour: "10.00 AM – 3.00 PM",
+    },
+    {
+      day: "kamis",
+      hour: "10.00 AM – 3.00 PM",
+    },
+    {
+      day: "jumat",
+      hour: "10.00 AM – 3.00 PM",
+    },
+    {
+      day: "sabtu",
+      hour: "8.00 am – 3.00 pm",
+    },
+    {
+      day: "minggu",
+      hour: "	8.00 am – 3.00 pm",
+    },
+  ];
 
   return (
     <div className="px-6 sm:px-4 py-[80px]">
@@ -160,9 +205,7 @@ const InfoDewi = () => {
               }
             >
               <div className="grid grid-cols-3 gap-4">
-                <KulinerCard />
-                <KulinerCard />
-                <KulinerCard />
+                <AkomodasiCard />
               </div>
             </Tab>
 
@@ -238,7 +281,38 @@ const InfoDewi = () => {
         </div>
 
         {/* right */}
-        <div className="flex-shrink flex-col w-[600px] z-0">
+        <div className="flex-shrink flex flex-col gap-3 w-[600px] z-0">
+          {/* jam operasional */}
+          <Card
+            className="relative border-1 space-y-2 px-3 pt-2 pb-4"
+            shadow="none"
+          >
+            <span className="text-lg font-semibold tracking-wide">
+              Jam Operasional
+            </span>
+            <Table
+              removeWrapper
+              aria-label="jam operasional"
+              color="success"
+              selectionMode="single"
+              defaultSelectedKeys={[getDayOfWeekNumber().toString()]}
+            >
+              <TableHeader>
+                <TableColumn>Hari</TableColumn>
+                <TableColumn>Waktu</TableColumn>
+              </TableHeader>
+              <TableBody>
+                {hours.map((data, index) => (
+                  <TableRow key={index}>
+                    <TableCell className="capitalize">{data.day}</TableCell>
+                    <TableCell className="uppercase">{data.hour}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </Card>
+
+          {/* peta lokasi */}
           <Card
             className="relative border-1 space-y-2 px-3 pt-2 pb-4"
             shadow="none"
