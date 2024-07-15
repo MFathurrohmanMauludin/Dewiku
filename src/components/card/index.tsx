@@ -389,7 +389,7 @@ const KulinerCard = () => {
         </CardBody>
         <CardFooter className="flex flex-col items-start">
           <b>Dawet Sambel Khas Jatimulyo</b>
-          <p className="text-default-500 text-sm">Harga: Rp4.000</p>
+          <p className="text-default-500 text-sm">Harga: Rp4.000 /porsi</p>
         </CardFooter>
       </Card>
 
@@ -445,106 +445,232 @@ const KulinerCard = () => {
 };
 
 const BudayaCard = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const history = `<p><span style="background-color:rgb(255,255,255);color:rgb(60,72,88);font-family:Montserrat;font-size:18px;">Sendratari Sugriwa Subali mengisahkan tentang pertarungan kolosal antara Mahesasura dan Lembusura yang berwujud manusia berkepala kerbau melawan Sugriwa-Subali yang merupakan kakak beradik berwujud manusia berkepala kera mirip dengan sosok Anoman di kisah Sendratari Ramayana.</span><br><br><span style="background-color:rgb(255,255,255);color:rgb(60,72,88);font-family:Montserrat;font-size:18px;">Pertunjukan Sendratari Sugriwa Subali ini bisa menjadi alternatif bagi mencari alternatif wisata budaya di Jawa Tengah dan juga Daerah Istimewa Yogyakarta.</span></p>`;
+
   return (
-  <>
-     <Card className="h-[300px]">
-      <CardHeader className="absolute bottom-0 z-10">
-        <h4 className="text-white font-medium text-large">Sendratari Sugriwa-Subali</h4>
-      </CardHeader>
-      <Image
-        removeWrapper
-        alt="Card background"
-        className="z-0 w-full h-full object-cover brightness-90 hover:brightness-100 focus-within:brightness-100"
-        src="https://visitingjogja.jogjaprov.go.id/wp-content/uploads/2020/04/422.jpg"
-        tabIndex={0}
-      />
-    </Card>
-  </>
-  )
+    <>
+      <Card className="h-[300px]" isPressable onPress={onOpen}>
+        <CardHeader className="absolute bottom-0 z-10">
+          <h4 className="text-white font-medium text-large">
+            Sendratari Sugriwa-Subali
+          </h4>
+        </CardHeader>
+        <Image
+          removeWrapper
+          alt="Card background"
+          className="z-0 w-full h-full object-cover brightness-90 hover:brightness-100 focus-within:brightness-100"
+          src="https://visitingjogja.jogjaprov.go.id/wp-content/uploads/2020/04/422.jpg"
+          tabIndex={0}
+        />
+      </Card>
+
+         {/* sejarah makanan */}
+         <Modal
+        size="md"
+        isOpen={isOpen}
+        placement="center"
+        onClose={onClose}
+        scrollBehavior="inside"
+        classNames={{
+          backdrop: "z-[1000]",
+          wrapper: "z-[1000]",
+        }}
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col">
+                <div className="flex flex-row items-stretch gap-x-2">
+                  <Image
+                    className="w-[50px] h-[50px]"
+                    src="https://www.desawisatajatimulyo.com/wp-content/uploads/2022/08/IMG_2521-360x240.jpg"
+                    alt="image-1"
+                    radius="md"
+                    width={100}
+                  />
+                  <div className="flex flex-col">
+                    <b>Sendratari Sugriwa-Subali</b>
+                    <p className="text-default-500 text-sm">Rp4.000</p>
+                  </div>
+                </div>
+              </ModalHeader>
+              <ModalBody>
+                <div dangerouslySetInnerHTML={{ __html: history }} />
+              </ModalBody>
+              <ModalFooter>
+                <Button
+                  color="danger"
+                  variant="light"
+                  radius="full"
+                  onPress={onClose}
+                >
+                  Tutup
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    </>
+  );
 };
 
 const AlamCard = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  
+
   return (
     <>
-    <Card shadow="sm" isPressable onPress={onOpen}>
-      <CardBody className="overflow-visible p-0">
-        <Image
-          shadow="sm"
-          radius="lg"
-          width="100%"
-          alt=""
-          className="w-full object-cover h-[200px]"
-          src={
-            "https://asset.kompas.com/crops/b_2bessHbE6IXIqr-6_lRssr0II=/0x0:1800x1200/750x500/data/photo/2022/11/04/6364469a947cc.jpg"
-          }
-        />
-      </CardBody>
-      <CardFooter className="flex flex-col items-start">
-        <b className="capitalize">Air Terjun Grojogan Sewu</b>
-        <span className="text-default-500 text-sm">Harga Tiket: Rp22.000</span>
-      </CardFooter>
-    </Card>
+      <Card shadow="sm" isPressable onPress={onOpen}>
+        <CardBody className="overflow-visible p-0">
+          <Image
+            shadow="sm"
+            radius="lg"
+            width="100%"
+            alt=""
+            className="w-full object-cover h-[200px]"
+            src={
+              "https://asset.kompas.com/crops/b_2bessHbE6IXIqr-6_lRssr0II=/0x0:1800x1200/750x500/data/photo/2022/11/04/6364469a947cc.jpg"
+            }
+          />
+        </CardBody>
+        <CardFooter className="flex flex-col items-start">
+          <b className="capitalize">Air Terjun Grojogan Sewu</b>
+          <span className="text-default-500 text-sm">
+            Harga Tiket: Rp22.000 /orang
+          </span>
+        </CardFooter>
+      </Card>
 
-    {/* sejarah makanan */}
-    <Modal
-      size="md"
-      isOpen={isOpen}
-      placement="center"
-      onClose={onClose}
-      scrollBehavior="inside"
-      classNames={{
-        backdrop: "z-[1000]",
-        wrapper: "z-[1000]",
-      }}
-    >
-      <ModalContent>
-        {(onClose) => (
-          <>
-            <ModalHeader className="flex flex-col">
-              <div className="flex flex-row items-stretch gap-x-2">
-                <Image
-                  className="w-[50px] h-[50px]"
-                  src="https://www.desawisatajatimulyo.com/wp-content/uploads/2022/08/IMG_2521-360x240.jpg"
-                  alt="image-1"
-                  radius="md"
-                  width={100}
-                />
-                <div className="flex flex-col">
-                  <b>Dawet Sambel Khas Jatimulyo</b>
-                  <p className="text-default-500 text-sm">Rp4.000</p>
+      {/* sejarah makanan */}
+      <Modal
+        size="md"
+        isOpen={isOpen}
+        placement="center"
+        onClose={onClose}
+        scrollBehavior="inside"
+        classNames={{
+          backdrop: "z-[1000]",
+          wrapper: "z-[1000]",
+        }}
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col">
+                <div className="flex flex-row items-stretch gap-x-2">
+                  <Image
+                    className="w-[50px] h-[50px]"
+                    src="https://www.desawisatajatimulyo.com/wp-content/uploads/2022/08/IMG_2521-360x240.jpg"
+                    alt="image-1"
+                    radius="md"
+                    width={100}
+                  />
+                  <div className="flex flex-col">
+                    <b>Dawet Sambel Khas Jatimulyo</b>
+                    <p className="text-default-500 text-sm">Rp4.000</p>
+                  </div>
                 </div>
-              </div>
-            </ModalHeader>
-            <ModalBody>
-              <div dangerouslySetInnerHTML={{ __html: history }} />
-            </ModalBody>
-            <ModalFooter>
-              <Button
-                color="danger"
-                variant="light"
-                radius="full"
-                onPress={onClose}
-              >
-                Tutup
-              </Button>
-            </ModalFooter>
-          </>
-        )}
-      </ModalContent>
-    </Modal>
-  </>
-  )
-}
+              </ModalHeader>
+              <ModalBody>
+                <div dangerouslySetInnerHTML={{ __html: history }} />
+              </ModalBody>
+              <ModalFooter>
+                <Button
+                  color="danger"
+                  variant="light"
+                  radius="full"
+                  onPress={onClose}
+                >
+                  Tutup
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    </>
+  );
+};
 
 const EventCard = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const history = `
+<p style="margin-left:0px;"><span style="font-family:'Times New Roman', Times, serif;font-size:14px;">Grebeg sampah adalah kegiatan mengumpulkan sampah ,memilah kemudian di kreasikan menjadi suatu bentuk kreasi yang nantinya bakal diarak dalam Grebek sampah di Kalurahan Jatimulyo. dalam hal ini, di Jatimulyo sampah tersebut di jadikan bentuk gunungan dan berbentuk burung. Kemudian gunungan dan burung tersebut, di arak dari lapangan pasar cublak menuju balai kalurahan.Setelah sampai di kalurahan, sampah tersebut di serahkan ke DLH Kulon progo.</span></p>
+<p style="margin-left:0px;"><span style="background-color:rgb(255,255,255);color:rgb(60,72,88);font-family:'Times New Roman', Times, serif;font-size:14px;">Grebeg Sampah ini di ikuti oleh Kepala Dinas Lingkungan Hidup &nbsp;Kulon Progo, Panewu, Kapolsek Danramil, Perangkat Kalurahan, BPKal, Linmas, Karang Taruna, dan warga masyarakat Kalurahan Jatimulyo yang dilaksanakan Sabtu, 10 September 2022, di Balai Kalurahan Jatimulyo. Tak lupa juga, untuk memeriahkan acara tersebut , ada pentas seni Jathilan Pongjur “KUDHO BUDHOYO* dari padukuhan Sonyo, kalurahan Jatimulyo, Kulon Progo.</span><br>&nbsp;</p>`;
+
   return (
     <>
+      <Card shadow="sm" isPressable onPress={onOpen}>
+        <CardBody className="overflow-visible p-0">
+          <Image
+            shadow="sm"
+            radius="lg"
+            width="100%"
+            alt=""
+            className="w-full object-cover h-[200px]"
+            src={
+              "https://www.desawisatajatimulyo.com/wp-content/uploads/2022/09/IMG_5128-1024x683.jpg"
+            }
+          />
+        </CardBody>
+        <CardFooter className="flex flex-col items-start">
+          <b className="capitalize">grebeg sampah</b>
+          <p className="text-default-500 text-sm">Dilaksanakan: 10 september 2022 </p>
+        </CardFooter>
+      </Card>
 
+      {/* sejarah makanan */}
+      <Modal
+        size="md"
+        isOpen={isOpen}
+        placement="center"
+        onClose={onClose}
+        scrollBehavior="inside"
+        classNames={{
+          backdrop: "z-[1000]",
+          wrapper: "z-[1000]",
+        }}
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col">
+                <div className="flex flex-row items-stretch gap-x-2">
+                  <Image
+                    className="w-[50px] h-[50px]"
+                    src="https://www.desawisatajatimulyo.com/wp-content/uploads/2022/09/IMG_5128-1024x683.jpg"
+                    alt="image-1"
+                    radius="md"
+                    width={100}
+                  />
+                  <div className="flex flex-col">
+                    <b>Grebeg Sampah</b>
+                    <p className="text-default-500 text-sm">Dilaksanakan: 10 September 2022</p>
+                  </div>
+                </div>
+              </ModalHeader>
+              <ModalBody>
+                <div className="flex flex-col items-center gap-y-2 text-[14px]" dangerouslySetInnerHTML={{ __html: history }} />
+              </ModalBody>
+              <ModalFooter>
+                <Button
+                  color="danger"
+                  variant="light"
+                  radius="full"
+                  onPress={onClose}
+                >
+                  Tutup
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
     </>
-  ) 
-}
+  );
+};
 
 export {
   BannerCard,
@@ -553,5 +679,6 @@ export {
   RatingCard,
   DesaCard,
   AlamCard,
+  EventCard,
   BudayaCard,
 };

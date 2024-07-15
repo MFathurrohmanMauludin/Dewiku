@@ -2,13 +2,20 @@ import { faCalendar, faStar } from "@fortawesome/free-regular-svg-icons";
 import {
   faInfoCircle,
   faMasksTheater,
+  faTents,
   faTree,
   faUtensils,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Card, CardBody, Image, Tab, Tabs } from "@nextui-org/react";
 import { useState } from "react";
-import { AlamCard, BudayaCard, KulinerCard, RatingCard } from "../card";
+import {
+  AlamCard,
+  BudayaCard,
+  EventCard,
+  KulinerCard,
+  RatingCard,
+} from "../card";
 
 const InfoDewi = () => {
   const [isSelected, setIsSelected] = useState("acara");
@@ -74,12 +81,9 @@ const InfoDewi = () => {
                 </div>
               }
             >
-              <Card>
-                <CardBody>
-                  Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                  qui officia deserunt mollit anim id est laborum.
-                </CardBody>
-              </Card>
+              <div className="grid grid-cols-3 gap-4">
+                <EventCard />
+              </div>
             </Tab>
 
             {/* alam */}
@@ -131,6 +135,27 @@ const InfoDewi = () => {
                 >
                   <FontAwesomeIcon icon={faUtensils} fontSize={16} />
                   <span>Kuliner</span>
+                </div>
+              }
+            >
+              <div className="grid grid-cols-3 gap-4">
+                <KulinerCard />
+                <KulinerCard />
+                <KulinerCard />
+              </div>
+            </Tab>
+
+            {/* akomodasi */}
+            <Tab
+              key="akomodasi"
+              title={
+                <div
+                  className={`flex items-center ${
+                    isSelected === "akomodasi" && "text-amber-700"
+                  } space-x-2`}
+                >
+                  <FontAwesomeIcon icon={faTents} fontSize={16} />
+                  <span>Akomodasi</span>
                 </div>
               }
             >
