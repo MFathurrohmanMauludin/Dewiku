@@ -77,7 +77,6 @@ const InfoDewi = () => {
   return (
     <div className="px-6 sm:px-2 md:px-4 py-[80px]">
       <div className="grid grid-cols-2 xs:grid-cols-1 gap-4">
-        
         {/* show photo */}
         <Card className="border-1" shadow="none">
           <div className="space-y-2 max-w-[720px] w-full px-3 pt-2 pb-3">
@@ -204,7 +203,7 @@ const InfoDewi = () => {
             aria-label="Options"
             radius="full"
             selectedKey={isSelected}
-            classNames={{base: '!max-w-[100%]'}}
+            classNames={{ base: "!max-w-[100%]" }}
             onSelectionChange={setIsSelected}
           >
             {/* acara */}
@@ -319,7 +318,9 @@ const InfoDewi = () => {
               }
             >
               <div className="flex justify-end">
-                <Button className="text-white" color="success" size="md">Berikan Testimoni</Button>
+                <Button className="text-white" color="success" size="md">
+                  Berikan Testimoni
+                </Button>
               </div>
               <div className="grid grid-cols-3 xs:grid-cols-1 sm:grid-cols-2 gap-4 mt-3 overflow-y-auto max-h-[500px]">
                 <RatingCard
@@ -379,38 +380,8 @@ const InfoDewi = () => {
         </div>
 
         {/* right */}
-        <div className="flex-shrink flex flex-col gap-3 w-[600px] z-0 lg:w-full xl:w-[400px]">
+        <div className="flex-shrink flex flex-col gap-3 w-[600px] z-0 lg:w-full">
           {/* jam operasional */}
-          <Card
-            className="relative border-1 space-y-2 px-3 pt-2 pb-4"
-            shadow="none"
-          >
-            <span className="text-lg font-semibold tracking-wide">
-              Jam Operasional
-            </span>
-            <Table
-              removeWrapper
-              aria-label="jam operasional"
-              color="success"
-              selectionMode="single"
-              defaultSelectedKeys={[getDayOfWeekNumber().toString()]}
-            >
-              <TableHeader>
-                <TableColumn>Hari</TableColumn>
-                <TableColumn>Waktu</TableColumn>
-              </TableHeader>
-              <TableBody>
-                {hours.map((data, index) => (
-                  <TableRow key={index}>
-                    <TableCell className="capitalize">{data.day}</TableCell>
-                    <TableCell className="uppercase">{data.hour}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </Card>
-
-          {/* kontak dan alamat */}
           <Card
             className="relative border-1 space-y-2 px-3 pt-2 pb-4"
             shadow="none"
@@ -459,6 +430,37 @@ const InfoDewi = () => {
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
+          </Card>
+
+          {/* kontak dan alamat */}
+          <Card
+            className="relative border-1 space-y-2 px-3 pt-2 pb-4"
+            shadow="none"
+          >
+            <span className="text-lg font-semibold tracking-wide">
+              Kontak & Bagikan
+            </span>
+
+            <div className="space-y-2 mt-2">
+              <div className="flex flex-col text-md">
+                <span className="font-semibold">Telepon</span>
+                <a href="https://api.whatsapp.com/send?phone=6281229914791">
+                  Suhandri +62 8122 9914 791
+                </a>
+              </div>
+
+              <div className="flex flex-col text-md">
+                <span className="font-semibold">Kantor</span>
+                <p className="tracking-wide">
+                  Jln. Kiskendo - Sermo Sokomoyo RT 8 RW 2, Jatimulyo, Girimulyo
+                  Kulon Progo
+                </p>
+              </div>
+
+              <div className="flex flex-row gap-x-1">
+                
+              </div>
+            </div>
           </Card>
         </div>
       </div>
