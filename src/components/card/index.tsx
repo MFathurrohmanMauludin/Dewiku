@@ -383,7 +383,7 @@ const KulinerCard = () => {
         </CardBody>
         <CardFooter className="flex flex-col items-start">
           <b>Dawet Sambel Khas Jatimulyo</b>
-          <p className="text-default-500 text-sm">Rp4.000 /porsi</p>
+          <p className="text-default-500 text-sm">Rp4.000 /Porsi</p>
         </CardFooter>
       </Card>
 
@@ -531,7 +531,7 @@ const AlamCard = () => {
         </CardBody>
         <CardFooter className="flex flex-col items-start">
           <b className="capitalize">Air Terjun Grojogan Sewu</b>
-          <span className="text-default-500 text-sm">Rp22.000 /orang</span>
+          <span className="text-default-500 text-sm">Rp22.000 /Orang</span>
         </CardFooter>
       </Card>
 
@@ -698,7 +698,7 @@ const AkomodasiCard = () => {
         </CardBody>
         <CardFooter className="flex flex-col items-start">
           <b>Omah Watu Blencong</b>
-          <p className="text-default-500 text-sm">Rp200.000 /malam</p>
+          <p className="text-default-500 text-sm">Rp200.000 /Malam</p>
         </CardFooter>
       </Card>
 

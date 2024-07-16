@@ -43,6 +43,7 @@ import {
   ShareWhatsapp,
   ShareXTwitter,
 } from "../share";
+import { TestimonyForm } from "../modal";
 
 const InfoDewi = () => {
   const [isSelected, setIsSelected] = useState("acara");
@@ -82,7 +83,7 @@ const InfoDewi = () => {
   ];
 
   const hide = document.querySelector(".review-box");
-  hide?.setAttribute('id', 'hide-review');
+  hide?.setAttribute("id", "hide-review");
 
   return (
     <div className="px-6 sm:px-2 md:px-4 py-[80px]">
@@ -328,9 +329,22 @@ const InfoDewi = () => {
               }
             >
               <div className="flex justify-end">
-                <Button className="text-white" color="success" size="md">
-                  Berikan Testimoni
-                </Button>
+                <TestimonyForm
+                  photo={""}
+                  fullname={""}
+                  email={""}
+                  comment={""}
+                  like={0}
+                  rating={0}
+                  control={{
+                    validateEmail: "",
+                    validateFullName: "",
+                  }}
+                  status={{
+                    email: false,
+                    fullName: false,
+                  }}
+                />
               </div>
               <div className="grid grid-cols-3 xs:grid-cols-1 sm:grid-cols-2 gap-4 mt-3 overflow-y-auto max-h-[500px]">
                 <RatingCard
@@ -438,7 +452,6 @@ const InfoDewi = () => {
               style={{ border: 0 }}
               allowFullScreen={true}
               loading="lazy"
-              rating
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
           </Card>
