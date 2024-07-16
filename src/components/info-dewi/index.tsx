@@ -36,6 +36,13 @@ import {
   RatingCard,
 } from "../card";
 import { getDayOfWeekNumber } from "../../utils/changeDate";
+import {
+  ShareFacebook,
+  ShareLine,
+  ShareTelegram,
+  ShareWhatsapp,
+  ShareXTwitter,
+} from "../share";
 
 const InfoDewi = () => {
   const [isSelected, setIsSelected] = useState("acara");
@@ -73,6 +80,9 @@ const InfoDewi = () => {
       hour: "	8.00 am – 3.00 pm",
     },
   ];
+
+  const hide = document.querySelector(".review-box");
+  hide?.setAttribute('id', 'hide-review');
 
   return (
     <div className="px-6 sm:px-2 md:px-4 py-[80px]">
@@ -428,6 +438,7 @@ const InfoDewi = () => {
               style={{ border: 0 }}
               allowFullScreen={true}
               loading="lazy"
+              rating
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
           </Card>
@@ -457,8 +468,25 @@ const InfoDewi = () => {
                 </p>
               </div>
 
-              <div className="flex flex-row gap-x-1">
-                
+              <div className="flex flex-row gap-x-2 py-2">
+                <ShareFacebook
+                  url={""}
+                  hashtag={["Desa_Wisata_Indonesiaku", "Wonderful_Indonesia"]}
+                />
+
+                <ShareTelegram url={""} hashtag={["hello world"]} />
+
+                <ShareLine
+                  url={""}
+                  hashtag={["Desa_Wisata_Indonesiaku", "Wonderful_Indonesia"]}
+                />
+
+                <ShareXTwitter
+                  url={""}
+                  hashtag={["Desa_Wisata_Indonesiaku", "Wonderful_Indonesia"]}
+                />
+
+                <ShareWhatsapp url={""} hashtag={["hello world"]} />
               </div>
             </div>
           </Card>

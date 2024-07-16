@@ -33,7 +33,7 @@ body{
   height: 600px; /* Default height for larger screens */
 }
 
-.gm-style .review-box {
+.review-box {
   display: none !important;
 }
 
