@@ -2,12 +2,17 @@ import { faCalendar, faStar } from "@fortawesome/free-regular-svg-icons";
 import {
   faInfoCircle,
   faMasksTheater,
+  faSun,
   faTents,
   faTree,
+  faHeart as faHeartSolid,
   faUtensils,
 } from "@fortawesome/free-solid-svg-icons";
+import { faHeart } from "@fortawesome/free-regular-svg-icons";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  Button,
   Card,
   CardBody,
   Image,
@@ -19,6 +24,7 @@ import {
   TableHeader,
   TableRow,
   Tabs,
+  Tooltip,
 } from "@nextui-org/react";
 import { useState } from "react";
 import {
@@ -33,6 +39,7 @@ import { getDayOfWeekNumber } from "../../utils/changeDate";
 
 const InfoDewi = () => {
   const [isSelected, setIsSelected] = useState("acara");
+  const [isLike, setIsLike] = useState(false);
   const description = `<p style="margin-left:0px;">Kalurahan Jatimulyo Kapanewon Girimulyo Kabupaten Kulon Progo merupakan penggabungan dua kalurahan, yaitu Kalurahan Jonggrangan dan Kalurahan Sokomoyo, yang mana penggabungan menjadi satu kalurahan tersebut terjadi pada tanggal 16 Maret 1947. Pada waktu itu Kalurahan Jonggrangan dipimpin oleh Lurah Pawiro Sentono dan Kalurahan Sokomoyo dipimpin oleh Lurah Djogo Diharjo.</p><br/>
 <p style="margin-left:0px;">Nama Jatimulyo adalah pemberian KRT. Noto Projo, ditandai dengan pemberian dan penanaman lima pohon jati oleh KRT. Noto Projo di Pedukuhan Sokomoyo. Penanaman lima pohon jati itu mengandung maksud setelah penggabungan dua kelurahan wilayah tersebut akan benar-benar menjadi “mulyo” apabila digarap dengan benar, sesuai dengan tujuan awal penggabungan dua kelurahan tersebut.<br>Setelah penggabungan dua kelurahan menjadi Kelurahan Jatimulyo, yang sekarang menjadi Desa Jatimulyo dipimpin oleh seorang Lurah<br><br>Desa wisata Jatimulyo terletak di ketinggian 500-800 mdpl di kawasan Pegunungan Menoreh, tepatnya di Kecamatan Girimulyo, Kabupaten Kulon Progo. Desa Wisata Jatimulyo merupakan salah satu desa yang masih menganut kebudayaan jawa yang kuat. Setiap bulan Sapar diadakan Merti Dusun Jatimulyo suatu upacara adat yang sarat dengan kearifan lokal. Untuk menuju Desa Wisata Jatimulyo dibutuhkan waktu 45 menit dari pusat kota Wates. Wisatawan dapat menggunakan kendaraan pribadi maupun kendaraan rental untuk menuju ke Desa Wisata Jatimulyo.</p>`;
 
@@ -68,30 +75,117 @@ const InfoDewi = () => {
   ];
 
   return (
-    <div className="px-6 sm:px-4 py-[80px]">
-      <div className="grid grid-cols-2 gap-x-4 max-h-[450px]">
-        {/* left */}
+    <div className="px-6 sm:px-2 md:px-4 py-[80px]">
+      <div className="grid grid-cols-2 xs:grid-cols-1 gap-4">
+        
+        {/* show photo */}
         <Card className="border-1" shadow="none">
           <div className="space-y-2 max-w-[720px] w-full px-3 pt-2 pb-3">
             <span className="text-lg font-semibold tracking-wide">
               Desa Wisata Jatimulyo
             </span>
-            <Image
-              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEicjpSwM2KC7Ln684sDJwrTBieNvTtRGMllDcGy1YmAC_7Jo7yQHEtNO4dMWWc7yIT7QiUiGORMYeAUmi5lDMfg-TW_KPckFfarbeVf7rsECfN2TtM7k-DegbQEPqHWlyYnXALYExoOTLI/s1600/IMG_20161212_101915.jpg"
-              className="object-cover"
-              width={720}
-              alt="hello world"
-            />
+            <div className="relative">
+              <Image
+                src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEicjpSwM2KC7Ln684sDJwrTBieNvTtRGMllDcGy1YmAC_7Jo7yQHEtNO4dMWWc7yIT7QiUiGORMYeAUmi5lDMfg-TW_KPckFfarbeVf7rsECfN2TtM7k-DegbQEPqHWlyYnXALYExoOTLI/s1600/IMG_20161212_101915.jpg"
+                className="object-cover w-full"
+                width={720}
+                alt="hello world"
+              />
+
+              {/* weather and like/share button */}
+              <div className="absolute flex justify-between z-10 py-1 px-2 top-2 w-full">
+                <Tooltip content="cerah berawan | hangat" showArrow>
+                  <div className="flex flex-row items-center gap-1 px-2 bg-black/30 backdrop-blur-sm w-fit rounded-full cursor-default">
+                    <FontAwesomeIcon
+                      className="text-yellow-400"
+                      icon={faSun}
+                      fontSize={24}
+                    />
+
+                    <span className="text-md text-white">
+                      20<sup className="text-[12px]">o</sup>C
+                    </span>
+                  </div>
+                </Tooltip>
+
+                <Button
+                  className={`bg-white/10 backdrop-blur-sm text-white text-md ${
+                    isLike ? "text-rose-700" : "text-white"
+                  } hover:text-rose-700`}
+                  startContent={
+                    <div className="flex items-center gap-x-2">
+                      <FontAwesomeIcon
+                        icon={isLike ? faHeartSolid : faHeart}
+                        fontSize={18}
+                      />
+                      <span>{isLike ? 101 : 100}</span>
+                    </div>
+                  }
+                  onClick={() => setIsLike(!isLike)}
+                  variant="solid"
+                  size="md"
+                  radius="full"
+                />
+              </div>
+            </div>
           </div>
         </Card>
 
-        {/* right */}
+        {/* galery photo */}
         <Card className="border-1" shadow="none">
           <span className="text-lg px-3 py-2 font-semibold tracking-wide">
             Galeri
           </span>
-          <div className="overflow-y-auto max-h-[450px]">
-            <div className="columns-3 space-y-4 gap-x-4 pb-3 px-3">
+          <div className="overflow-y-auto max-h-[460px] xs:max-h-[300px] sm:max-h-[300px] md:max-h-[250px]">
+            <div className="columns-3 xs:columns-2 md:columns-2 space-y-4 gap-x-4 pb-3 px-3">
+              <Image
+                className="object-cover w-[200px] h-[200px]"
+                src="https://plus.unsplash.com/premium_photo-1677829177642-30def98b0963?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                width={200}
+                alt="image-1"
+              />
+              <Image
+                className="object-cover w-[200px] h-[200px]"
+                src="https://plus.unsplash.com/premium_photo-1677829177642-30def98b0963?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                width={200}
+                alt="image-1"
+              />
+              <Image
+                className="object-cover w-[200px] h-[200px]"
+                src="https://plus.unsplash.com/premium_photo-1677829177642-30def98b0963?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                width={200}
+                alt="image-1"
+              />
+              <Image
+                className="object-cover w-[200px] h-[200px]"
+                src="https://plus.unsplash.com/premium_photo-1677829177642-30def98b0963?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                width={200}
+                alt="image-1"
+              />
+              <Image
+                className="object-cover w-[200px] h-[200px]"
+                src="https://plus.unsplash.com/premium_photo-1677829177642-30def98b0963?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                width={200}
+                alt="image-1"
+              />
+              <Image
+                className="object-cover w-[200px] h-[200px]"
+                src="https://plus.unsplash.com/premium_photo-1677829177642-30def98b0963?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                width={200}
+                alt="image-1"
+              />
+              <Image
+                className="object-cover w-[200px] h-[200px]"
+                src="https://plus.unsplash.com/premium_photo-1677829177642-30def98b0963?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                width={200}
+                alt="image-1"
+              />
+              <Image
+                className="object-cover w-[200px] h-[200px]"
+                src="https://plus.unsplash.com/premium_photo-1677829177642-30def98b0963?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                width={200}
+                alt="image-1"
+              />
               <Image
                 className="object-cover w-[200px] h-[200px]"
                 src="https://plus.unsplash.com/premium_photo-1677829177642-30def98b0963?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -103,13 +197,14 @@ const InfoDewi = () => {
         </Card>
       </div>
 
-      <div className="flex xs:flex-wrap sm:flex-wrap gap-x-4 py-[80px]">
+      <div className="flex xs:flex-wrap sm:flex-wrap md:flex-wrap lg:flex-wrap gap-x-4 pt-4 pb-[80px]">
         {/* left */}
         <div className="flex-shrink flex-col w-full z-0">
           <Tabs
             aria-label="Options"
             radius="full"
             selectedKey={isSelected}
+            classNames={{base: '!max-w-[100%]'}}
             onSelectionChange={setIsSelected}
           >
             {/* acara */}
@@ -126,7 +221,7 @@ const InfoDewi = () => {
                 </div>
               }
             >
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-3 xs:grid-cols-1 sm:grid-cols-2 gap-4 overflow-y-auto max-h-[500px]">
                 <EventCard />
               </div>
             </Tab>
@@ -145,7 +240,7 @@ const InfoDewi = () => {
                 </div>
               }
             >
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-3 xs:grid-cols-1 sm:grid-cols-2 gap-4 overflow-y-auto max-h-[500px]">
                 <AlamCard />
               </div>
             </Tab>
@@ -164,7 +259,7 @@ const InfoDewi = () => {
                 </div>
               }
             >
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-3 xs:grid-cols-1 sm:grid-cols-2 gap-4 overflow-y-auto max-h-[500px]">
                 <BudayaCard />
               </div>
             </Tab>
@@ -183,7 +278,7 @@ const InfoDewi = () => {
                 </div>
               }
             >
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-3 xs:grid-cols-1 sm:grid-cols-2 gap-4 overflow-y-auto max-h-[500px]">
                 <KulinerCard />
                 <KulinerCard />
                 <KulinerCard />
@@ -204,7 +299,7 @@ const InfoDewi = () => {
                 </div>
               }
             >
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-3 xs:grid-cols-1 sm:grid-cols-2 gap-4 overflow-y-auto max-h-[500px]">
                 <AkomodasiCard />
               </div>
             </Tab>
@@ -223,7 +318,10 @@ const InfoDewi = () => {
                 </div>
               }
             >
-              <div className="flex flex-wrap gap-4">
+              <div className="flex justify-end">
+                <Button className="text-white" color="success" size="md">Berikan Testimoni</Button>
+              </div>
+              <div className="grid grid-cols-3 xs:grid-cols-1 sm:grid-cols-2 gap-4 mt-3 overflow-y-auto max-h-[500px]">
                 <RatingCard
                   name={"Hatsune Miku"}
                   imgUrl={
@@ -281,8 +379,38 @@ const InfoDewi = () => {
         </div>
 
         {/* right */}
-        <div className="flex-shrink flex flex-col gap-3 w-[600px] z-0">
+        <div className="flex-shrink flex flex-col gap-3 w-[600px] z-0 lg:w-full xl:w-[400px]">
           {/* jam operasional */}
+          <Card
+            className="relative border-1 space-y-2 px-3 pt-2 pb-4"
+            shadow="none"
+          >
+            <span className="text-lg font-semibold tracking-wide">
+              Jam Operasional
+            </span>
+            <Table
+              removeWrapper
+              aria-label="jam operasional"
+              color="success"
+              selectionMode="single"
+              defaultSelectedKeys={[getDayOfWeekNumber().toString()]}
+            >
+              <TableHeader>
+                <TableColumn>Hari</TableColumn>
+                <TableColumn>Waktu</TableColumn>
+              </TableHeader>
+              <TableBody>
+                {hours.map((data, index) => (
+                  <TableRow key={index}>
+                    <TableCell className="capitalize">{data.day}</TableCell>
+                    <TableCell className="uppercase">{data.hour}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </Card>
+
+          {/* kontak dan alamat */}
           <Card
             className="relative border-1 space-y-2 px-3 pt-2 pb-4"
             shadow="none"

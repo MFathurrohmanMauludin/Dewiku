@@ -33,6 +33,10 @@ body{
   height: 600px; /* Default height for larger screens */
 }
 
+.gm-style .review-box {
+  display: none !important;
+}
+
 @media (max-width: 768px) {
   .chart-container {
     height: 400px; /* Height for mobile devices */

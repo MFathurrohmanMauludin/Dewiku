@@ -1,5 +1,4 @@
 import {
-  faCloud,
   faHeart as faHeartSolid,
   faPalette,
   faStar as faStarSolid,
@@ -267,28 +266,23 @@ const DesaCard = (data: DesaCardProps) => {
         {/* weather and like/share button */}
         <div className="absolute flex justify-between z-10 py-1 px-2 top-2 w-full">
           <Tooltip content="cerah berawan | hangat" showArrow>
-            <div className="relative bg-white/10 backdrop-blur-sm w-[84px] rounded-full cursor-default">
+            <div className="flex flex-row items-center gap-1 px-2 bg-black/30 backdrop-blur-sm w-fit rounded-full cursor-default">
               <FontAwesomeIcon
-                className="absolute left-3 top-[2px] text-yellow-400"
+                className="text-yellow-400"
                 icon={faSun}
-                fontSize={18}
-              />
-              <FontAwesomeIcon
-                className="absolute left-4 top-2 text-white z-0"
-                icon={faCloud}
-                fontSize={20}
+                fontSize={24}
               />
 
-              <span className="absolute left-10 top-[6px] text-sm text-white">
-                20<sup className="text-[8px]">o</sup>C
+              <span className="text-md text-white">
+                20<sup className="text-[12px]">o</sup>C
               </span>
             </div>
           </Tooltip>
 
           <Button
-            className={`bg-white/30 backdrop-blur-sm text-white ${
-              isLike ? "text-rose-600" : "text-white"
-            } hover:text-rose-600`}
+            className={`bg-white/10 backdrop-blur-sm text-white text-md ${
+              isLike ? "text-rose-700" : "text-white"
+            } hover:text-rose-700`}
             startContent={
               <div className="flex items-center gap-x-2">
                 <FontAwesomeIcon
@@ -300,7 +294,7 @@ const DesaCard = (data: DesaCardProps) => {
             }
             onClick={() => setIsLike(!isLike)}
             variant="solid"
-            size="sm"
+            size="md"
             radius="full"
           />
         </div>
@@ -320,7 +314,7 @@ const DesaCard = (data: DesaCardProps) => {
               fontSize={14}
             />
             <span className="line-clamp-1 text-sm leading-tight">
-              Kab. Kulon Progo, Daerah Istimewa Yogyakarta
+              Daerah Istimewa Yogyakarta
             </span>
           </div>
 
@@ -537,9 +531,7 @@ const AlamCard = () => {
         </CardBody>
         <CardFooter className="flex flex-col items-start">
           <b className="capitalize">Air Terjun Grojogan Sewu</b>
-          <span className="text-default-500 text-sm">
-            Rp22.000 /orang
-          </span>
+          <span className="text-default-500 text-sm">Rp22.000 /orang</span>
         </CardFooter>
       </Card>
 
