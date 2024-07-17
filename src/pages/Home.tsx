@@ -1,6 +1,7 @@
 import React from "react";
 import Hero from "../components/hero";
 import DewiPopularSection from "../components/dewi-popular";
+import DewiLainnya from "../components/dewi-lainnya";
 
 interface Props {}
 

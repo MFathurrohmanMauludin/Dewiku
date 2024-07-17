@@ -15,6 +15,21 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 
+import {
+  faCheck,
+  faStar as faStarSolid,
+} from "@fortawesome/free-solid-svg-icons";
+import { faShareFromSquare, faStar } from "@fortawesome/free-regular-svg-icons";
+import Rating from "react-rating";
+import { useState } from "react";
+import {
+  ShareFacebook,
+  ShareLine,
+  ShareTelegram,
+  ShareWhatsapp,
+  ShareXTwitter,
+} from "../share";
+
 interface Props {
   photo: string;
   fullname: string;
@@ -40,22 +55,6 @@ interface verification {
 interface share {
   link: string;
 }
-
-import {
-  faCheck,
-  faShareSquare,
-  faStar as faStarSolid,
-} from "@fortawesome/free-solid-svg-icons";
-import { faStar } from "@fortawesome/free-regular-svg-icons";
-import Rating from "react-rating";
-import { useState } from "react";
-import {
-  ShareFacebook,
-  ShareLine,
-  ShareTelegram,
-  ShareWhatsapp,
-  ShareXTwitter,
-} from "../share";
 
 const TestimonyForm = (data: Props) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -273,30 +272,30 @@ const ShareModal = (data: share) => {
   return (
     <>
       <Button
-        className="hover:!bg-white"
+        className="hover:!bg-green-700 hover:text-white bg-white/10 backdrop-blur-sm text-white text-md"
         onPress={onOpen}
-        size="sm"
+        size="md"
         startContent={
-          <Tooltip content="Terverifikasi">
+          <Tooltip content="bagikan">
             <FontAwesomeIcon
-              icon={faShareSquare}
-              fontSize={16}
+              icon={faShareFromSquare}
+              fontSize={18}
             />
           </Tooltip>
         }
         variant="light"
         radius="full"
-        isIconOnly
-      />
+      >
+        Bagikan
+      </Button>
 
       <Modal
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         placement="center"
         size="md"
-        backdrop="blur"
+        backdrop="transparent"
         classNames={{
-          backdrop: "backdrop-blur-md z-[1000]",
           wrapper: "z-[1000]",
         }}
         scrollBehavior="inside"
@@ -305,13 +304,13 @@ const ShareModal = (data: share) => {
           {() => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                Desa Wisata Jatimulyo
+                Bagikan Informasi ini
               </ModalHeader>
 
               {/* verifikasi */}
               <ModalBody className="flex items-center justify-center">
                 {/* share */}
-                <div className="flex flex-row gap-x-2 py-2">
+                <div className="flex flex-row gap-x-4 py-2">
                   <ShareFacebook
                     url={data.link}
                     hashtag={["Desa_Wisata_Indonesiaku", "Wonderful_Indonesia"]}

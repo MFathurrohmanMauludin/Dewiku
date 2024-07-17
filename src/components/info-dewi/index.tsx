@@ -40,7 +40,8 @@ import {
   RatingCard,
 } from "../card";
 import { getDayOfWeekNumber } from "../../utils/changeDate";
-import { TestimonyForm, VerifycationModal } from "../modal";
+import { ShareModal, TestimonyForm, VerifycationModal } from "../modal";
+import { useLocation } from "react-router-dom";
 
 const InfoDewi = () => {
   const data = [
@@ -57,6 +58,7 @@ const InfoDewi = () => {
   const [isSelected, setIsSelected] = useState("acara");
   const [isLike, setIsLike] = useState(false);
   const [value, setValue] = useState<string>("");
+  const {search, pathname} = useLocation();
 
   const handleSelectionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setValue(e.target.value);
@@ -112,6 +114,7 @@ const InfoDewi = () => {
               </span>
               <VerifycationModal imgUrl={""} link={""} />
             </div>
+
             <div className="relative">
               <Image
                 src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEicjpSwM2KC7Ln684sDJwrTBieNvTtRGMllDcGy1YmAC_7Jo7yQHEtNO4dMWWc7yIT7QiUiGORMYeAUmi5lDMfg-TW_KPckFfarbeVf7rsECfN2TtM7k-DegbQEPqHWlyYnXALYExoOTLI/s1600/IMG_20161212_101915.jpg"
@@ -136,24 +139,28 @@ const InfoDewi = () => {
                   </div>
                 </Tooltip>
 
-                <Button
-                  className={`bg-white/10 backdrop-blur-sm text-white text-md ${
-                    isLike ? "text-rose-700" : "text-white"
-                  } hover:text-rose-700`}
-                  startContent={
-                    <div className="flex items-center gap-x-2">
-                      <FontAwesomeIcon
-                        icon={isLike ? faHeartSolid : faHeart}
-                        fontSize={18}
-                      />
-                      <span>{isLike ? 101 : 100}</span>
-                    </div>
-                  }
-                  onClick={() => setIsLike(!isLike)}
-                  variant="solid"
-                  size="md"
-                  radius="full"
-                />
+                <div className="flex items-center gap-x-2">
+                  <Button
+                    className={`bg-white/10 backdrop-blur-sm text-white text-md ${
+                      isLike ? "text-rose-700" : "text-white"
+                    } hover:text-rose-700`}
+                    startContent={
+                      <div className="flex items-center gap-x-2">
+                        <FontAwesomeIcon
+                          icon={isLike ? faHeartSolid : faHeart}
+                          fontSize={18}
+                        />
+                        <span>{isLike ? 101 : 100}</span>
+                      </div>
+                    }
+                    onClick={() => setIsLike(!isLike)}
+                    variant="solid"
+                    size="md"
+                    radius="full"
+                  />
+
+                  <ShareModal link={pathname + search}/>
+                </div>
               </div>
             </div>
           </div>
