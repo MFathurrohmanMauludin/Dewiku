@@ -42,6 +42,7 @@ import {
 import { getDayOfWeekNumber } from "../../utils/changeDate";
 import { ShareModal, TestimonyForm, VerifycationModal } from "../modal";
 import { useLocation } from "react-router-dom";
+import { DesaWisataData } from "../../utils/data";
 
 const InfoDewi = () => {
   const data = [
@@ -54,6 +55,8 @@ const InfoDewi = () => {
       label: "video",
     },
   ];
+
+  const getData = DesaWisataData();
 
   const [isSelected, setIsSelected] = useState("acara");
   const [isLike, setIsLike] = useState(false);
@@ -98,8 +101,17 @@ const InfoDewi = () => {
     },
   ];
 
-  const hide = document.querySelector(".review-box");
-  hide?.setAttribute("id", "hide-review");
+  const regex = /(?:\?|&)name=([^&]+)/;
+  const match = search.match(regex);
+  const nameValue = match
+    ? decodeURIComponent(match[1]).replace(/\+/g, " ")
+    : "";
+
+  const detail = getData.filter((data) => data.name === nameValue)[0];
+
+  console.log(detail);
+  
+  
 
   return (
     <div className="px-6 sm:px-2 md:px-4 py-[80px]">
