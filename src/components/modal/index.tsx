@@ -44,11 +44,10 @@ const TestimonyForm = (data: Props) => {
       <Button
         onPress={onOpen}
         className="text-white capitalize"
-        size="md"
+        size="sm"
         color="success"
-        radius="full"
       >
-        berikan testimoni
+       buat testimoni
       </Button>
 
       <Modal

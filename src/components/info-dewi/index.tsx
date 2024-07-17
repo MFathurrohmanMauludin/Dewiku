@@ -328,7 +328,7 @@ const InfoDewi = () => {
                 </div>
               }
             >
-              <div className="flex justify-end">
+              <div className="flex justify-start">
                 <TestimonyForm
                   photo={""}
                   fullname={""}
@@ -413,6 +413,7 @@ const InfoDewi = () => {
             <span className="text-lg font-semibold tracking-wide">
               Jam Operasional
             </span>
+            
             <Table
               removeWrapper
               aria-label="jam operasional"

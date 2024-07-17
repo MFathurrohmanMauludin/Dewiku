@@ -68,7 +68,7 @@ const Header = () => {
             <Button
               as={Link}
               to="#"
-              className="hover:!bg-white hover:text-green-600 text-gray-400"
+              className="hover:text-rose-600 text-gray-400"
               startContent={<FontAwesomeIcon icon={faHeart} fontSize={18} />}
               size="md"
               variant="light"
@@ -81,7 +81,7 @@ const Header = () => {
             <Button
               as={Link}
               to="#"
-              className="hover:!text-green-600 text-gray-400"
+              className="hover:!text-cyan-600 text-gray-400"
               startContent={<FontAwesomeIcon icon={faLanguage} fontSize={18} />}
               size="md"
               variant="light"

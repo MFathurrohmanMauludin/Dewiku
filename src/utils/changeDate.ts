@@ -4,7 +4,8 @@ const formatShortIndonesiaDate = (data: string) => new Date(data).toLocaleDateSt
 
 const getDayOfWeekNumber = (): number => {
     const today = new Date();
-    const dayOfWeek = today.getDay();
+    const dayOfWeek = today.getDay() - 1;
+    
     // Adjusting so that Monday is 1 and Sunday is 7
     return dayOfWeek === 0 ? 7 : dayOfWeek;
   };
