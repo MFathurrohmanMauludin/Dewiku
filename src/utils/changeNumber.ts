@@ -16,7 +16,7 @@ const abbreviateNumber = (num: number): string => {
     }
 }
 
-const formatNumberViewer = (num: number): string => {
+const formatNumberShort = (num: number): string => {
     if (num >= 1_000_000_000) {
         return (num / 1_000_000_000).toFixed(1) + 'm';
     } else if (num >= 1_000_000) {
@@ -33,4 +33,4 @@ const totalNominal = (donors: any) => {
     return donors.reduce((total: any, donor: any) => total + donor.nominal, 0);
   }
 
-export {ThousandSeparators, abbreviateNumber, countDay, totalNominal, formatNumberViewer};
+export {ThousandSeparators, abbreviateNumber, countDay, totalNominal, formatNumberShort};

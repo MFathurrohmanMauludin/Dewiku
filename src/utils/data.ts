@@ -79,38 +79,38 @@ const DesaWisataData = () => [
     openHours: [
       {
         day: "senin",
-        open: "10:00 am",
-        close: "03:00 pm",
+        open: "10:00",
+        close: "15:00",
       },
       {
         day: "selasa",
-        open: "10:00 am",
-        close: "03:00 pm",
+        open: "10:00",
+        close: "15:00",
       },
       {
         day: "rabu",
-        open: "10:00 am",
-        close: "03:00 pm",
+        open: "10:00",
+        close: "15:00",
       },
       {
         day: "kamis",
-        open: "10:00 am",
-        close: "03:00 pm",
+        open: "10:00",
+        close: "15:00",
       },
       {
         day: "jumat",
-        open: "10:00 am",
-        close: "03:00 pm",
+        open: "10:00",
+        close: "15:00",
       },
       {
         day: "sabtu",
-        open: "08:00 am",
-        close: "03:00 pm",
+        open: "08:00",
+        close: "15:00",
       },
       {
         day: "minggu",
-        open: "08:00 am",
-        close: "03:00 pm",
+        open: "08:00",
+        close: "15:00",
       },
     ],
     contact: {

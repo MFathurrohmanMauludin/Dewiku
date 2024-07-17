@@ -28,7 +28,7 @@ import {
 } from "@nextui-org/react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { formatNumberViewer } from "../../utils/changeNumber";
+import { formatNumberShort } from "../../utils/changeNumber";
 import { formatShortIndonesiaDate } from "../../utils/changeDate";
 import Rating from "react-rating";
 
@@ -54,7 +54,18 @@ interface RatingProps {
   date: string;
 }
 
-interface DesaCardProps {}
+interface DesaCardProps {
+  name: string;
+  imgUrl: string;
+  location: string;
+  rating: number;
+  testimony: number;
+  weather: number;
+  like: number;
+  visitors: number;
+  openhours: boolean;
+  hours: any;
+}
 
 const BannerCard = (data: BannerCardProps) => {
   return (
@@ -253,110 +264,106 @@ const DesaCard = (data: DesaCardProps) => {
 
   return (
     <>
-      <Link to={"/info-dewi?name="}>
-        <Card className="max-w-[340px] w-full" shadow="sm">
-          <Image
-            removeWrapper
-            alt={"image-1"}
-            className="z-0 w-full h-full object-cover"
-            src={
-              "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEicjpSwM2KC7Ln684sDJwrTBieNvTtRGMllDcGy1YmAC_7Jo7yQHEtNO4dMWWc7yIT7QiUiGORMYeAUmi5lDMfg-TW_KPckFfarbeVf7rsECfN2TtM7k-DegbQEPqHWlyYnXALYExoOTLI/s1600/IMG_20161212_101915.jpg"
-            }
-          />
+      <Card className="max-w-[340px] w-full" shadow="sm">
+        <Image
+          removeWrapper
+          alt={data.name}
+          className="z-0 w-full h-full object-cover"
+          src={data.imgUrl}
+        />
 
-          {/* weather and like/share button */}
-          <div className="absolute flex justify-between z-10 py-1 px-2 top-2 w-full">
-            <Tooltip content="cerah berawan | hangat" showArrow>
-              <div className="flex flex-row items-center gap-1 px-2 bg-black/30 backdrop-blur-sm w-fit rounded-full cursor-default">
-                <FontAwesomeIcon
-                  className="text-yellow-400"
-                  icon={faSun}
-                  fontSize={24}
-                />
-
-                <span className="text-md text-white">
-                  20<sup className="text-[12px]">o</sup>C
-                </span>
-              </div>
-            </Tooltip>
-
-            <Button
-              className={`bg-white/10 backdrop-blur-sm text-white text-md ${
-                isLike ? "text-rose-700" : "text-white"
-              } hover:text-rose-700`}
-              startContent={
-                <div className="flex items-center gap-x-2">
-                  <FontAwesomeIcon
-                    icon={isLike ? faHeartSolid : faHeart}
-                    fontSize={18}
-                  />
-                  <span>{isLike ? 101 : 100}</span>
-                </div>
-              }
-              onClick={() => setIsLike(!isLike)}
-              variant="solid"
-              size="md"
-              radius="full"
-            />
-          </div>
-
-          {/* name & info penting */}
-          <div className="flex flex-col px-2 mt-2 pb-3">
-            <Link
-              to={"/info-dewi?name="}
-              className="text-lg tracking-wide hover:text-green-600 font-semibold line-clamp-1"
-            >
-              Desa Wisata Jatimulyo
-            </Link>
-            <div className="flex items-center gap-x-2">
+        {/* weather and like/share button */}
+        <div className="absolute flex justify-between z-[50] py-1 px-2 top-2 w-full">
+          <Tooltip content="cerah berawan | hangat" showArrow>
+            <div className="flex flex-row items-center gap-1 px-2 bg-black/30 backdrop-blur-sm w-fit rounded-full cursor-default">
               <FontAwesomeIcon
-                className="text-gray-500"
-                icon={faMap}
-                fontSize={14}
+                className="text-yellow-400"
+                icon={faSun}
+                fontSize={24}
               />
-              <span className="line-clamp-1 text-sm leading-tight">
-                Daerah Istimewa Yogyakarta
+
+              <span className="text-md text-white">
+                {data.weather}<sup className="text-[12px]">o</sup>C
               </span>
             </div>
+          </Tooltip>
 
-            <div className="flex items-center justify-between mt-1">
-              <div className="flex flex-row gap-x-4">
-                {/* rating */}
-                <div className="flex items-center gap-x-1 text-sm">
-                  <FontAwesomeIcon
-                    className="text-yellow-500"
-                    icon={faStar}
-                    fontSize={15}
-                  />
-                  <span>4.5 (1.5rb)</span>
-                </div>
+          <Button
+            className={`bg-white/10 backdrop-blur-sm text-white text-md z-[50] ${
+              isLike ? "text-rose-700" : "text-white"
+            } hover:text-rose-700`}
+            startContent={
+              <div className="flex items-center gap-x-2">
+                <FontAwesomeIcon
+                  icon={isLike ? faHeartSolid : faHeart}
+                  fontSize={18}
+                />
+                <span>{isLike ? formatNumberShort(data.like + 1) : formatNumberShort(data.like)}</span>
+              </div>
+            }
+            onClick={() => setIsLike(!isLike)}
+            variant="solid"
+            size="sm"
+            radius="full"
+          />
+        </div>
 
-                {/* turis */}
-                <div className="flex items-center gap-x-1 text-sm">
-                  <FontAwesomeIcon
-                    className="text-gray-600"
-                    icon={faSuitcaseRolling}
-                    fontSize={15}
-                  />
-                  <span className="text-sm">
-                    {formatNumberViewer(9485)} Turis
-                  </span>
-                </div>
+        {/* name & info penting */}
+        <div className="flex flex-col px-2 mt-2 pb-3">
+          <Link
+            to={`/info-dewi?name=${data.name}`}
+            className="text-lg tracking-wide hover:text-green-600 font-semibold line-clamp-1 capitalize"
+          >
+            {data.name}
+          </Link>
+          <div className="flex items-center gap-x-2">
+            <FontAwesomeIcon
+              className="text-gray-500"
+              icon={faMap}
+              fontSize={14}
+            />
+            <span className="line-clamp-1 text-sm leading-tight capitalize">
+              {data.location}
+            </span>
+          </div>
+
+          <div className="flex items-center justify-between mt-1">
+            <div className="flex flex-row gap-x-4">
+              {/* rating */}
+              <div className="flex items-center gap-x-1 text-sm">
+                <FontAwesomeIcon
+                  className="text-yellow-500"
+                  icon={faStar}
+                  fontSize={15}
+                />
+                <span>{data.rating} ({data.testimony})</span>
               </div>
 
-              {/* status */}
-              <Button
-                className="hover:!bg-green-600 hover:!text-white text-green-600"
-                size="sm"
-                variant="light"
-                radius="full"
-              >
-                Buka
-              </Button>
+              {/* turis */}
+              <div className="flex items-center gap-x-1 text-sm">
+                <FontAwesomeIcon
+                  className="text-gray-600"
+                  icon={faSuitcaseRolling}
+                  fontSize={15}
+                />
+                <span className="text-sm">
+                  {formatNumberShort(data.visitors)} Turis
+                </span>
+              </div>
             </div>
+
+            {/* status */}
+            <Button
+              className={`${data.openhours ?  "hover:!bg-green-600 text-green-600" : "hover:!bg-rose-600 text-rose-600"} hover:!text-white capitalize`}
+              size="sm"
+              variant="light"
+              radius="full"
+            >
+              {data.openhours ? 'buka' : 'tutup'}
+            </Button>
           </div>
-        </Card>
-      </Link>
+        </div>
+      </Card>
     </>
   );
 };
