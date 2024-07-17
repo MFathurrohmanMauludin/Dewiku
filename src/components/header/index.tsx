@@ -16,13 +16,8 @@ const Header = () => {
       icon: "",
     },
     {
-      name: "acara",
-      link: "/acara",
-      icon: "",
-    },
-    {
-      name: "galeri",
-      link: "/galeri",
+      name: "cari dewi",
+      link: "/search",
       icon: "",
     },
   ];
@@ -46,7 +41,7 @@ const Header = () => {
         </Link>
 
         {/* navigation */}
-        <nav className="flex items-center md:hidden gap-x-4 capitalize text-[16px]">
+        <nav className="flex items-center gap-x-4 capitalize text-[16px] md:hidden">
           {data.map((nav, index) => (
             <Link
               className={`${
@@ -63,7 +58,7 @@ const Header = () => {
         </nav>
 
         {/* sign up & login */}
-        <div className="flex items-center gap-x-2 xs:hidden sm:hidden md:hidden">
+        <div className="flex items-center gap-x-2">
           <Tooltip content="Favorit saya" placement="bottom" showArrow>
             <Button
               as={Link}

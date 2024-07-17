@@ -43,12 +43,19 @@ interface share {
 
 import {
   faCheck,
+  faShareSquare,
   faStar as faStarSolid,
 } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
 import Rating from "react-rating";
 import { useState } from "react";
-import { ShareFacebook, ShareLine, ShareTelegram, ShareWhatsapp, ShareXTwitter } from "../share";
+import {
+  ShareFacebook,
+  ShareLine,
+  ShareTelegram,
+  ShareWhatsapp,
+  ShareXTwitter,
+} from "../share";
 
 const TestimonyForm = (data: Props) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -261,29 +268,80 @@ const VerifycationModal = (data: verification) => {
 };
 
 const ShareModal = (data: share) => {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   return (
     <>
-      {/* share */}
-      <div className="flex flex-row gap-x-2 py-2">
-        <ShareFacebook
-          url={data.link}
-          hashtag={["Desa_Wisata_Indonesiaku", "Wonderful_Indonesia"]}
-        />
+      <Button
+        className="hover:!bg-white"
+        onPress={onOpen}
+        size="sm"
+        startContent={
+          <Tooltip content="Terverifikasi">
+            <FontAwesomeIcon
+              icon={faShareSquare}
+              fontSize={16}
+            />
+          </Tooltip>
+        }
+        variant="light"
+        radius="full"
+        isIconOnly
+      />
 
-        <ShareTelegram url={data.link} hashtag={["Desa_Wisata_Indonesiaku", "Wonderful_Indonesia"]} />
+      <Modal
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        placement="center"
+        size="md"
+        backdrop="blur"
+        classNames={{
+          backdrop: "backdrop-blur-md z-[1000]",
+          wrapper: "z-[1000]",
+        }}
+        scrollBehavior="inside"
+      >
+        <ModalContent>
+          {() => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">
+                Desa Wisata Jatimulyo
+              </ModalHeader>
 
-        <ShareLine
-          url={data.link}
-          hashtag={["Desa_Wisata_Indonesiaku", "Wonderful_Indonesia"]}
-        />
+              {/* verifikasi */}
+              <ModalBody className="flex items-center justify-center">
+                {/* share */}
+                <div className="flex flex-row gap-x-2 py-2">
+                  <ShareFacebook
+                    url={data.link}
+                    hashtag={["Desa_Wisata_Indonesiaku", "Wonderful_Indonesia"]}
+                  />
 
-        <ShareXTwitter
-          url={data.link}
-          hashtag={["Desa_Wisata_Indonesiaku", "Wonderful_Indonesia"]}
-        />
+                  <ShareTelegram
+                    url={data.link}
+                    hashtag={["Desa_Wisata_Indonesiaku", "Wonderful_Indonesia"]}
+                  />
 
-        <ShareWhatsapp url={data.link} hashtag={["Desa_Wisata_Indonesiaku", "Wonderful_Indonesia"]} />
-      </div>
+                  <ShareLine
+                    url={data.link}
+                    hashtag={["Desa_Wisata_Indonesiaku", "Wonderful_Indonesia"]}
+                  />
+
+                  <ShareXTwitter
+                    url={data.link}
+                    hashtag={["Desa_Wisata_Indonesiaku", "Wonderful_Indonesia"]}
+                  />
+
+                  <ShareWhatsapp
+                    url={data.link}
+                    hashtag={["Desa_Wisata_Indonesiaku", "Wonderful_Indonesia"]}
+                  />
+                </div>
+              </ModalBody>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
     </>
   );
 };

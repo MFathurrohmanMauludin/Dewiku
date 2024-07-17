@@ -123,7 +123,10 @@ const DesaWisataData = () => [
       },
       office: "Jln. Kiskendo - Sermo Sokomoyo RT 8 RW 2, Jatimulyo, Girimulyo Kulon Progo",
     },
-    verification: "https://jadesta.kemenparekraf.go.id/qrcode?id=jatimulyo",
+    verification: {
+      link: "https://jadesta.kemenparekraf.go.id/qrcode?id=jatimulyo",
+      status: true,
+    },
     award: [ 
       {
         name: "DESA JATIMULYO JUARA 3 LOMBA DESA WISATA NUSANTARA",
