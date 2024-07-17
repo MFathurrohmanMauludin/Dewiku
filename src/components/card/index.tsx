@@ -253,108 +253,110 @@ const DesaCard = (data: DesaCardProps) => {
 
   return (
     <>
-      <Card className="max-w-[340px] w-full" shadow="sm">
-        <Image
-          removeWrapper
-          alt={"image-1"}
-          className="z-0 w-full h-full object-cover"
-          src={
-            "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEicjpSwM2KC7Ln684sDJwrTBieNvTtRGMllDcGy1YmAC_7Jo7yQHEtNO4dMWWc7yIT7QiUiGORMYeAUmi5lDMfg-TW_KPckFfarbeVf7rsECfN2TtM7k-DegbQEPqHWlyYnXALYExoOTLI/s1600/IMG_20161212_101915.jpg"
-          }
-        />
-
-        {/* weather and like/share button */}
-        <div className="absolute flex justify-between z-10 py-1 px-2 top-2 w-full">
-          <Tooltip content="cerah berawan | hangat" showArrow>
-            <div className="flex flex-row items-center gap-1 px-2 bg-black/30 backdrop-blur-sm w-fit rounded-full cursor-default">
-              <FontAwesomeIcon
-                className="text-yellow-400"
-                icon={faSun}
-                fontSize={24}
-              />
-
-              <span className="text-md text-white">
-                20<sup className="text-[12px]">o</sup>C
-              </span>
-            </div>
-          </Tooltip>
-
-          <Button
-            className={`bg-white/10 backdrop-blur-sm text-white text-md ${
-              isLike ? "text-rose-700" : "text-white"
-            } hover:text-rose-700`}
-            startContent={
-              <div className="flex items-center gap-x-2">
-                <FontAwesomeIcon
-                  icon={isLike ? faHeartSolid : faHeart}
-                  fontSize={18}
-                />
-                <span>{isLike ? 101 : 100}</span>
-              </div>
+      <Link to={"/info-dewi?name="}>
+        <Card className="max-w-[340px] w-full" shadow="sm">
+          <Image
+            removeWrapper
+            alt={"image-1"}
+            className="z-0 w-full h-full object-cover"
+            src={
+              "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEicjpSwM2KC7Ln684sDJwrTBieNvTtRGMllDcGy1YmAC_7Jo7yQHEtNO4dMWWc7yIT7QiUiGORMYeAUmi5lDMfg-TW_KPckFfarbeVf7rsECfN2TtM7k-DegbQEPqHWlyYnXALYExoOTLI/s1600/IMG_20161212_101915.jpg"
             }
-            onClick={() => setIsLike(!isLike)}
-            variant="solid"
-            size="md"
-            radius="full"
           />
-        </div>
 
-        {/* name & info penting */}
-        <div className="flex flex-col px-2 mt-2 pb-3">
-          <Link
-            to={"/info-dewi?name="}
-            className="text-lg tracking-wide hover:text-green-600 font-semibold line-clamp-1"
-          >
-            Desa Wisata Jatimulyo
-          </Link>
-          <div className="flex items-center gap-x-2">
-            <FontAwesomeIcon
-              className="text-gray-500"
-              icon={faMap}
-              fontSize={14}
-            />
-            <span className="line-clamp-1 text-sm leading-tight">
-              Daerah Istimewa Yogyakarta
-            </span>
-          </div>
-
-          <div className="flex items-center justify-between mt-1">
-            <div className="flex flex-row gap-x-4">
-              {/* rating */}
-              <div className="flex items-center gap-x-1 text-sm">
+          {/* weather and like/share button */}
+          <div className="absolute flex justify-between z-10 py-1 px-2 top-2 w-full">
+            <Tooltip content="cerah berawan | hangat" showArrow>
+              <div className="flex flex-row items-center gap-1 px-2 bg-black/30 backdrop-blur-sm w-fit rounded-full cursor-default">
                 <FontAwesomeIcon
-                  className="text-yellow-500"
-                  icon={faStar}
-                  fontSize={15}
+                  className="text-yellow-400"
+                  icon={faSun}
+                  fontSize={24}
                 />
-                <span>4.5 (1.5rb)</span>
-              </div>
 
-              {/* turis */}
-              <div className="flex items-center gap-x-1 text-sm">
-                <FontAwesomeIcon
-                  className="text-gray-600"
-                  icon={faSuitcaseRolling}
-                  fontSize={15}
-                />
-                <span className="text-sm">
-                  {formatNumberViewer(9485)} Turis
+                <span className="text-md text-white">
+                  20<sup className="text-[12px]">o</sup>C
                 </span>
               </div>
+            </Tooltip>
+
+            <Button
+              className={`bg-white/10 backdrop-blur-sm text-white text-md ${
+                isLike ? "text-rose-700" : "text-white"
+              } hover:text-rose-700`}
+              startContent={
+                <div className="flex items-center gap-x-2">
+                  <FontAwesomeIcon
+                    icon={isLike ? faHeartSolid : faHeart}
+                    fontSize={18}
+                  />
+                  <span>{isLike ? 101 : 100}</span>
+                </div>
+              }
+              onClick={() => setIsLike(!isLike)}
+              variant="solid"
+              size="md"
+              radius="full"
+            />
+          </div>
+
+          {/* name & info penting */}
+          <div className="flex flex-col px-2 mt-2 pb-3">
+            <Link
+              to={"/info-dewi?name="}
+              className="text-lg tracking-wide hover:text-green-600 font-semibold line-clamp-1"
+            >
+              Desa Wisata Jatimulyo
+            </Link>
+            <div className="flex items-center gap-x-2">
+              <FontAwesomeIcon
+                className="text-gray-500"
+                icon={faMap}
+                fontSize={14}
+              />
+              <span className="line-clamp-1 text-sm leading-tight">
+                Daerah Istimewa Yogyakarta
+              </span>
             </div>
 
-            {/* status */}
-            <Button
-              className="hover:!bg-green-600 hover:!text-white text-green-600"
-              size="sm"
-              variant="light"
-              radius="full"
-            >
-              Buka
-            </Button>
+            <div className="flex items-center justify-between mt-1">
+              <div className="flex flex-row gap-x-4">
+                {/* rating */}
+                <div className="flex items-center gap-x-1 text-sm">
+                  <FontAwesomeIcon
+                    className="text-yellow-500"
+                    icon={faStar}
+                    fontSize={15}
+                  />
+                  <span>4.5 (1.5rb)</span>
+                </div>
+
+                {/* turis */}
+                <div className="flex items-center gap-x-1 text-sm">
+                  <FontAwesomeIcon
+                    className="text-gray-600"
+                    icon={faSuitcaseRolling}
+                    fontSize={15}
+                  />
+                  <span className="text-sm">
+                    {formatNumberViewer(9485)} Turis
+                  </span>
+                </div>
+              </div>
+
+              {/* status */}
+              <Button
+                className="hover:!bg-green-600 hover:!text-white text-green-600"
+                size="sm"
+                variant="light"
+                radius="full"
+              >
+                Buka
+              </Button>
+            </div>
           </div>
-        </div>
-      </Card>
+        </Card>
+      </Link>
     </>
   );
 };

@@ -19,7 +19,7 @@ class Home extends React.Component<Props, State> {
     return (
       <>
         <div id="main-content" />
-        <Hero />
+        {/* <Hero /> */}
         <DewiPopularSection/>
       </>
     );
