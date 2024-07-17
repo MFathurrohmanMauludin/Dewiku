@@ -27,7 +27,7 @@ const DewiPopularSection = () => {
   }  
 
   return (
-    <div className="space-y-2 px-6 py-[80px]">
+    <div className="space-y-2 px-6 xs:px-2 py-[80px]">
       <span className="text-lg font-semibold tracking-wider">
         Desa Wisata Populer
       </span>
@@ -38,8 +38,7 @@ const DewiPopularSection = () => {
             key={index}
             name={desa.name}
             location={desa.location.city}
-            rating={5}
-            weather={0}
+            weather={25}
             like={desa.like}
             visitors={desa.visitors}
             hours={desa.openHours}

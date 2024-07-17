@@ -28,9 +28,10 @@ import {
 } from "@nextui-org/react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { formatNumberShort } from "../../utils/changeNumber";
+import { formatNumberShort, getAverageRating } from "../../utils/changeNumber";
 import { formatShortIndonesiaDate } from "../../utils/changeDate";
 import Rating from "react-rating";
+import { DesaWisataData } from "../../utils/data";
 
 interface GaleryProps {
   title: string;
@@ -58,7 +59,6 @@ interface DesaCardProps {
   name: string;
   imgUrl: string;
   location: string;
-  rating: number;
   testimony: number;
   weather: number;
   like: number;
@@ -262,9 +262,14 @@ const GaleryCard = (data: GaleryProps) => {
 const DesaCard = (data: DesaCardProps) => {
   const [isLike, setIsLike] = useState(false);
 
+  const getData = DesaWisataData();
+  const filteredData = getData.filter((desa) =>
+    desa.name.includes("jatimulyo")
+  );
+
   return (
     <>
-      <Card className="max-w-[340px] w-full" shadow="sm">
+      <Card className="!max-w-full w-full border-1" shadow="none">
         <Image
           removeWrapper
           alt={data.name}
@@ -283,7 +288,8 @@ const DesaCard = (data: DesaCardProps) => {
               />
 
               <span className="text-md text-white">
-                {data.weather}<sup className="text-[12px]">o</sup>C
+                {data.weather}
+                <sup className="text-[12px]">o</sup>C
               </span>
             </div>
           </Tooltip>
@@ -298,7 +304,11 @@ const DesaCard = (data: DesaCardProps) => {
                   icon={isLike ? faHeartSolid : faHeart}
                   fontSize={18}
                 />
-                <span>{isLike ? formatNumberShort(data.like + 1) : formatNumberShort(data.like)}</span>
+                <span>
+                  {isLike
+                    ? formatNumberShort(data.like + 1)
+                    : formatNumberShort(data.like)}
+                </span>
               </div>
             }
             onClick={() => setIsLike(!isLike)}
@@ -336,7 +346,9 @@ const DesaCard = (data: DesaCardProps) => {
                   icon={faStar}
                   fontSize={15}
                 />
-                <span>{data.rating} ({data.testimony})</span>
+                <span>
+                  {getAverageRating(filteredData)} ({data.testimony})
+                </span>
               </div>
 
               {/* turis */}
@@ -354,12 +366,16 @@ const DesaCard = (data: DesaCardProps) => {
 
             {/* status */}
             <Button
-              className={`${data.openhours ?  "hover:!bg-green-600 text-green-600" : "hover:!bg-rose-600 text-rose-600"} hover:!text-white capitalize`}
+              className={`${
+                data.openhours
+                  ? "hover:!bg-green-600 text-green-600"
+                  : "hover:!bg-rose-600 text-rose-600"
+              } hover:!text-white capitalize`}
               size="sm"
               variant="light"
               radius="full"
             >
-              {data.openhours ? 'buka' : 'tutup'}
+              {data.openhours ? "buka" : "tutup"}
             </Button>
           </div>
         </div>
@@ -377,7 +393,7 @@ const KulinerCard = () => {
 
   return (
     <>
-      <Card shadow="sm" isPressable onPress={onOpen}>
+      <Card className="!max-w-full w-full border-1" shadow="none" isPressable onPress={onOpen}>
         <CardBody className="overflow-visible p-0">
           <Image
             shadow="sm"

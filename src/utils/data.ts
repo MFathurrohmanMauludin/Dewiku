@@ -1,6 +1,6 @@
 const DesaWisataData = () => [
   {
-    name: "desa wisata Jatimulyo",
+    name: "desa wisata jatimulyo",
     imgUrl:
       "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEicjpSwM2KC7Ln684sDJwrTBieNvTtRGMllDcGy1YmAC_7Jo7yQHEtNO4dMWWc7yIT7QiUiGORMYeAUmi5lDMfg-TW_KPckFfarbeVf7rsECfN2TtM7k-DegbQEPqHWlyYnXALYExoOTLI/s1600/IMG_20161212_101915.jpg",
     weatherLocation: {
@@ -70,10 +70,18 @@ const DesaWisataData = () => [
       {
         name: "Hatsune Miku",
         imgUrl: "https://i.pinimg.com/736x/5f/03/5f/5f035fab60d92fa74c6f9546da140497.jpg",
-        rate: 5,
+        rating: 5,
         like: 100,
-        testimony: "Sangat enak",
+        comment: "Sangat enak",
         date: "7/10/2024",
+      },
+      {
+        name: "Vladilena Milize",
+        imgUrl: "https://i.pinimg.com/736x/34/51/14/34511493ad859f27733704e6245e7bea.jpg",
+        rating: 4,
+        like: 240,
+        comment: "udaranya sejuk",
+        date: "7/15/2024",
       },
     ],
     openHours: [

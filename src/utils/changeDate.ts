@@ -43,5 +43,4 @@ const getDayOfWeekNumber = (): number => {
     return hours * 60 + minutes;
   }
   
-
 export {formatIndonesiaDate, formatShortIndonesiaDate, getDayOfWeekNumber, getToday, getHours, timeStringToMinutes};
