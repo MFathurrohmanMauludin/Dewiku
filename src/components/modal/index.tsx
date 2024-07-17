@@ -10,6 +10,7 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
+  Snippet,
   Textarea,
   Tooltip,
   useDisclosure,
@@ -277,10 +278,7 @@ const ShareModal = (data: share) => {
         size="md"
         startContent={
           <Tooltip content="bagikan">
-            <FontAwesomeIcon
-              icon={faShareFromSquare}
-              fontSize={18}
-            />
+            <FontAwesomeIcon icon={faShareFromSquare} fontSize={18} />
           </Tooltip>
         }
         variant="light"
@@ -300,7 +298,7 @@ const ShareModal = (data: share) => {
         }}
         scrollBehavior="inside"
       >
-        <ModalContent>
+        <ModalContent className="pb-3">
           {() => (
             <>
               <ModalHeader className="flex flex-col gap-1">
@@ -336,6 +334,11 @@ const ShareModal = (data: share) => {
                     hashtag={["Desa_Wisata_Indonesiaku", "Wonderful_Indonesia"]}
                   />
                 </div>
+
+                {/* copy link */}
+                <Snippet className="w-full" symbol="" variant="bordered">
+                 {`https://dewiku.netlify.app${data.link}`}
+                </Snippet>
               </ModalBody>
             </>
           )}
