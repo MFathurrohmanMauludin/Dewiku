@@ -116,7 +116,7 @@ const DesaWisataData = () => [
     contact: {
       telp: "Suhandri +62 8122 9914 791",
       email: "dewijatimulyo@gmail.com",
-      sosmed: {
+      socmed: {
         ig: "https://www.instagram.com/desawisatajatimulyo",
         fb: "",
         tw: "",

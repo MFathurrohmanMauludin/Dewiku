@@ -172,7 +172,7 @@ const Footer = () => {
 
       {/* copyright */}
       <div className="flex items-center justify-between px-8 xs:px-4 py-3 text-sm">
-        <span>&copy; 2024 - PT Dewi Indonesia</span>
+        <span>&copy; 2024 - M Fathurrohman Mauludin</span>
         <div className="space-x-3">
           <Link to={"#"} className="text-gray-500 hover:text-gray-700">
             Term of Service

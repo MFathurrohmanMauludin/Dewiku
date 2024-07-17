@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Button,
   Checkbox,
+  Image,
   Input,
   Link,
   Modal,
@@ -10,6 +11,7 @@ import {
   ModalFooter,
   ModalHeader,
   Textarea,
+  Tooltip,
   useDisclosure,
 } from "@nextui-org/react";
 
@@ -30,10 +32,23 @@ interface Props {
   };
 }
 
-import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
+interface verification {
+  imgUrl: string;
+  link: string;
+}
+
+interface share {
+  link: string;
+}
+
+import {
+  faCheck,
+  faStar as faStarSolid,
+} from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
 import Rating from "react-rating";
 import { useState } from "react";
+import { ShareFacebook, ShareLine, ShareTelegram, ShareWhatsapp, ShareXTwitter } from "../share";
 
 const TestimonyForm = (data: Props) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -47,7 +62,7 @@ const TestimonyForm = (data: Props) => {
         size="sm"
         color="success"
       >
-       buat testimoni
+        buat testimoni
       </Button>
 
       <Modal
@@ -75,7 +90,7 @@ const TestimonyForm = (data: Props) => {
                 <div className="flex flex-col items-center gap-y-4 pb-4">
                   <span>Berapa penilaian anda untuk desa wisata ini?</span>
                   <Rating
-                  className="space-x-2"
+                    className="space-x-2"
                     emptySymbol={
                       <FontAwesomeIcon
                         icon={faStar}
@@ -132,7 +147,9 @@ const TestimonyForm = (data: Props) => {
                   }}
                 />
 
-                <span className="flex justify-end text-tiny">Karakter Tersisa: 500</span>
+                <span className="flex justify-end text-tiny">
+                  Karakter Tersisa: 500
+                </span>
 
                 {/* term of service & privacy policy */}
                 <div className="flex py-2 px-1 justify-between">
@@ -163,7 +180,7 @@ const TestimonyForm = (data: Props) => {
                 >
                   Cancel
                 </Button>
-                
+
                 <Button
                   className="bg-gray-900 text-white"
                   onPress={onClose}
@@ -181,4 +198,94 @@ const TestimonyForm = (data: Props) => {
   );
 };
 
-export { TestimonyForm };
+const VerifycationModal = (data: verification) => {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+  return (
+    <>
+      <Button
+        className="hover:!bg-white"
+        onPress={onOpen}
+        size="sm"
+        startContent={
+          <Tooltip content="Terverifikasi">
+            <FontAwesomeIcon
+              className="py-[4px] px-[4.8px] text-white bg-green-600 rounded-full"
+              icon={faCheck}
+              fontSize={12}
+            />
+          </Tooltip>
+        }
+        variant="light"
+        radius="full"
+        isIconOnly
+      />
+
+      <Modal
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        placement="center"
+        size="md"
+        backdrop="blur"
+        classNames={{
+          backdrop: "backdrop-blur-md z-[1000]",
+          wrapper: "z-[1000]",
+        }}
+        scrollBehavior="inside"
+      >
+        <ModalContent>
+          {() => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">
+                Desa Wisata Jatimulyo
+              </ModalHeader>
+
+              {/* verifikasi */}
+              <ModalBody className="flex items-center justify-center">
+                <Image
+                  className="h-[300px]"
+                  src="https://jadesta.kemenparekraf.go.id/qrcode?id=jatimulyo"
+                  height={400}
+                  alt="qr-code"
+                  loading="lazy"
+                />
+
+                <p>Desa ini telah tervefikasi oleh Dinas Pariwisata Setempat</p>
+              </ModalBody>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    </>
+  );
+};
+
+const ShareModal = (data: share) => {
+  return (
+    <>
+      {/* share */}
+      <div className="flex flex-row gap-x-2 py-2">
+        <ShareFacebook
+          url={data.link}
+          hashtag={["Desa_Wisata_Indonesiaku", "Wonderful_Indonesia"]}
+        />
+
+        <ShareTelegram url={data.link} hashtag={["Desa_Wisata_Indonesiaku", "Wonderful_Indonesia"]} />
+
+        <ShareLine
+          url={data.link}
+          hashtag={["Desa_Wisata_Indonesiaku", "Wonderful_Indonesia"]}
+        />
+
+        <ShareXTwitter
+          url={data.link}
+          hashtag={["Desa_Wisata_Indonesiaku", "Wonderful_Indonesia"]}
+        />
+
+        <ShareWhatsapp url={data.link} hashtag={["Desa_Wisata_Indonesiaku", "Wonderful_Indonesia"]} />
+      </div>
+    </>
+  );
+};
+
+export { TestimonyForm, VerifycationModal, ShareModal };
