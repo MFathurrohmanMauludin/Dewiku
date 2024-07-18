@@ -28,7 +28,11 @@ import {
 } from "@nextui-org/react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { formatNumberShort, getAverageRating } from "../../utils/changeNumber";
+import {
+  formatNumberShort,
+  getAverageRating,
+  ThousandSeparators,
+} from "../../utils/changeNumber";
 import { formatShortIndonesiaDate } from "../../utils/changeDate";
 import Rating from "react-rating";
 import { DesaWisataData } from "../../utils/data";
@@ -49,7 +53,7 @@ interface BannerCardProps {
 interface RatingProps {
   name: string;
   imgUrl: string;
-  nominal: number;
+  rating: number;
   comment: string;
   like: number;
   date: string;
@@ -65,6 +69,21 @@ interface DesaCardProps {
   visitors: number;
   openhours: boolean;
   hours: any;
+}
+
+interface EventProps {
+  name: string;
+  imgUrl: string;
+  schedule_date: string;
+  desc: any;
+}
+
+interface AnotherProps {
+  name: string;
+  imgUrl: string;
+  price: number;
+  location: string;
+  desc: any;
 }
 
 const BannerCard = (data: BannerCardProps) => {
@@ -126,7 +145,7 @@ const RatingCard = (data: RatingProps) => {
                     className="text-yellow-400"
                   />
                 }
-                initialRating={4}
+                initialRating={data.rating}
                 readonly
               />
             </div>
@@ -135,7 +154,7 @@ const RatingCard = (data: RatingProps) => {
         <CardBody className="px-3 py-0 text-small text-default-400">
           <p className="line-clamp-4 text-gray-600">{data.comment}</p>
         </CardBody>
-        <CardFooter className="flex justify-start gap-2">
+        <CardFooter className="flex justify-end gap-2">
           <Button
             className={`hover:!bg-white ${
               isLike ? "text-rose-600" : "text-gray-600"
@@ -384,263 +403,36 @@ const DesaCard = (data: DesaCardProps) => {
   );
 };
 
-const KulinerCard = () => {
+const KulinerCard = (data: AnotherProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const history = `<p><span style="background-color:rgb(255,255,255);color:rgb(60,72,88);font-family:Montserrat;font-size:18px;"><span style="-webkit-text-stroke-width:0px;display:inline !important;float:none;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:300;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">Di Jatimulyolah Makanan tradisional warisan nenek moyang ini bisa ditemukan. ‘Dawet Sambel’ namanya, sekitar 60 tahun yang lalu, ketika Dawet Sambel dicetuskan oleh seorang penjual Pecel, namanya adalah ‘Dawet Pecel’, Singkat cerita, ada salah satu warga Jatimulyo namanya Simbah Wagiyem, warga Asli padukuhan Sokomoyo, Kalurahan Jatimulyo, Kapanewon Girimulyo. Mbah wagiyem yang berprofesi sebagai Penjual Pecel, Pecel adalah makanan dari sayuran yang direbus dengan di tambahkan Sambal kelapa dan nira kelapa sebagai pemanis. Mbah wagiyem selalu berjulan di pasar traditional setiap rabu dan Sabtu,Terkadang juga berjualan di setiap Even yang di adakan di desa.&nbsp;</span></span></p>
-<p>&nbsp;</p>
-<p><span style="background-color:rgb(255,255,255);color:rgb(60,72,88);font-family:Montserrat;font-size:18px;"><span style="-webkit-text-stroke-width:0px;display:inline !important;float:none;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:300;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">Jatimulyo berada di deretan Pegunungan Menoreh, tanah di Jatimulyo sangatlah subur, cocok untuk segala macam tanaman, apalagi jenis umbi umbian, tumbuhan Ganyong pada tahun 1950 an banyak ditemukan, Umbi yang kaya akan Gizi dan Berserat tinggi ini hampir setiap masyarakat di Jatimulyo menanamnya.&nbsp;</span></span></p>
-<p><span style="background-color:rgb(255,255,255);color:rgb(60,72,88);font-family:Montserrat;font-size:18px;"><span style="-webkit-text-stroke-width:0px;display:inline !important;float:none;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:300;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">Melihat potensi tersebut mbah Wagiyem memcoba untuk membuat sesuatu dari ganyong, awalnya simbah Wagiyem ingin membuat jenang ganyong, dengan cara memarut umbi ganyong, kemudian di peras untuk diambil sari patinya, dan dimasak dengan air mendidih, percobaan yang dilakukan Mbah Wagiyem ahirnya berhasil, tetapi tidak sampai situ saja, karena Mbah Wagiyem seorang pedagang, beliau haus akan inovasi untuk Ganyong untuk bias menjadi nilai Ekonomi.</span></span></p>`;
 
   return (
     <>
-      <Card className="!max-w-full w-full border-1" shadow="none" isPressable onPress={onOpen}>
+      <Card
+        className="!max-w-full w-full border-1"
+        shadow="none"
+        isPressable
+        onPress={onOpen}
+      >
         <CardBody className="overflow-visible p-0">
           <Image
             shadow="sm"
             radius="lg"
             width="100%"
-            alt=""
+            alt={data.name}
             className="w-full object-cover h-[200px]"
-            src={
-              "https://www.desawisatajatimulyo.com/wp-content/uploads/2022/08/IMG_2521-360x240.jpg"
-            }
+            src={data.imgUrl}
           />
         </CardBody>
         <CardFooter className="flex flex-col items-start">
-          <b>Dawet Sambel Khas Jatimulyo</b>
-          <p className="text-default-500 text-sm">Rp4.000 /Porsi</p>
-        </CardFooter>
-      </Card>
-
-      {/* sejarah makanan */}
-      <Modal
-        size="lg"
-        isOpen={isOpen}
-        placement="center"
-        onClose={onClose}
-        scrollBehavior="inside"
-        classNames={{
-          backdrop: "z-[1000]",
-          wrapper: "z-[1000]",
-        }}
-      >
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col">
-                <div className="flex flex-row items-stretch gap-x-2">
-                  <Image
-                    className="w-[50px] h-[50px]"
-                    src="https://www.desawisatajatimulyo.com/wp-content/uploads/2022/08/IMG_2521-360x240.jpg"
-                    alt="image-1"
-                    radius="md"
-                    width={100}
-                  />
-                  <div className="flex flex-col">
-                    <b>Dawet Sambel Khas Jatimulyo</b>
-                    <p className="text-default-500 text-sm">Rp4.000</p>
-                  </div>
-                </div>
-              </ModalHeader>
-              <ModalBody>
-                <div dangerouslySetInnerHTML={{ __html: history }} />
-              </ModalBody>
-              <ModalFooter>
-                <Button
-                  color="danger"
-                  variant="light"
-                  radius="full"
-                  onPress={onClose}
-                >
-                  Tutup
-                </Button>
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
-    </>
-  );
-};
-
-const BudayaCard = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const history = `<p><span style="background-color:rgb(255,255,255);color:rgb(60,72,88);font-family:Montserrat;font-size:18px;">Sendratari Sugriwa Subali mengisahkan tentang pertarungan kolosal antara Mahesasura dan Lembusura yang berwujud manusia berkepala kerbau melawan Sugriwa-Subali yang merupakan kakak beradik berwujud manusia berkepala kera mirip dengan sosok Anoman di kisah Sendratari Ramayana.</span><br><br><span style="background-color:rgb(255,255,255);color:rgb(60,72,88);font-family:Montserrat;font-size:18px;">Pertunjukan Sendratari Sugriwa Subali ini bisa menjadi alternatif bagi mencari alternatif wisata budaya di Jawa Tengah dan juga Daerah Istimewa Yogyakarta.</span></p>`;
-
-  return (
-    <>
-      <Card className="h-[300px]" isPressable onPress={onOpen}>
-        <CardHeader className="absolute bottom-0 z-10">
-          <h4 className="text-white font-medium text-large">
-            Sendratari Sugriwa-Subali
-          </h4>
-        </CardHeader>
-        <Image
-          removeWrapper
-          alt="Card background"
-          className="z-0 w-full h-full object-cover brightness-90 hover:brightness-100 focus-within:brightness-100"
-          src="https://visitingjogja.jogjaprov.go.id/wp-content/uploads/2020/04/422.jpg"
-          tabIndex={0}
-        />
-      </Card>
-
-      {/* sejarah makanan */}
-      <Modal
-        size="lg"
-        isOpen={isOpen}
-        placement="center"
-        onClose={onClose}
-        scrollBehavior="inside"
-        classNames={{
-          backdrop: "z-[1000]",
-          wrapper: "z-[1000]",
-        }}
-      >
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col">
-                <div className="flex flex-row items-stretch gap-x-2">
-                  <Image
-                    className="w-[50px] h-[50px]"
-                    src="https://www.desawisatajatimulyo.com/wp-content/uploads/2022/08/IMG_2521-360x240.jpg"
-                    alt="image-1"
-                    radius="md"
-                    width={100}
-                  />
-                  <div className="flex flex-col">
-                    <b>Sendratari Sugriwa-Subali</b>
-                    <p className="text-default-500 text-sm">Rp4.000</p>
-                  </div>
-                </div>
-              </ModalHeader>
-              <ModalBody>
-                <div dangerouslySetInnerHTML={{ __html: history }} />
-              </ModalBody>
-              <ModalFooter>
-                <Button
-                  color="danger"
-                  variant="light"
-                  radius="full"
-                  onPress={onClose}
-                >
-                  Tutup
-                </Button>
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
-    </>
-  );
-};
-
-const AlamCard = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
-  return (
-    <>
-      <Card shadow="sm" isPressable onPress={onOpen}>
-        <CardBody className="overflow-visible p-0">
-          <Image
-            shadow="sm"
-            radius="lg"
-            width="100%"
-            alt=""
-            className="w-full object-cover h-[200px]"
-            src={
-              "https://asset.kompas.com/crops/b_2bessHbE6IXIqr-6_lRssr0II=/0x0:1800x1200/750x500/data/photo/2022/11/04/6364469a947cc.jpg"
-            }
-          />
-        </CardBody>
-        <CardFooter className="flex flex-col items-start">
-          <b className="capitalize">Air Terjun Grojogan Sewu</b>
-          <span className="text-default-500 text-sm">Rp22.000 /Orang</span>
-        </CardFooter>
-      </Card>
-
-      {/* sejarah makanan */}
-      <Modal
-        size="lg"
-        isOpen={isOpen}
-        placement="center"
-        onClose={onClose}
-        scrollBehavior="inside"
-        classNames={{
-          backdrop: "z-[1000]",
-          wrapper: "z-[1000]",
-        }}
-      >
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col">
-                <div className="flex flex-row items-stretch gap-x-2">
-                  <Image
-                    className="w-[50px] h-[50px]"
-                    src="https://www.desawisatajatimulyo.com/wp-content/uploads/2022/08/IMG_2521-360x240.jpg"
-                    alt="image-1"
-                    radius="md"
-                    width={100}
-                  />
-                  <div className="flex flex-col">
-                    <b>Dawet Sambel Khas Jatimulyo</b>
-                    <p className="text-default-500 text-sm">Rp4.000</p>
-                  </div>
-                </div>
-              </ModalHeader>
-              <ModalBody>
-                <div dangerouslySetInnerHTML={{ __html: history }} />
-              </ModalBody>
-              <ModalFooter>
-                <Button
-                  color="danger"
-                  variant="light"
-                  radius="full"
-                  onPress={onClose}
-                >
-                  Tutup
-                </Button>
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
-    </>
-  );
-};
-
-const EventCard = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const history = `
-<p style="margin-left:0px;"><span style="font-family:'Times New Roman', Times, serif;font-size:14px;">Grebeg sampah adalah kegiatan mengumpulkan sampah ,memilah kemudian di kreasikan menjadi suatu bentuk kreasi yang nantinya bakal diarak dalam Grebek sampah di Kalurahan Jatimulyo. dalam hal ini, di Jatimulyo sampah tersebut di jadikan bentuk gunungan dan berbentuk burung. Kemudian gunungan dan burung tersebut, di arak dari lapangan pasar cublak menuju balai kalurahan.Setelah sampai di kalurahan, sampah tersebut di serahkan ke DLH Kulon progo.</span></p>
-<p style="margin-left:0px;"><span style="background-color:rgb(255,255,255);color:rgb(60,72,88);font-family:'Times New Roman', Times, serif;font-size:14px;">Grebeg Sampah ini di ikuti oleh Kepala Dinas Lingkungan Hidup &nbsp;Kulon Progo, Panewu, Kapolsek Danramil, Perangkat Kalurahan, BPKal, Linmas, Karang Taruna, dan warga masyarakat Kalurahan Jatimulyo yang dilaksanakan Sabtu, 10 September 2022, di Balai Kalurahan Jatimulyo. Tak lupa juga, untuk memeriahkan acara tersebut , ada pentas seni Jathilan Pongjur “KUDHO BUDHOYO* dari padukuhan Sonyo, kalurahan Jatimulyo, Kulon Progo.</span><br>&nbsp;</p>`;
-
-  return (
-    <>
-      <Card shadow="sm" isPressable onPress={onOpen}>
-        <CardBody className="overflow-visible p-0">
-          <Image
-            shadow="sm"
-            radius="lg"
-            width="100%"
-            alt=""
-            className="w-full object-cover h-[200px]"
-            src={
-              "https://www.desawisatajatimulyo.com/wp-content/uploads/2022/09/IMG_5128-1024x683.jpg"
-            }
-          />
-        </CardBody>
-        <CardFooter className="flex flex-col items-start">
-          <b className="capitalize">grebeg sampah</b>
+          <b className="capitalize">{data.name}</b>
           <p className="text-default-500 text-sm">
-            Dilaksanakan: 10 september 2022{" "}
+            Rp{ThousandSeparators(data.price)} /Porsi
           </p>
         </CardFooter>
       </Card>
 
-      {/* sejarah makanan */}
+      {/* sejarah */}
       <Modal
         size="lg"
         isOpen={isOpen}
@@ -659,24 +451,37 @@ const EventCard = () => {
                 <div className="flex flex-row items-stretch gap-x-2">
                   <Image
                     className="w-[50px] h-[50px]"
-                    src="https://www.desawisatajatimulyo.com/wp-content/uploads/2022/09/IMG_5128-1024x683.jpg"
-                    alt="image-1"
+                    src={data.imgUrl}
+                    alt={data.name}
                     radius="md"
                     width={100}
                   />
                   <div className="flex flex-col">
-                    <b>Grebeg Sampah</b>
+                    <b className="capitalize">{data.name}</b>
                     <p className="text-default-500 text-sm">
-                      Dilaksanakan: 10 September 2022
+                      Rp{ThousandSeparators(data.price)} /Porsi
                     </p>
                   </div>
                 </div>
               </ModalHeader>
-              <ModalBody>
-                <div
-                  className="flex flex-col items-center gap-y-2 text-[14px]"
-                  dangerouslySetInnerHTML={{ __html: history }}
-                />
+              <ModalBody className="flex flex-col gap-y-3">
+                <div dangerouslySetInnerHTML={{ __html: data.desc }} />
+
+                {data.location !== "" && (
+                  <div className="space-y-2">
+                    <strong>Lokasi</strong>
+                    <iframe
+                      src={`https://www.google.com/maps/embed?pb=${data.location}`}
+                      className="rounded-lg h-[300px] w-full"
+                      width="654"
+                      height="400"
+                      style={{ border: 0 }}
+                      allowFullScreen={true}
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    ></iframe>
+                  </div>
+                )}
               </ModalBody>
               <ModalFooter>
                 <Button
@@ -696,38 +501,109 @@ const EventCard = () => {
   );
 };
 
-const AkomodasiCard = () => {
+// const BudayaCard = () => {
+//   const { isOpen, onOpen, onClose } = useDisclosure();
+
+//   const history = `<p><span style="background-color:rgb(255,255,255);color:rgb(60,72,88);font-family:Montserrat;font-size:18px;">Sendratari Sugriwa Subali mengisahkan tentang pertarungan kolosal antara Mahesasura dan Lembusura yang berwujud manusia berkepala kerbau melawan Sugriwa-Subali yang merupakan kakak beradik berwujud manusia berkepala kera mirip dengan sosok Anoman di kisah Sendratari Ramayana.</span><br><br><span style="background-color:rgb(255,255,255);color:rgb(60,72,88);font-family:Montserrat;font-size:18px;">Pertunjukan Sendratari Sugriwa Subali ini bisa menjadi alternatif bagi mencari alternatif wisata budaya di Jawa Tengah dan juga Daerah Istimewa Yogyakarta.</span></p>`;
+
+//   return (
+//     <>
+//       <Card className="h-[300px]" isPressable onPress={onOpen}>
+//         <CardHeader className="absolute bottom-0 z-10">
+//           <h4 className="text-white font-medium text-large">
+//             Sendratari Sugriwa-Subali
+//           </h4>
+//         </CardHeader>
+//         <Image
+//           removeWrapper
+//           alt="Card background"
+//           className="z-0 w-full h-full object-cover brightness-90 hover:brightness-100 focus-within:brightness-100"
+//           src="https://visitingjogja.jogjaprov.go.id/wp-content/uploads/2020/04/422.jpg"
+//           tabIndex={0}
+//         />
+//       </Card>
+
+//       {/* sejarah makanan */}
+//       <Modal
+//         size="lg"
+//         isOpen={isOpen}
+//         placement="center"
+//         onClose={onClose}
+//         scrollBehavior="inside"
+//         classNames={{
+//           backdrop: "z-[1000]",
+//           wrapper: "z-[1000]",
+//         }}
+//       >
+//         <ModalContent>
+//           {(onClose) => (
+//             <>
+//               <ModalHeader className="flex flex-col">
+//                 <div className="flex flex-row items-stretch gap-x-2">
+//                   <Image
+//                     className="w-[50px] h-[50px]"
+//                     src="https://www.desawisatajatimulyo.com/wp-content/uploads/2022/08/IMG_2521-360x240.jpg"
+//                     alt="image-1"
+//                     radius="md"
+//                     width={100}
+//                   />
+//                   <div className="flex flex-col">
+//                     <b>Sendratari Sugriwa-Subali</b>
+//                     <p className="text-default-500 text-sm">Rp4.000</p>
+//                   </div>
+//                 </div>
+//               </ModalHeader>
+//               <ModalBody>
+//                 <div dangerouslySetInnerHTML={{ __html: history }} />
+//               </ModalBody>
+//               <ModalFooter>
+//                 <Button
+//                   color="danger"
+//                   variant="light"
+//                   radius="full"
+//                   onPress={onClose}
+//                 >
+//                   Tutup
+//                 </Button>
+//               </ModalFooter>
+//             </>
+//           )}
+//         </ModalContent>
+//       </Modal>
+//     </>
+//   );
+// };
+
+const BudayaCard = (data: AnotherProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const history = `<p><strong>Fasilitas</strong></p>
-<ul>
-    <li>Makan 1x</li>
-    <li>welcomedrink 1x</li>
-    <li>Mandi Air Hangat</li>
-    <li>Kamar Mandi Dalam</li>
-</ul>`;
 
   return (
     <>
-      <Card shadow="sm" isPressable onPress={onOpen}>
+      <Card
+        className="!max-w-full w-full border-1"
+        shadow="none"
+        isPressable
+        onPress={onOpen}
+      >
         <CardBody className="overflow-visible p-0">
           <Image
             shadow="sm"
             radius="lg"
             width="100%"
-            alt=""
+            alt={data.name}
             className="w-full object-cover h-[200px]"
-            src={
-              "https://www.desawisatajatimulyo.com/wp-content/uploads/2022/09/IMG_2526.jpg"
-            }
+            src={data.imgUrl}
           />
         </CardBody>
         <CardFooter className="flex flex-col items-start">
-          <b>Omah Watu Blencong</b>
-          <p className="text-default-500 text-sm">Rp200.000 /Malam</p>
+          <b className="capitalize">{data.name}</b>
+          <p className="text-default-500 text-sm">
+            Rp{ThousandSeparators(data.price)} /Tiket
+          </p>
         </CardFooter>
       </Card>
 
-      {/* sejarah makanan */}
+      {/* sejarah */}
       <Modal
         size="lg"
         isOpen={isOpen}
@@ -746,24 +622,124 @@ const AkomodasiCard = () => {
                 <div className="flex flex-row items-stretch gap-x-2">
                   <Image
                     className="w-[50px] h-[50px]"
-                    src="https://www.desawisatajatimulyo.com/wp-content/uploads/2022/09/IMG_2526.jpg"
-                    alt="image-1"
+                    src={data.imgUrl}
+                    alt={data.name}
                     radius="md"
                     width={100}
                   />
                   <div className="flex flex-col">
-                    <b>Omah Watu Blencong</b>
-                    <p className="text-default-500 text-sm">Rp200.000 /malam</p>
+                    <b className="capitalize">{data.name}</b>
+                    <p className="text-default-500 text-sm">
+                      Rp{ThousandSeparators(data.price)} /Porsi
+                    </p>
                   </div>
                 </div>
               </ModalHeader>
               <ModalBody className="flex flex-col gap-y-3">
-                <div dangerouslySetInnerHTML={{ __html: history }} />
+                <div dangerouslySetInnerHTML={{ __html: data.desc }} />
+
+                {data.location !== "" && (
+                  <div className="space-y-2">
+                    <strong>Lokasi</strong>
+                    <iframe
+                      src={`https://www.google.com/maps/embed?pb=${data.location}`}
+                      className="rounded-lg h-[300px] w-full"
+                      width="654"
+                      height="400"
+                      style={{ border: 0 }}
+                      allowFullScreen={true}
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    ></iframe>
+                  </div>
+                )}
+              </ModalBody>
+              <ModalFooter>
+                <Button
+                  color="danger"
+                  variant="light"
+                  radius="full"
+                  onPress={onClose}
+                >
+                  Tutup
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    </>
+  );
+};
+
+const AlamCard = (data: AnotherProps) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  return (
+    <>
+      <Card
+        className="!max-w-full w-full border-1"
+        shadow="none"
+        isPressable
+        onPress={onOpen}
+      >
+        <CardBody className="overflow-visible p-0">
+          <Image
+            shadow="sm"
+            radius="lg"
+            width="100%"
+            alt={data.name}
+            className="w-full object-cover h-[200px]"
+            src={data.imgUrl}
+          />
+        </CardBody>
+        <CardFooter className="flex flex-col items-start">
+          <b className="capitalize">{data.name}</b>
+          <span className="text-default-500 text-sm">
+            Rp{ThousandSeparators(data.price)} /Tiket
+          </span>
+        </CardFooter>
+      </Card>
+
+      {/* history */}
+      <Modal
+        size="lg"
+        isOpen={isOpen}
+        placement="center"
+        onClose={onClose}
+        scrollBehavior="inside"
+        classNames={{
+          backdrop: "z-[1000]",
+          wrapper: "z-[1000]",
+        }}
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col">
+                <div className="flex flex-row items-stretch gap-x-2">
+                  <Image
+                    className="w-[50px] h-[50px]"
+                    src={data.imgUrl}
+                    alt={data.name}
+                    radius="md"
+                    width={100}
+                  />
+                  <div className="flex flex-col">
+                    <b className="capitalize">{data.name}</b>
+                    <span className="text-default-500 text-sm">
+                      Rp{ThousandSeparators(data.price)} /Tiket
+                    </span>
+                  </div>
+                </div>
+              </ModalHeader>
+              <ModalBody className="flex flex-col gap-y-3">
+                <div dangerouslySetInnerHTML={{ __html: data.desc }} />
 
                 <div className="space-y-2">
                   <strong>Lokasi</strong>
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1976.679951964016!2d110.12964470000003!3d-7.751597899999987!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7aee24a41cb525%3A0xfc21dfaa13f7ef0e!2sOmah%20Watu%20Blencong!5e0!3m2!1sen!2sid!4v1721059533508!5m2!1sen!2sid"
+                    src={`https://www.google.com/maps/embed?pb=${data.location}`}
                     className="rounded-lg h-[300px] w-full"
                     width="654"
                     height="400"
@@ -789,6 +765,191 @@ const AkomodasiCard = () => {
         </ModalContent>
       </Modal>
     </>
+  );
+};
+
+const EventCard = (data: EventProps) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  return (
+    <>
+      <Card
+        className="!max-w-full w-full border-1"
+        shadow="none"
+        isPressable
+        onPress={onOpen}
+      >
+        <CardBody className="overflow-visible p-0">
+          <Image
+            shadow="sm"
+            radius="lg"
+            width="100%"
+            alt=""
+            className="w-full object-cover h-[200px]"
+            src={
+              "https://www.desawisatajatimulyo.com/wp-content/uploads/2022/09/IMG_5128-1024x683.jpg"
+            }
+          />
+        </CardBody>
+        <CardFooter className="flex flex-col items-start">
+          <b className="capitalize">{data.name}</b>
+          <p className="text-default-500 text-sm">
+            Dilaksanakan: {formatShortIndonesiaDate(data.schedule_date)}{" "}
+          </p>
+        </CardFooter>
+      </Card>
+
+      {/* sejarah makanan */}
+      <Modal
+        size="lg"
+        isOpen={isOpen}
+        placement="center"
+        onClose={onClose}
+        scrollBehavior="inside"
+        classNames={{
+          backdrop: "z-[1000]",
+          wrapper: "z-[1000]",
+        }}
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col">
+                <div className="flex flex-row items-stretch gap-x-2">
+                  <Image
+                    className="w-[50px] h-[50px]"
+                    src={data.imgUrl}
+                    alt={data.name}
+                    radius="md"
+                    width={100}
+                  />
+                  <div className="flex flex-col">
+                    <b className="capitalize">{data.name}</b>
+                    <p className="text-default-500 text-sm">
+                      Dilaksanakan:{" "}
+                      {formatShortIndonesiaDate(data.schedule_date)}
+                    </p>
+                  </div>
+                </div>
+              </ModalHeader>
+              <ModalBody>
+                <div
+                  className="flex flex-col items-center gap-y-2 text-[14px]"
+                  dangerouslySetInnerHTML={{ __html: data.desc }}
+                />
+              </ModalBody>
+              <ModalFooter>
+                <Button
+                  color="danger"
+                  variant="light"
+                  radius="full"
+                  onPress={onClose}
+                >
+                  Tutup
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    </>
+  );
+};
+
+const AkomodasiCard = (data: AnotherProps) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  return (
+    <>
+    <Card
+      className="!max-w-full w-full border-1"
+      shadow="none"
+      isPressable
+      onPress={onOpen}
+    >
+      <CardBody className="overflow-visible p-0">
+        <Image
+          shadow="sm"
+          radius="lg"
+          width="100%"
+          alt={data.name}
+          className="w-full object-cover h-[200px]"
+          src={data.imgUrl}
+        />
+      </CardBody>
+      <CardFooter className="flex flex-col items-start">
+        <b className="capitalize">{data.name}</b>
+        <p className="text-default-500 text-sm">
+          Rp{ThousandSeparators(data.price)} /Malam
+        </p>
+      </CardFooter>
+    </Card>
+
+    {/* sejarah */}
+    <Modal
+      size="lg"
+      isOpen={isOpen}
+      placement="center"
+      onClose={onClose}
+      scrollBehavior="inside"
+      classNames={{
+        backdrop: "z-[1000]",
+        wrapper: "z-[1000]",
+      }}
+    >
+      <ModalContent>
+        {(onClose) => (
+          <>
+            <ModalHeader className="flex flex-col">
+              <div className="flex flex-row items-stretch gap-x-2">
+                <Image
+                  className="w-[50px] h-[50px]"
+                  src={data.imgUrl}
+                  alt={data.name}
+                  radius="md"
+                  width={100}
+                />
+                <div className="flex flex-col">
+                  <b className="capitalize">{data.name}</b>
+                  <p className="text-default-500 text-sm">
+                    Rp{ThousandSeparators(data.price)} /Malam
+                  </p>
+                </div>
+              </div>
+            </ModalHeader>
+            <ModalBody className="flex flex-col gap-y-3">
+              <div dangerouslySetInnerHTML={{ __html: data.desc }} />
+
+              {data.location !== "" && (
+                <div className="space-y-2">
+                  <strong>Lokasi</strong>
+                  <iframe
+                    src={`https://www.google.com/maps/embed?pb=${data.location}`}
+                    className="rounded-lg h-[300px] w-full"
+                    width="654"
+                    height="400"
+                    style={{ border: 0 }}
+                    allowFullScreen={true}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  ></iframe>
+                </div>
+              )}
+            </ModalBody>
+            <ModalFooter>
+              <Button
+                color="danger"
+                variant="light"
+                radius="full"
+                onPress={onClose}
+              >
+                Tutup
+              </Button>
+            </ModalFooter>
+          </>
+        )}
+      </ModalContent>
+    </Modal>
+  </>
   );
 };
 

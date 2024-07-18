@@ -17,6 +17,8 @@ const DesaWisataData = () => [
       {
         name: "Sendratari Sugriwa-Subali",
         imgUrl: "https://visitingjogja.jogjaprov.go.id/wp-content/uploads/2020/04/422.jpg",
+        price: 100000,
+        location: "",
         desc: `<p><span style="background-color:rgb(255,255,255);color:rgb(60,72,88);font-family:Montserrat;font-size:18px;">Sendratari Sugriwa Subali mengisahkan tentang pertarungan kolosal antara Mahesasura dan Lembusura yang berwujud manusia berkepala kerbau melawan Sugriwa-Subali yang merupakan kakak beradik berwujud manusia berkepala kera mirip dengan sosok Anoman di kisah Sendratari Ramayana.</span><br><br><span style="background-color:rgb(255,255,255);color:rgb(60,72,88);font-family:Montserrat;font-size:18px;">Pertunjukan Sendratari Sugriwa Subali ini bisa menjadi alternatif bagi mencari alternatif wisata budaya di Jawa Tengah dan juga Daerah Istimewa Yogyakarta.</span></p>`,
       },
     ],
@@ -44,6 +46,7 @@ const DesaWisataData = () => [
         name: "Dawet Sambel Khas Jatimulyo",
         imgUrl: "https://www.desawisatajatimulyo.com/wp-content/uploads/2022/08/IMG_2521-360x240.jpg",
         price: 4000,
+        location: "",
         desc: `<p><span style="background-color:rgb(255,255,255);color:rgb(60,72,88);font-family:Montserrat;font-size:18px;"><span style="-webkit-text-stroke-width:0px;display:inline !important;float:none;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:300;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">Di Jatimulyolah Makanan tradisional warisan nenek moyang ini bisa ditemukan. ‘Dawet Sambel’ namanya, sekitar 60 tahun yang lalu, ketika Dawet Sambel dicetuskan oleh seorang penjual Pecel, namanya adalah ‘Dawet Pecel’, Singkat cerita, ada salah satu warga Jatimulyo namanya Simbah Wagiyem, warga Asli padukuhan Sokomoyo, Kalurahan Jatimulyo, Kapanewon Girimulyo. Mbah wagiyem yang berprofesi sebagai Penjual Pecel, Pecel adalah makanan dari sayuran yang direbus dengan di tambahkan Sambal kelapa dan nira kelapa sebagai pemanis. Mbah wagiyem selalu berjulan di pasar traditional setiap rabu dan Sabtu,Terkadang juga berjualan di setiap Even yang di adakan di desa.&nbsp;</span></span></p>
 <p>&nbsp;</p>
 <p><span style="background-color:rgb(255,255,255);color:rgb(60,72,88);font-family:Montserrat;font-size:18px;"><span style="-webkit-text-stroke-width:0px;display:inline !important;float:none;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:300;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">Jatimulyo berada di deretan Pegunungan Menoreh, tanah di Jatimulyo sangatlah subur, cocok untuk segala macam tanaman, apalagi jenis umbi umbian, tumbuhan Ganyong pada tahun 1950 an banyak ditemukan, Umbi yang kaya akan Gizi dan Berserat tinggi ini hampir setiap masyarakat di Jatimulyo menanamnya.&nbsp;</span></span></p>
@@ -65,7 +68,11 @@ const DesaWisataData = () => [
 </ul>`,
       },
     ],
-    galery: ["https://jadesta.kemenparekraf.go.id/imgpost/32182.jpg", "https://jadesta.kemenparekraf.go.id/imgpost/32213.jpg", "https://jadesta.kemenparekraf.go.id/imgpost/32217.jpg"],
+    galery: [
+      "https://jadesta.kemenparekraf.go.id/imgpost/32182.jpg", 
+      "https://jadesta.kemenparekraf.go.id/imgpost/32213.jpg", 
+      "https://jadesta.kemenparekraf.go.id/imgpost/32217.jpg"
+    ],
     testimony: [
       {
         name: "Hatsune Miku",
@@ -89,36 +96,43 @@ const DesaWisataData = () => [
         day: "senin",
         open: "10:00",
         close: "15:00",
+        type: "wib",
       },
       {
         day: "selasa",
         open: "10:00",
         close: "15:00",
+        type: "wib",
       },
       {
         day: "rabu",
         open: "10:00",
         close: "15:00",
+        type: "wib",
       },
       {
         day: "kamis",
         open: "10:00",
         close: "15:00",
+        type: "wib",
       },
       {
         day: "jumat",
         open: "10:00",
         close: "15:00",
+        type: "wib",
       },
       {
         day: "sabtu",
         open: "08:00",
         close: "15:00",
+        type: "wib",
       },
       {
         day: "minggu",
         open: "08:00",
         close: "15:00",
+        type: "wib",
       },
     ],
     contact: {

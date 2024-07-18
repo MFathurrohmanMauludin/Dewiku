@@ -43,6 +43,7 @@ import { getDayOfWeekNumber } from "../../utils/changeDate";
 import { ShareModal, TestimonyForm, VerifycationModal } from "../modal";
 import { useLocation } from "react-router-dom";
 import { DesaWisataData } from "../../utils/data";
+import { formatNumberShort } from "../../utils/changeNumber";
 
 const InfoDewi = () => {
   const data = [
@@ -57,49 +58,7 @@ const InfoDewi = () => {
   ];
 
   const getData = DesaWisataData();
-
-  const [isSelected, setIsSelected] = useState("acara");
-  const [isLike, setIsLike] = useState(false);
-  const [value, setValue] = useState<string>("");
-  const {search, pathname} = useLocation();
-
-  const handleSelectionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setValue(e.target.value);
-  };
-
-  const description = `<p style="margin-left:0px;">Kalurahan Jatimulyo Kapanewon Girimulyo Kabupaten Kulon Progo merupakan penggabungan dua kalurahan, yaitu Kalurahan Jonggrangan dan Kalurahan Sokomoyo, yang mana penggabungan menjadi satu kalurahan tersebut terjadi pada tanggal 16 Maret 1947. Pada waktu itu Kalurahan Jonggrangan dipimpin oleh Lurah Pawiro Sentono dan Kalurahan Sokomoyo dipimpin oleh Lurah Djogo Diharjo.</p><br/>
-<p style="margin-left:0px;">Nama Jatimulyo adalah pemberian KRT. Noto Projo, ditandai dengan pemberian dan penanaman lima pohon jati oleh KRT. Noto Projo di Pedukuhan Sokomoyo. Penanaman lima pohon jati itu mengandung maksud setelah penggabungan dua kelurahan wilayah tersebut akan benar-benar menjadi “mulyo” apabila digarap dengan benar, sesuai dengan tujuan awal penggabungan dua kelurahan tersebut.<br>Setelah penggabungan dua kelurahan menjadi Kelurahan Jatimulyo, yang sekarang menjadi Desa Jatimulyo dipimpin oleh seorang Lurah<br><br>Desa wisata Jatimulyo terletak di ketinggian 500-800 mdpl di kawasan Pegunungan Menoreh, tepatnya di Kecamatan Girimulyo, Kabupaten Kulon Progo. Desa Wisata Jatimulyo merupakan salah satu desa yang masih menganut kebudayaan jawa yang kuat. Setiap bulan Sapar diadakan Merti Dusun Jatimulyo suatu upacara adat yang sarat dengan kearifan lokal. Untuk menuju Desa Wisata Jatimulyo dibutuhkan waktu 45 menit dari pusat kota Wates. Wisatawan dapat menggunakan kendaraan pribadi maupun kendaraan rental untuk menuju ke Desa Wisata Jatimulyo.</p>`;
-
-  const hours = [
-    {
-      day: "senin",
-      hour: "10.00 AM – 3.00 PM",
-    },
-    {
-      day: "selasa",
-      hour: "10.00 AM – 3.00 PM",
-    },
-    {
-      day: "rabu",
-      hour: "10.00 AM – 3.00 PM",
-    },
-    {
-      day: "kamis",
-      hour: "10.00 AM – 3.00 PM",
-    },
-    {
-      day: "jumat",
-      hour: "10.00 AM – 3.00 PM",
-    },
-    {
-      day: "sabtu",
-      hour: "8.00 am – 3.00 pm",
-    },
-    {
-      day: "minggu",
-      hour: "	8.00 am – 3.00 pm",
-    },
-  ];
+  const { search, pathname } = useLocation();
 
   const regex = /(?:\?|&)name=([^&]+)/;
   const match = search.match(regex);
@@ -109,9 +68,15 @@ const InfoDewi = () => {
 
   const detail = getData.filter((data) => data.name === nameValue)[0];
 
-  console.log(detail);
-  
-  
+  const [isSelected, setIsSelected] = useState("acara");
+  const [isLike, setIsLike] = useState(false);
+  const [value, setValue] = useState<string>("");
+  const [isGalery, setIsGalery] = useState(detail.imgUrl);
+
+  const handleSelectionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setValue(e.target.value);
+  };
+
 
   return (
     <div className="px-6 sm:px-2 md:px-4 py-[80px]">
@@ -122,17 +87,17 @@ const InfoDewi = () => {
           <div className="space-y-2 max-w-[720px] w-full px-3 pt-2 pb-3">
             <div className="flex flex-row items-center">
               <span className="text-lg font-semibold tracking-wide">
-                Desa Wisata Jatimulyo
+                {detail.name}
               </span>
               <VerifycationModal imgUrl={""} link={""} />
             </div>
 
             <div className="relative">
               <Image
-                src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEicjpSwM2KC7Ln684sDJwrTBieNvTtRGMllDcGy1YmAC_7Jo7yQHEtNO4dMWWc7yIT7QiUiGORMYeAUmi5lDMfg-TW_KPckFfarbeVf7rsECfN2TtM7k-DegbQEPqHWlyYnXALYExoOTLI/s1600/IMG_20161212_101915.jpg"
+                src={isGalery}
                 className="object-cover w-full"
                 width={720}
-                alt="hello world"
+                alt={detail.name}
               />
 
               {/* weather and like/share button */}
@@ -162,7 +127,11 @@ const InfoDewi = () => {
                           icon={isLike ? faHeartSolid : faHeart}
                           fontSize={18}
                         />
-                        <span>{isLike ? 101 : 100}</span>
+                        <span>
+                          {isLike
+                            ? formatNumberShort(detail.like + 1)
+                            : formatNumberShort(detail.like)}
+                        </span>
                       </div>
                     }
                     onClick={() => setIsLike(!isLike)}
@@ -171,7 +140,7 @@ const InfoDewi = () => {
                     radius="full"
                   />
 
-                  <ShareModal link={pathname + search}/>
+                  <ShareModal link={pathname + search} />
                 </div>
               </div>
             </div>
@@ -205,60 +174,19 @@ const InfoDewi = () => {
 
           <div className="overflow-y-auto max-h-[460px] xs:max-h-[300px] sm:max-h-[300px] md:max-h-[250px]">
             <div className="columns-3 xs:columns-2 md:columns-2 space-y-4 gap-x-4 pb-3 px-3">
-              <Image
-                className="object-cover w-[200px] h-[200px]"
-                src="https://plus.unsplash.com/premium_photo-1677829177642-30def98b0963?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                width={200}
-                alt="image-1"
-              />
-              <Image
-                className="object-cover w-[200px] h-[200px]"
-                src="https://plus.unsplash.com/premium_photo-1677829177642-30def98b0963?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                width={200}
-                alt="image-1"
-              />
-              <Image
-                className="object-cover w-[200px] h-[200px]"
-                src="https://plus.unsplash.com/premium_photo-1677829177642-30def98b0963?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                width={200}
-                alt="image-1"
-              />
-              <Image
-                className="object-cover w-[200px] h-[200px]"
-                src="https://plus.unsplash.com/premium_photo-1677829177642-30def98b0963?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                width={200}
-                alt="image-1"
-              />
-              <Image
-                className="object-cover w-[200px] h-[200px]"
-                src="https://plus.unsplash.com/premium_photo-1677829177642-30def98b0963?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                width={200}
-                alt="image-1"
-              />
-              <Image
-                className="object-cover w-[200px] h-[200px]"
-                src="https://plus.unsplash.com/premium_photo-1677829177642-30def98b0963?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                width={200}
-                alt="image-1"
-              />
-              <Image
-                className="object-cover w-[200px] h-[200px]"
-                src="https://plus.unsplash.com/premium_photo-1677829177642-30def98b0963?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                width={200}
-                alt="image-1"
-              />
-              <Image
-                className="object-cover w-[200px] h-[200px]"
-                src="https://plus.unsplash.com/premium_photo-1677829177642-30def98b0963?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                width={200}
-                alt="image-1"
-              />
-              <Image
-                className="object-cover w-[200px] h-[200px]"
-                src="https://plus.unsplash.com/premium_photo-1677829177642-30def98b0963?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                width={200}
-                alt="image-1"
-              />
+              {detail.galery.flatMap((data, index) => (
+                <Image
+                  className={`object-cover w-[200px] h-[200px] cursor-pointer ${
+                    isGalery === data
+                      ? "border-4 border-green-500 brightness-75"
+                      : "border-4 border-white"
+                  }`}
+                  src={data}
+                  width={200}
+                  alt={`img-${index}`}
+                  onClick={() => setIsGalery(data)}
+                />
+              ))}
             </div>
           </div>
         </Card>
@@ -290,7 +218,9 @@ const InfoDewi = () => {
               }
             >
               <div className="grid grid-cols-3 xs:grid-cols-1 sm:grid-cols-2 gap-4 overflow-y-auto max-h-[500px]">
-                <EventCard />
+                {detail.event.flatMap((data, index) => (
+                  <EventCard key={index} {...data} />
+                ))}
               </div>
             </Tab>
 
@@ -309,7 +239,9 @@ const InfoDewi = () => {
               }
             >
               <div className="grid grid-cols-3 xs:grid-cols-1 sm:grid-cols-2 gap-4 overflow-y-auto max-h-[500px]">
-                <AlamCard />
+                {detail.nature.flatMap((data, index) => (
+                  <AlamCard key={index} {...data} />
+                ))}
               </div>
             </Tab>
 
@@ -328,7 +260,9 @@ const InfoDewi = () => {
               }
             >
               <div className="grid grid-cols-3 xs:grid-cols-1 sm:grid-cols-2 gap-4 overflow-y-auto max-h-[500px]">
-                <BudayaCard />
+              {detail.culture.flatMap((data, index) => (
+                <BudayaCard key={index} {...data} />
+              ))}
               </div>
             </Tab>
 
@@ -347,9 +281,9 @@ const InfoDewi = () => {
               }
             >
               <div className="grid grid-cols-3 xs:grid-cols-1 sm:grid-cols-2 gap-4 overflow-y-auto max-h-[500px]">
-                <KulinerCard />
-                <KulinerCard />
-                <KulinerCard />
+                {detail.culnary.flatMap((data, index) => (
+                  <KulinerCard key={index} {...data} />
+                ))}
               </div>
             </Tab>
 
@@ -368,7 +302,9 @@ const InfoDewi = () => {
               }
             >
               <div className="grid grid-cols-3 xs:grid-cols-1 sm:grid-cols-2 gap-4 overflow-y-auto max-h-[500px]">
-                <AkomodasiCard />
+                {detail.accommodation.flatMap((data, index) => (
+                  <AkomodasiCard key={index} {...data} />
+                ))}
               </div>
             </Tab>
 
@@ -405,36 +341,9 @@ const InfoDewi = () => {
                 />
               </div>
               <div className="grid grid-cols-3 xs:grid-cols-1 sm:grid-cols-2 gap-4 mt-3 overflow-y-auto max-h-[500px]">
-                <RatingCard
-                  name={"Hatsune Miku"}
-                  imgUrl={
-                    "https://i.pinimg.com/736x/5f/03/5f/5f035fab60d92fa74c6f9546da140497.jpg"
-                  }
-                  nominal={4}
-                  comment={"Sangat enak"}
-                  like={495}
-                  date={"7/10/2024"}
-                />
-                <RatingCard
-                  name={"Hatsune Miku"}
-                  imgUrl={
-                    "https://i.pinimg.com/736x/5f/03/5f/5f035fab60d92fa74c6f9546da140497.jpg"
-                  }
-                  nominal={4}
-                  comment={"Sangat enak"}
-                  like={495}
-                  date={"7/10/2024"}
-                />
-                <RatingCard
-                  name={"Hatsune Miku"}
-                  imgUrl={
-                    "https://i.pinimg.com/736x/5f/03/5f/5f035fab60d92fa74c6f9546da140497.jpg"
-                  }
-                  nominal={4}
-                  comment={"Sangat enak"}
-                  like={495}
-                  date={"7/10/2024"}
-                />
+                {detail.testimony.flatMap((data, index) => (
+                  <RatingCard key={index} {...data} />
+                ))}
               </div>
             </Tab>
 
@@ -454,7 +363,7 @@ const InfoDewi = () => {
             >
               <Card>
                 <CardBody>
-                  <div dangerouslySetInnerHTML={{ __html: description }} />
+                  <div dangerouslySetInnerHTML={{ __html: detail.desc }} />
                 </CardBody>
               </Card>
             </Tab>
@@ -484,10 +393,12 @@ const InfoDewi = () => {
                 <TableColumn>Waktu</TableColumn>
               </TableHeader>
               <TableBody>
-                {hours.map((data, index) => (
+                {detail.openHours.map((data, index) => (
                   <TableRow key={index}>
                     <TableCell className="capitalize">{data.day}</TableCell>
-                    <TableCell className="uppercase">{data.hour}</TableCell>
+                    <TableCell className="uppercase">
+                      {data.open} - {data.close} {data.type}
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -504,7 +415,7 @@ const InfoDewi = () => {
             </span>
 
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.3503402489273!2d110.12818867404908!3d-7.752616076869493!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7aee2f7077f711%3A0x930b72080bcaff27!2sDesa%20Wisata%20Jatimulyo%20-%20Kulon%20Progo!5e0!3m2!1sen!2sid!4v1720793257450!5m2!1sen!2sid"
+              src={`https://www.google.com/maps/embed?pb=${detail.location.maps}`}
               className="rounded-lg h-[300px] w-full"
               width="654"
               height="400"
