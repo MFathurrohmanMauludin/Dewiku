@@ -264,7 +264,10 @@ const VerifycationModal = (data: verification) => {
                   />
                 </div>
 
-                <p>Desa ini telah tervefikasi oleh Dinas Pariwisata Setempat</p>
+                <p className="mt-3">
+                  Desa ini telah tervefikasi oleh <br />
+                  <strong>Kementerian Pariwisata dan Ekonomi Kreatif</strong>
+                </p>
               </ModalBody>
             </>
           )}
