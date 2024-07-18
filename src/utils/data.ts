@@ -69,9 +69,28 @@ const DesaWisataData = () => [
       },
     ],
     galery: [
-      "https://jadesta.kemenparekraf.go.id/imgpost/32182.jpg", 
-      "https://jadesta.kemenparekraf.go.id/imgpost/32213.jpg", 
-      "https://jadesta.kemenparekraf.go.id/imgpost/32217.jpg"
+      {
+       url: "https://jadesta.kemenparekraf.go.id/imgpost/32182.jpg",
+       type: "photo", 
+      },
+      {
+       url: "https://jadesta.kemenparekraf.go.id/imgpost/32213.jpg",
+       type: "photo", 
+      },
+      {
+       url: "https://jadesta.kemenparekraf.go.id/imgpost/32217.jpg",
+       type: "photo", 
+      },
+      {
+       thumbnail: "https://i.ytimg.com/vi/t1koHOkzJ5s/hqdefault.jpg",
+       url: "t1koHOkzJ5s?si=rMeJgUI6FXoFpVOP",
+       type: "video", 
+      },
+      {
+       thumbnail: "https://i.ytimg.com/vi/iKRB59sWg6Y/maxresdefault.jpg",
+       url: "iKRB59sWg6Y?si=4nHmvY-sIlPVmHjo",
+       type: "video", 
+      },
     ],
     testimony: [
       {
@@ -136,12 +155,16 @@ const DesaWisataData = () => [
       },
     ],
     contact: {
-      telp: "Suhandri +62 8122 9914 791",
+      telp: {
+        name: "suhandri",
+        number: "6281229914791",
+      },
       email: "dewijatimulyo@gmail.com",
       socmed: {
         ig: "https://www.instagram.com/desawisatajatimulyo",
         fb: "",
         tw: "",
+        ytb: "https://www.youtube.com/@desawisatajatimulyoofficia3149",
       },
       office: "Jln. Kiskendo - Sermo Sokomoyo RT 8 RW 2, Jatimulyo, Girimulyo Kulon Progo",
     },
@@ -152,8 +175,16 @@ const DesaWisataData = () => [
     award: [ 
       {
         name: "DESA JATIMULYO JUARA 3 LOMBA DESA WISATA NUSANTARA",
-        certificate: "www.desawisatajatimulyo.com/2022/09/15/prestasi",
-      }
+        link: "www.desawisatajatimulyo.com/2022/09/15/prestasi",
+      },
+      {
+        name: "ADWI 2024 (50 besar)",
+        link: "",
+      },
+      {
+        name: "ADWI 2021 (100 Besar)",
+        link: "",
+      },
     ],
     facility: ["area parkir", "kamar mandi umum", "spot foto", "ATMs", "balai pertemuan", "cafetaria", "jungle tracking", "mushola", "spot foto", "wifi area", "tempat makan", "outbound", "kuliner", "kios souvenir"],
     like: 1504,

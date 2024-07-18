@@ -43,12 +43,12 @@ import { getDayOfWeekNumber } from "../../utils/changeDate";
 import { ShareModal, TestimonyForm, VerifycationModal } from "../modal";
 import { useLocation } from "react-router-dom";
 import { DesaWisataData } from "../../utils/data";
-import { formatNumberShort } from "../../utils/changeNumber";
+import { formatNumberShort, formatPhoneNumber } from "../../utils/changeNumber";
 
 const InfoDewi = () => {
   const data = [
     {
-      key: "foto",
+      key: "photo",
       label: "foto",
     },
     {
@@ -70,13 +70,15 @@ const InfoDewi = () => {
 
   const [isSelected, setIsSelected] = useState("acara");
   const [isLike, setIsLike] = useState(false);
-  const [value, setValue] = useState<string>("");
-  const [isGalery, setIsGalery] = useState(detail.imgUrl);
+  const [isType, setIsType] = useState<string>("photo");
+  const [isPhoto, setIsPhoto] = useState("https://jadesta.kemenparekraf.go.id/imgpost/32182.jpg");
+  const [isVideo, setIsVideo] = useState("t1koHOkzJ5s?si=rMeJgUI6FXoFpVOP");
 
   const handleSelectionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setValue(e.target.value);
+    setIsType(e.target.value);
   };
 
+  const galery = detail.galery.filter((data) => data.type.includes(isType));
 
   return (
     <div className="px-6 sm:px-2 md:px-4 py-[80px]">
@@ -86,19 +88,32 @@ const InfoDewi = () => {
         <Card className="border-1" shadow="none">
           <div className="space-y-2 max-w-[720px] w-full px-3 pt-2 pb-3">
             <div className="flex flex-row items-center">
-              <span className="text-lg font-semibold tracking-wide">
+              <span className="text-lg font-semibold tracking-wide capitalize">
                 {detail.name}
               </span>
               <VerifycationModal imgUrl={""} link={""} />
             </div>
 
             <div className="relative">
-              <Image
-                src={isGalery}
-                className="object-cover w-full"
-                width={720}
-                alt={detail.name}
-              />
+              {isType !== "photo" ? (
+                <iframe
+                  className="w-full min-h-[500px] rounded-2xl"
+                  width="560"
+                  height="500"
+                  src={`https://www.youtube.com/embed/${isVideo}`}
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                ></iframe>
+              ) : (
+                <Image
+                  src={isPhoto}
+                  className="object-cover w-full"
+                  width={720}
+                  alt={detail.name}
+                />
+              )}
 
               {/* weather and like/share button */}
               <div className="absolute flex justify-between z-10 py-1 px-2 top-2 w-full">
@@ -157,7 +172,7 @@ const InfoDewi = () => {
             <Select
               variant="bordered"
               placeholder="Filter"
-              selectedKeys={[value]}
+              selectedKeys={[isType]}
               className="max-w-[100px] mr-1"
               classNames={{ trigger: "!border-1 capitalize" }}
               size="sm"
@@ -174,19 +189,35 @@ const InfoDewi = () => {
 
           <div className="overflow-y-auto max-h-[460px] xs:max-h-[300px] sm:max-h-[300px] md:max-h-[250px]">
             <div className="columns-3 xs:columns-2 md:columns-2 space-y-4 gap-x-4 pb-3 px-3">
-              {detail.galery.flatMap((data, index) => (
-                <Image
-                  className={`object-cover w-[200px] h-[200px] cursor-pointer ${
-                    isGalery === data
-                      ? "border-4 border-green-500 brightness-75"
-                      : "border-4 border-white"
-                  }`}
-                  src={data}
-                  width={200}
-                  alt={`img-${index}`}
-                  onClick={() => setIsGalery(data)}
-                />
-              ))}
+              {isType === "photo" &&
+                galery.flatMap((data, index) => (
+                  <Image
+                    className={`object-cover w-[200px] h-[200px] cursor-pointer ${
+                      isPhoto === data.url
+                        ? "border-4 border-green-500 brightness-75"
+                        : "border-4 border-white"
+                    }`}
+                    src={data.url}
+                    width={200}
+                    alt={`img-${index}`}
+                    onClick={() => setIsPhoto(data.url)}
+                  />
+                ))}
+
+              {isType === "video" &&
+                galery.flatMap((data, index) => (
+                  <Image
+                    className={`object-cover w-[200px] h-[200px] cursor-pointer ${
+                      isVideo === data.url
+                        ? "border-4 border-green-500 brightness-75"
+                        : "border-4 border-white"
+                    }`}
+                    src={data.thumbnail}
+                    width={200}
+                    alt={`img-${index}`}
+                    onClick={() => setIsVideo(data.url)}
+                  />
+                ))}
             </div>
           </div>
         </Card>
@@ -260,9 +291,9 @@ const InfoDewi = () => {
               }
             >
               <div className="grid grid-cols-3 xs:grid-cols-1 sm:grid-cols-2 gap-4 overflow-y-auto max-h-[500px]">
-              {detail.culture.flatMap((data, index) => (
-                <BudayaCard key={index} {...data} />
-              ))}
+                {detail.culture.flatMap((data, index) => (
+                  <BudayaCard key={index} {...data} />
+                ))}
               </div>
             </Tab>
 
@@ -435,9 +466,17 @@ const InfoDewi = () => {
               Penghargaan
             </span>
 
-            <div className="grid grid-cols-1 gap-y-1 text-[14px]">
-              <span>ADWI 2024 (50 Besar)</span>
-              <span>ADWI 2021 (100 Besar)</span>
+            <div className="grid grid-cols-1 gap-y-1 capitalize">
+              {detail.award.flatMap((data, index) => (
+                <LinkExternal
+                  className="!text-sm leading-snug text-gray-800 hover:text-green-700"
+                  key={index}
+                  href={`https://${data.link !== "" ? data.link : "#"}`}
+                  isExternal
+                >
+                  {data.name}
+                </LinkExternal>
+              ))}
             </div>
           </Card>
 
@@ -449,25 +488,27 @@ const InfoDewi = () => {
             <span className="text-lg font-semibold tracking-wide">Kontak</span>
 
             <div className="space-y-2 mt-2 text-[14px]">
-              <div className="flex flex-col">
+              <div className="flex flex-col capitalize">
                 <span className="font-semibold">Telepon</span>
-                <a href="https://api.whatsapp.com/send?phone=6281229914791">
-                  Suhandri +62 8122 9914 791
-                </a>
+                <LinkExternal
+                  href={`https://api.whatsapp.com/send?phone=${detail.contact.telp.number}`}
+                  className="!text-sm leading-snug text-gray-800 hover:text-green-700"
+                  isExternal
+                >
+                  {detail.contact.telp.name} (
+                  {formatPhoneNumber(detail.contact.telp.number)})
+                </LinkExternal>
               </div>
 
               <div className="flex flex-col">
                 <span className="font-semibold">Kantor</span>
-                <p className="tracking-wide">
-                  Jln. Kiskendo - Sermo Sokomoyo RT 8 RW 2, Jatimulyo, Girimulyo
-                  Kulon Progo
-                </p>
+                <p className="tracking-wide">{detail.contact.office}</p>
               </div>
 
               <div className="flex flex-col">
                 <span className="font-semibold">Ikuti Kami</span>
                 <div className="flex flex-row gap-x-2 mt-1">
-                  <LinkExternal href="https://www.instagram.com/desawisatajatimulyo">
+                  <LinkExternal href={detail.contact.socmed.ig}>
                     <Image
                       className="h-[2em] w-[2em]"
                       src={instagramIcon}

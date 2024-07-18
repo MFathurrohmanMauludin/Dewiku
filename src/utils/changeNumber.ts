@@ -39,12 +39,34 @@ const totalNominal = (donors: any) => {
 };
 
 function getAverageRating(data: any): number {
-    const testimonies = data[0].testimony;
-    if (testimonies.length === 0) return 0;
-    
-    const totalRating = testimonies.reduce((sum: any, testimony: { rating: any; }) => sum + testimony.rating, 0);
-    return totalRating / testimonies.length;
+  const testimonies = data[0].testimony;
+  if (testimonies.length === 0) return 0;
+
+  const totalRating = testimonies.reduce(
+    (sum: any, testimony: { rating: any }) => sum + testimony.rating,
+    0
+  );
+  return totalRating / testimonies.length;
+};
+
+function formatPhoneNumber(phoneNumber: string): string {
+  // Ensure the phone number starts with '+'
+  if (!phoneNumber.startsWith('+')) {
+      phoneNumber = '+' + phoneNumber;
   }
+
+  // Add a space after the country code
+  let formattedNumber = phoneNumber.slice(0, 3) + ' ' + phoneNumber.slice(3);
+
+  // Split the remaining number into chunks of 4 digits
+  let parts = [];
+  for (let i = 4; i < formattedNumber.length; i += 4) {
+      parts.push(formattedNumber.slice(i, i + 4));
+  }
+
+  // Join the parts with a space
+  return formattedNumber.slice(0, 4) + ' ' + parts.join(' ');
+};
 
 export {
   ThousandSeparators,
@@ -53,4 +75,5 @@ export {
   totalNominal,
   formatNumberShort,
   getAverageRating,
+  formatPhoneNumber,
 };
