@@ -2,7 +2,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Button,
   Checkbox,
-  Image,
   Input,
   Link,
   Modal,
@@ -30,6 +29,7 @@ import {
   ShareWhatsapp,
   ShareXTwitter,
 } from "../share";
+import QRCode from "react-qr-code";
 
 interface Props {
   photo: string;
@@ -49,7 +49,6 @@ interface Props {
 }
 
 interface verification {
-  imgUrl: string;
   link: string;
 }
 
@@ -249,13 +248,21 @@ const VerifycationModal = (data: verification) => {
 
               {/* verifikasi */}
               <ModalBody className="flex items-center justify-center">
-                <Image
-                  className="h-[300px]"
-                  src="https://jadesta.kemenparekraf.go.id/qrcode?id=jatimulyo"
-                  height={400}
-                  alt="qr-code"
-                  loading="lazy"
-                />
+                <div
+                  style={{
+                    height: "auto",
+                    margin: "0 auto",
+                    maxWidth: 300,
+                    width: "100%",
+                  }}
+                >
+                  <QRCode
+                    size={256}
+                    style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+                    value={data.link}
+                    viewBox={`0 0 256 256`}
+                  />
+                </div>
 
                 <p>Desa ini telah tervefikasi oleh Dinas Pariwisata Setempat</p>
               </ModalBody>
@@ -337,7 +344,9 @@ const ShareModal = (data: share) => {
 
                 {/* copy link */}
                 <Snippet className="w-full" symbol="" variant="bordered">
-                 {`https://dewiku.netlify.app${data.link}`}
+                  <span className="line-clamp-1 max-w-[38ch]">
+                    {`https://dewiku.netlify.app${data.link}`}
+                  </span>
                 </Snippet>
               </ModalBody>
             </>

@@ -30,7 +30,7 @@ import {
   Tabs,
   Tooltip,
 } from "@nextui-org/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AkomodasiCard,
   AlamCard,
@@ -71,14 +71,31 @@ const InfoDewi = () => {
   const [isSelected, setIsSelected] = useState("acara");
   const [isLike, setIsLike] = useState(false);
   const [isType, setIsType] = useState<string>("photo");
-  const [isPhoto, setIsPhoto] = useState("https://jadesta.kemenparekraf.go.id/imgpost/32182.jpg");
+  const [isPhoto, setIsPhoto] = useState(
+    "https://jadesta.kemenparekraf.go.id/imgpost/32182.jpg"
+  );
   const [isVideo, setIsVideo] = useState("t1koHOkzJ5s?si=rMeJgUI6FXoFpVOP");
+
+  const [deviceWidth, setDeviceWidth] = useState<number>(window.innerWidth);
 
   const handleSelectionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setIsType(e.target.value);
   };
 
   const galery = detail.galery.filter((data) => data.type.includes(isType));
+
+  useEffect(() => {
+      const handleResize = () => {
+          setDeviceWidth(window.innerWidth);
+      };
+
+      window.addEventListener('resize', handleResize);
+
+      // Clean up the event listener on component unmount
+      return () => {
+          window.removeEventListener('resize', handleResize);
+      };
+  }, []);
 
   return (
     <div className="px-6 sm:px-2 md:px-4 py-[80px]">
@@ -91,15 +108,17 @@ const InfoDewi = () => {
               <span className="text-lg font-semibold tracking-wide capitalize">
                 {detail.name}
               </span>
-              <VerifycationModal imgUrl={""} link={""} />
+              {detail.verification.status && (
+                <VerifycationModal link={detail.verification.link} />
+              )}
             </div>
 
             <div className="relative">
               {isType !== "photo" ? (
                 <iframe
-                  className="w-full min-h-[500px] rounded-2xl"
+                  className="w-full xs:!min-h-[300px] rounded-2xl"
                   width="560"
-                  height="500"
+                  height={deviceWidth <= 500 ? '300' : '500'}
                   src={`https://www.youtube.com/embed/${isVideo}`}
                   title="YouTube video player"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

@@ -169,7 +169,7 @@ const DesaWisataData = () => [
       office: "Jln. Kiskendo - Sermo Sokomoyo RT 8 RW 2, Jatimulyo, Girimulyo Kulon Progo",
     },
     verification: {
-      link: "https://jadesta.kemenparekraf.go.id/qrcode?id=jatimulyo",
+      link: "https://jadesta.kemenparekraf.go.id/desa/jatimulyo",
       status: true,
     },
     award: [ 
