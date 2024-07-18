@@ -42,10 +42,17 @@ import {
 import { getDayOfWeekNumber } from "../../utils/changeDate";
 import { ShareModal, TestimonyForm, VerifycationModal } from "../modal";
 import { useLocation } from "react-router-dom";
-import { DesaWisataData } from "../../utils/data";
 import { formatNumberShort, formatPhoneNumber } from "../../utils/changeNumber";
 
-const InfoDewi = () => {
+interface Props {
+  desa: any;
+  control: {
+    inputChange: any;
+    ratingChange: any;
+  };
+}
+
+const InfoDewi = (info: Props) => {
   const data = [
     {
       key: "photo",
@@ -57,7 +64,8 @@ const InfoDewi = () => {
     },
   ];
 
-  const getData = DesaWisataData();
+  const getData = info.desa;
+
   const { search, pathname } = useLocation();
 
   const regex = /(?:\?|&)name=([^&]+)/;
@@ -66,7 +74,7 @@ const InfoDewi = () => {
     ? decodeURIComponent(match[1]).replace(/\+/g, " ")
     : "";
 
-  const detail = getData.filter((data) => data.name === nameValue)[0];
+  const detail = getData.filter((data: any) => data.name === nameValue)[0];
 
   const [isSelected, setIsSelected] = useState("acara");
   const [isLike, setIsLike] = useState(false);
@@ -82,19 +90,21 @@ const InfoDewi = () => {
     setIsType(e.target.value);
   };
 
-  const galery = detail.galery.filter((data) => data.type.includes(isType));
+  const galery = detail.galery.filter((data: any) =>
+    data.type.includes(isType)
+  );
 
   useEffect(() => {
-      const handleResize = () => {
-          setDeviceWidth(window.innerWidth);
-      };
+    const handleResize = () => {
+      setDeviceWidth(window.innerWidth);
+    };
 
-      window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
-      // Clean up the event listener on component unmount
-      return () => {
-          window.removeEventListener('resize', handleResize);
-      };
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   return (
@@ -118,7 +128,7 @@ const InfoDewi = () => {
                 <iframe
                   className="w-full xs:!min-h-[300px] rounded-2xl"
                   width="560"
-                  height={deviceWidth <= 500 ? '300' : '500'}
+                  height={deviceWidth <= 500 ? "300" : "500"}
                   src={`https://www.youtube.com/embed/${isVideo}`}
                   title="YouTube video player"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -209,7 +219,7 @@ const InfoDewi = () => {
           <div className="overflow-y-auto max-h-[460px] xs:max-h-[300px] sm:max-h-[300px] md:max-h-[250px]">
             <div className="columns-3 xs:columns-2 md:columns-2 space-y-4 gap-x-4 pb-3 px-3">
               {isType === "photo" &&
-                galery.flatMap((data, index) => (
+                galery.flatMap((data: any, index: number) => (
                   <Image
                     className={`object-cover w-[200px] h-[200px] cursor-pointer ${
                       isPhoto === data.url
@@ -224,7 +234,7 @@ const InfoDewi = () => {
                 ))}
 
               {isType === "video" &&
-                galery.flatMap((data, index) => (
+                galery.flatMap((data: any, index: number) => (
                   <Image
                     className={`object-cover w-[200px] h-[200px] cursor-pointer ${
                       isVideo === data.url
@@ -268,7 +278,7 @@ const InfoDewi = () => {
               }
             >
               <div className="grid grid-cols-3 xs:grid-cols-1 sm:grid-cols-2 gap-4 overflow-y-auto max-h-[500px]">
-                {detail.event.flatMap((data, index) => (
+                {detail.event.flatMap((data: any, index: number) => (
                   <EventCard key={index} {...data} />
                 ))}
               </div>
@@ -289,7 +299,7 @@ const InfoDewi = () => {
               }
             >
               <div className="grid grid-cols-3 xs:grid-cols-1 sm:grid-cols-2 gap-4 overflow-y-auto max-h-[500px]">
-                {detail.nature.flatMap((data, index) => (
+                {detail.nature.flatMap((data: any, index: number) => (
                   <AlamCard key={index} {...data} />
                 ))}
               </div>
@@ -310,7 +320,7 @@ const InfoDewi = () => {
               }
             >
               <div className="grid grid-cols-3 xs:grid-cols-1 sm:grid-cols-2 gap-4 overflow-y-auto max-h-[500px]">
-                {detail.culture.flatMap((data, index) => (
+                {detail.culture.flatMap((data: any, index: number) => (
                   <BudayaCard key={index} {...data} />
                 ))}
               </div>
@@ -331,7 +341,7 @@ const InfoDewi = () => {
               }
             >
               <div className="grid grid-cols-3 xs:grid-cols-1 sm:grid-cols-2 gap-4 overflow-y-auto max-h-[500px]">
-                {detail.culnary.flatMap((data, index) => (
+                {detail.culnary.flatMap((data: any, index: number) => (
                   <KulinerCard key={index} {...data} />
                 ))}
               </div>
@@ -352,7 +362,7 @@ const InfoDewi = () => {
               }
             >
               <div className="grid grid-cols-3 xs:grid-cols-1 sm:grid-cols-2 gap-4 overflow-y-auto max-h-[500px]">
-                {detail.accommodation.flatMap((data, index) => (
+                {detail.accommodation.flatMap((data: any, index: number) => (
                   <AkomodasiCard key={index} {...data} />
                 ))}
               </div>
@@ -383,6 +393,8 @@ const InfoDewi = () => {
                   control={{
                     validateEmail: "",
                     validateFullName: "",
+                    inputChange: info.control.inputChange,
+                    ratingChange: info.control.ratingChange,
                   }}
                   status={{
                     email: false,
@@ -390,8 +402,9 @@ const InfoDewi = () => {
                   }}
                 />
               </div>
+
               <div className="grid grid-cols-3 xs:grid-cols-1 sm:grid-cols-2 gap-4 mt-3 overflow-y-auto max-h-[500px]">
-                {detail.testimony.flatMap((data, index) => (
+                {detail.testimony.flatMap((data: any, index: number) => (
                   <RatingCard key={index} {...data} />
                 ))}
               </div>
@@ -443,7 +456,7 @@ const InfoDewi = () => {
                 <TableColumn>Waktu</TableColumn>
               </TableHeader>
               <TableBody>
-                {detail.openHours.map((data, index) => (
+                {detail.openHours.map((data: any, index: number) => (
                   <TableRow key={index}>
                     <TableCell className="capitalize">{data.day}</TableCell>
                     <TableCell className="uppercase">
@@ -486,7 +499,7 @@ const InfoDewi = () => {
             </span>
 
             <div className="grid grid-cols-1 gap-y-1 capitalize">
-              {detail.award.flatMap((data, index) => (
+              {detail.award.flatMap((data: any, index: number) => (
                 <LinkExternal
                   className="!text-sm leading-snug text-gray-800 hover:text-green-700"
                   key={index}

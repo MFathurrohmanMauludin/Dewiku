@@ -5,8 +5,8 @@ import Home from "./pages/Home";
 import ScrollToTop from "./utils/scrollTop";
 import Header from "./components/header";
 import Footer from "./components/footer";
-import InfoDewi from "./components/info-dewi";
 import Syarat_Ketentuan from "./pages/Syarat&Ketentuan";
+import DetailDewi from "./pages/DetailDewi";
 
 const App = () => {
   return (
@@ -16,7 +16,7 @@ const App = () => {
         <Header />
         <Routes>
           <Route path="/" Component={Home} />
-          <Route path="/info-dewi" Component={InfoDewi} />
+          <Route path="/info-dewi" Component={DetailDewi} />
           <Route path="/syarat-&-ketentuan" Component={Syarat_Ketentuan} />
         </Routes>
         <Footer />

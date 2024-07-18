@@ -31,7 +31,7 @@ import {
 } from "../share";
 import QRCode from "react-qr-code";
 
-interface Props {
+interface FormProps {
   photo: string;
   fullname: string;
   email: string;
@@ -41,6 +41,8 @@ interface Props {
   control: {
     validateEmail: any;
     validateFullName: any;
+    inputChange: any;
+    ratingChange: any;
   };
   status: {
     email: boolean;
@@ -56,7 +58,7 @@ interface share {
   link: string;
 }
 
-const TestimonyForm = (data: Props) => {
+const TestimonyForm = (data: FormProps) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [isCheck, setCheck] = useState(true);
 
@@ -112,7 +114,7 @@ const TestimonyForm = (data: Props) => {
                       />
                     }
                     initialRating={0}
-                    onChange={(rate) => alert(rate)}
+                    onChange={(rate) => data.control.ratingChange(rate)}
                   />
                 </div>
 
@@ -121,7 +123,6 @@ const TestimonyForm = (data: Props) => {
                   type="text"
                   label="Nama Lengkap"
                   variant="bordered"
-                  value={data.fullname}
                   onValueChange={data.control.validateFullName}
                   isInvalid={data.status.fullName}
                   errorMessage="Mohon masukan nama lengkap lebih dari 1 huruf"
@@ -133,7 +134,6 @@ const TestimonyForm = (data: Props) => {
                   type="email"
                   label="Email"
                   variant="bordered"
-                  value={data.email}
                   onValueChange={data.control.validateEmail}
                   isInvalid={data.status.email}
                   errorMessage="Mohon masukan email yang valid"
