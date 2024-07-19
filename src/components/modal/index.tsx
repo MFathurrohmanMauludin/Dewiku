@@ -41,8 +41,7 @@ interface FormProps {
   control: {
     validateEmail: any;
     validateFullName: any;
-    inputChange: any;
-    ratingChange: any;
+    validateRating: any;
   };
   status: {
     email: boolean;
@@ -114,7 +113,7 @@ const TestimonyForm = (data: FormProps) => {
                       />
                     }
                     initialRating={0}
-                    onChange={(rate) => data.control.ratingChange(rate)}
+                    onChange={(rate) => data.control.validateRating(rate)}
                   />
                 </div>
 

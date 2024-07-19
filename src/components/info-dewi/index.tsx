@@ -51,10 +51,9 @@ interface Props {
   email: string;
   comment: string;
   like: number;
-  rating: string;
+  rating: number;
   control: {
-    inputChange: any;
-    ratingChange: any;
+    validateRating: any;
     validateMail: any;
     validateFullName: any;
   };
@@ -401,8 +400,7 @@ const InfoDewi = (info: Props) => {
                   control={{
                     validateEmail: info.control.validateMail,
                     validateFullName: info.control.validateFullName,
-                    inputChange: info.control.inputChange,
-                    ratingChange: info.control.ratingChange,
+                    validateRating: info.control.validateRating,
                   }}
                   status={{
                     email: false,

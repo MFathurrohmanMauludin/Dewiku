@@ -21,6 +21,7 @@ class DetailDewi extends React.Component<Props, State> {
         name: "",
         imgUrl: "",
         like: 0,
+        email: "",
         comment: "",
         rating: 5,
         date: new Date().toLocaleDateString(),
@@ -31,22 +32,13 @@ class DetailDewi extends React.Component<Props, State> {
     };
   }
 
-  handleInputChange = (e: any) => {
-    const { name, value } = e.target ? e.target : e;
-    this.setState((prevState) => ({
-      testimony: {
-        ...prevState.testimony,
-        [name]: value,
-      },
-    }));
-  };
-
-  handleRatingChange = (data: number) => {
+  // validasi rating
+  validateRating = (data: number) => {
     this.setState({ testimony: { rating: data } });
   };
 
   // validasi nama lengkap
-  validateFullName = (data: any) => {
+  validateFullName = (data: string) => {
     const limit = 36;
     data.length > 1
       ? this.setState({
@@ -59,8 +51,8 @@ class DetailDewi extends React.Component<Props, State> {
         });
   };
 
-  // validasi nama lengkap
-  validateComments = (data: any) => {
+  // validasi comments
+  validateComments = (data: string) => {
     const limit = 36;
     data.length > 1
       ? this.setState({
@@ -103,8 +95,7 @@ class DetailDewi extends React.Component<Props, State> {
           like={this.state.testimony.like}
           rating={this.state.testimony.rating}
           control={{
-            inputChange: this.handleInputChange,
-            ratingChange: this.handleRatingChange,
+            validateRating: this.validateRating,
             validateFullName: this.validateFullName,
             validateMail: this.validateMail,
           }}
