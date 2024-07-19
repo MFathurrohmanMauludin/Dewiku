@@ -40,8 +40,11 @@ interface FormProps {
   rating: number;
   control: {
     validateEmail: any;
+    validateComment: any;
+    validatePhoto: any;
     validateFullName: any;
     validateRating: any;
+    submitForm: any;
   };
   status: {
     email: boolean;
@@ -60,6 +63,19 @@ interface share {
 const TestimonyForm = (data: FormProps) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [isCheck, setCheck] = useState(true);
+  const limitText = 500 - data.comment.length;
+  const [isSendData, setSendData] = useState(false);
+
+  const sendData = (onClose: () => void) => {
+    setSendData(true);
+    setTimeout(() => {
+      data.control.submitForm();
+      setSendData(false);
+      setCheck(true);
+      onClose(); // Close the modal
+    }, 3000);
+  };
+
 
   return (
     <>
@@ -112,10 +128,19 @@ const TestimonyForm = (data: FormProps) => {
                         className="text-yellow-400"
                       />
                     }
-                    initialRating={0}
+                    initialRating={data.rating}
                     onChange={(rate) => data.control.validateRating(rate)}
                   />
                 </div>
+
+                {/* photo */}
+                <Input
+                  type="text"
+                  label="Foto (opsional)"
+                  variant="bordered"
+                  value={data.photo}
+                  onValueChange={data.control.validatePhoto}
+                />
 
                 {/* full name */}
                 <Input
@@ -151,13 +176,19 @@ const TestimonyForm = (data: FormProps) => {
                     base: "w-full",
                     input: "resize-y min-h-[100px]",
                   }}
+                  onValueChange={data.control.validateComment}
                   disableAutosize
                   disableAnimation
                 />
 
-                <span className="flex justify-end text-tiny">
-                  Karakter Tersisa: 500
-                </span>
+                <div className="flex justify-end items-center gap-x-1 text-sm">
+                  <span>karakter tersisa:</span>
+                  {limitText <= 10 ? (
+                    <span className="text-red-600">{limitText}</span>
+                  ) : (
+                    <span className="text-green-700">{limitText}</span>
+                  )}
+                </div>
 
                 {/* term of service & privacy policy */}
                 <div className="flex py-2 px-1 justify-between">
@@ -191,8 +222,9 @@ const TestimonyForm = (data: FormProps) => {
 
                 <Button
                   className="bg-gray-900 text-white"
-                  onPress={onClose}
                   isDisabled={isCheck}
+                  isLoading={isSendData}
+                  onPress={() => sendData(onClose)}
                   radius="full"
                 >
                   Submit

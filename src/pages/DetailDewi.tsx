@@ -6,9 +6,15 @@ interface Props {}
 interface State {
   desa: any;
   testimony: any;
-  statusNominal: boolean;
   statusEmail: boolean;
   statusFullName: boolean;
+  name: string;
+  imgUrl: string;
+  like: number;
+  email: string;
+  comment: string;
+  rating: number;
+  date: any;
 }
 
 class DetailDewi extends React.Component<Props, State> {
@@ -17,24 +23,43 @@ class DetailDewi extends React.Component<Props, State> {
 
     this.state = {
       desa: DesaWisataData(),
-      testimony: {
-        name: "",
-        imgUrl: "",
-        like: 0,
-        email: "",
-        comment: "",
-        rating: 5,
-        date: new Date().toLocaleDateString(),
-      },
-      statusNominal: false,
+      testimony: [],
+      name: "",
+      imgUrl: "",
+      like: 0,
+      email: "",
+      comment: "",
+      rating: 0,
+      date: new Date().toLocaleDateString(),
       statusEmail: false,
       statusFullName: false,
     };
   }
 
+  // save data
+  submitForm = () => {
+    const newTestimony = {
+      name: this.state.name,
+      imgUrl: this.state.imgUrl,
+      like: this.state.like,
+      email: this.state.email,
+      comment: this.state.comment,
+      rating: this.state.rating,
+      date: this.state.date,
+    };
+    this.setState((prevState) => ({
+      testimony: [...prevState.testimony, newTestimony],
+    }));
+  };
+
   // validasi rating
   validateRating = (data: number) => {
-    this.setState({ testimony: { rating: data } });
+    this.setState({ rating: data });
+  };
+
+  // validasi foto
+  validatePhoto = (data: string) => {
+    this.setState({ imgUrl: data });
   };
 
   // validasi nama lengkap
@@ -42,25 +67,25 @@ class DetailDewi extends React.Component<Props, State> {
     const limit = 36;
     data.length > 1
       ? this.setState({
-          testimony: { name: data.slice(0, limit) },
+          name: data.slice(0, limit),
           statusFullName: false,
         })
       : this.setState({
-          testimony: { name: data.slice(0, limit) },
+          name: data.slice(0, limit),
           statusFullName: true,
         });
   };
 
   // validasi comments
   validateComments = (data: string) => {
-    const limit = 36;
+    const limit = 500;
     data.length > 1
       ? this.setState({
-          testimony: { comment: data.slice(0, limit) },
+          comment: data.slice(0, limit),
           statusFullName: false,
         })
       : this.setState({
-          testimony: { comment: data.slice(0, limit) },
+          comment: data.slice(0, limit),
           statusFullName: true,
         });
   };
@@ -72,11 +97,11 @@ class DetailDewi extends React.Component<Props, State> {
     // Update state based on validation
     data.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i)
       ? this.setState({
-          testimony: { email: data.slice(0, limit) },
+          email: data.slice(0, limit),
           statusEmail: false,
         })
       : this.setState({
-          testimony: { email: data.slice(0, limit) },
+          email: data.slice(0, limit),
           statusEmail: true,
         });
   };
@@ -88,16 +113,23 @@ class DetailDewi extends React.Component<Props, State> {
       <>
         <InfoDewi
           desa={this.state.desa}
-          photo={this.state.testimony.imgUrl}
-          fullname={this.state.testimony.name}
-          email={this.state.testimony.email}
-          comment={this.state.testimony.comment}
-          like={this.state.testimony.like}
-          rating={this.state.testimony.rating}
+          photo={this.state.imgUrl}
+          fullname={this.state.name}
+          email={this.state.email}
+          comment={this.state.comment}
+          like={this.state.like}
+          rating={this.state.rating}
           control={{
             validateRating: this.validateRating,
             validateFullName: this.validateFullName,
             validateMail: this.validateMail,
+            validateComment: this.validateComments,
+            validatePhoto: this.validatePhoto,
+            submitForm: this.submitForm,
+          }}
+          status={{
+            email: this.state.statusEmail,
+            fullName: this.state.statusFullName,
           }}
         />
       </>

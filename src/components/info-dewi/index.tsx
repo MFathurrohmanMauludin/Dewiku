@@ -56,7 +56,14 @@ interface Props {
     validateRating: any;
     validateMail: any;
     validateFullName: any;
+    validateComment: any;
+    validatePhoto: any;
+    submitForm: any;
   };
+  status: {
+    email: boolean;
+    fullName: boolean;
+  }
 }
 
 const InfoDewi = (info: Props) => {
@@ -401,10 +408,13 @@ const InfoDewi = (info: Props) => {
                     validateEmail: info.control.validateMail,
                     validateFullName: info.control.validateFullName,
                     validateRating: info.control.validateRating,
+                    validateComment: info.control.validateComment,
+                    validatePhoto: info.control.validatePhoto,
+                    submitForm: info.control.submitForm
                   }}
                   status={{
-                    email: false,
-                    fullName: false,
+                    email: info.status.email,
+                    fullName: info.status.fullName,
                   }}
                 />
               </div>
