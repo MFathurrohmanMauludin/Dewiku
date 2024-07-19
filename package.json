@@ -6,8 +6,7 @@
   "author": "M Fathurrohman Mauludin",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "build:ignore-errors": "ESLINT_NO_DEV_ERRORS=true react-scripts build",
+    "build": "vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -36,8 +35,8 @@
     "uninstall": "^0.0.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.66",
-    "@types/react-dom": "^18.2.22",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
     "@types/react-router-hash-link": "^2.4.9",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",

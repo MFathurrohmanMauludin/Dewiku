@@ -6,13 +6,16 @@
     "description": "",
     "display": "standalone",
     "background_color": "#FFFFFF",
-    "theme_color": "#333333",
+    "theme_color": "#16A34A",
     "lang": "id",
     "categories": [
-        "desa wisata",
-        "liburan",
-        "wisata indonesia",
-        "wonderfull indonesia"
+        "Ekowisata,",
+        "Pengelolaan Pariwisata",
+        "Pemasaran Bidang Pariwisata",
+        "Inovasi dalam Pariwisata",
+        "Bisnis Pariwisata",
+        "Pelestarian Budaya Material",
+        "Ekonomi Digital"
     ],
     "icons": [
         {
