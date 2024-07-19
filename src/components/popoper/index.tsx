@@ -29,6 +29,7 @@ const LanguageComponent = () => {
     {
       icon: jpFlag,
       name: "japanese",
+      short: "jp",
     },
   ];
 
@@ -81,11 +82,11 @@ const LanguageComponent = () => {
         <Listbox variant="faded" aria-label="Listbox menu with icons">
           {listCountry.map((country, index) => (
             <ListboxItem
-              className="capitalize"
+              className={`capitalize text-gray-600 ${country.short === isLanguage && 'text-green-700'}`}
               startContent={<img src={country.icon} width={24} />}
               key={index}
               onPress={() => {
-                setLanguage(country.short);
+                country.short && setLanguage(country.short);
                 setIsOpen(!isOpen);
               }}
             >
