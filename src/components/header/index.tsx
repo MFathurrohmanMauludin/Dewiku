@@ -3,8 +3,9 @@ import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import SkipToContent from "../skip-content";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faLanguage } from "@fortawesome/free-solid-svg-icons";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import SearchComponent from "../modal/SearchComponent";
+import LanguageComponent from "../popoper";
 
 const Header = () => {
   const data = [
@@ -74,20 +75,7 @@ const Header = () => {
             isIconOnly
           />
 
-          <Button
-            as={Link}
-            to="#"
-            className="hover:!text-cyan-600 text-gray-400"
-            startContent={
-              <Tooltip content="bahasa" placement="bottom" showArrow>
-                <FontAwesomeIcon icon={faLanguage} fontSize={18} />
-              </Tooltip>
-            }
-            size="md"
-            variant="light"
-            radius="full"
-            isIconOnly
-          />
+         <LanguageComponent />
         </div>
       </header>
     </>
