@@ -860,96 +860,96 @@ const AkomodasiCard = (data: AnotherProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-    <Card
-      className="!max-w-full w-full border-1"
-      shadow="none"
-      isPressable
-      onPress={onOpen}
-    >
-      <CardBody className="overflow-visible p-0">
-        <Image
-          shadow="sm"
-          radius="lg"
-          width="100%"
-          alt={data.name}
-          className="w-full object-cover h-[200px]"
-          src={data.imgUrl}
-        />
-      </CardBody>
-      <CardFooter className="flex flex-col items-start">
-        <b className="capitalize">{data.name}</b>
-        <p className="text-default-500 text-sm">
-          Rp{ThousandSeparators(data.price)} /Malam
-        </p>
-      </CardFooter>
-    </Card>
+      <Card
+        className="!max-w-full w-full border-1"
+        shadow="none"
+        isPressable
+        onPress={onOpen}
+      >
+        <CardBody className="overflow-visible p-0">
+          <Image
+            shadow="sm"
+            radius="lg"
+            width="100%"
+            alt={data.name}
+            className="w-full object-cover h-[200px]"
+            src={data.imgUrl}
+          />
+        </CardBody>
+        <CardFooter className="flex flex-col items-start">
+          <b className="capitalize">{data.name}</b>
+          <p className="text-default-500 text-sm">
+            Rp{ThousandSeparators(data.price)} /Malam
+          </p>
+        </CardFooter>
+      </Card>
 
-    {/* sejarah */}
-    <Modal
-      size="lg"
-      isOpen={isOpen}
-      placement="center"
-      onClose={onClose}
-      scrollBehavior="inside"
-      classNames={{
-        backdrop: "z-[1000]",
-        wrapper: "z-[1000]",
-      }}
-    >
-      <ModalContent>
-        {(onClose) => (
-          <>
-            <ModalHeader className="flex flex-col">
-              <div className="flex flex-row items-stretch gap-x-2">
-                <Image
-                  className="w-[50px] h-[50px]"
-                  src={data.imgUrl}
-                  alt={data.name}
-                  radius="md"
-                  width={100}
-                />
-                <div className="flex flex-col">
-                  <b className="capitalize">{data.name}</b>
-                  <p className="text-default-500 text-sm">
-                    Rp{ThousandSeparators(data.price)} /Malam
-                  </p>
+      {/* sejarah */}
+      <Modal
+        size="lg"
+        isOpen={isOpen}
+        placement="center"
+        onClose={onClose}
+        scrollBehavior="inside"
+        classNames={{
+          backdrop: "z-[1000]",
+          wrapper: "z-[1000]",
+        }}
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col">
+                <div className="flex flex-row items-stretch gap-x-2">
+                  <Image
+                    className="w-[50px] h-[50px]"
+                    src={data.imgUrl}
+                    alt={data.name}
+                    radius="md"
+                    width={100}
+                  />
+                  <div className="flex flex-col">
+                    <b className="capitalize">{data.name}</b>
+                    <p className="text-default-500 text-sm">
+                      Rp{ThousandSeparators(data.price)} /Malam
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </ModalHeader>
-            <ModalBody className="flex flex-col gap-y-3">
-              <div dangerouslySetInnerHTML={{ __html: data.desc }} />
+              </ModalHeader>
+              <ModalBody className="flex flex-col gap-y-3">
+                <div dangerouslySetInnerHTML={{ __html: data.desc }} />
 
-              {data.location !== "" && (
-                <div className="space-y-2">
-                  <strong>Lokasi</strong>
-                  <iframe
-                    src={`https://www.google.com/maps/embed?pb=${data.location}`}
-                    className="rounded-lg h-[300px] w-full"
-                    width="654"
-                    height="400"
-                    style={{ border: 0 }}
-                    allowFullScreen={true}
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  ></iframe>
-                </div>
-              )}
-            </ModalBody>
-            <ModalFooter>
-              <Button
-                color="danger"
-                variant="light"
-                radius="full"
-                onPress={onClose}
-              >
-                Tutup
-              </Button>
-            </ModalFooter>
-          </>
-        )}
-      </ModalContent>
-    </Modal>
-  </>
+                {data.location !== "" && (
+                  <div className="space-y-2">
+                    <strong>Lokasi</strong>
+                    <iframe
+                      src={`https://www.google.com/maps/embed?pb=${data.location}`}
+                      className="rounded-lg h-[300px] w-full"
+                      width="654"
+                      height="400"
+                      style={{ border: 0 }}
+                      allowFullScreen={true}
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    ></iframe>
+                  </div>
+                )}
+              </ModalBody>
+              <ModalFooter>
+                <Button
+                  color="danger"
+                  variant="light"
+                  radius="full"
+                  onPress={onClose}
+                >
+                  Tutup
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    </>
   );
 };
 

@@ -16,8 +16,8 @@ const Header = () => {
       icon: "",
     },
     {
-      name: "cari dewi",
-      link: "/search",
+      name: "kategori",
+      link: "/kategori",
       icon: "",
     },
   ];

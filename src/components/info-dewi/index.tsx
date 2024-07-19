@@ -275,7 +275,7 @@ const InfoDewi = (info: Props) => {
             radius="full"
             selectedKey={isSelected}
             classNames={{ base: "!max-w-[100%]" }}
-            onSelectionChange={setIsSelected}
+            onSelectionChange={(key: any) => setIsSelected(key)}
           >
             {/* acara */}
             <Tab
