@@ -107,7 +107,6 @@ class DetailDewi extends React.Component<Props, State> {
   };
 
   render() {
-    console.log(this.state.testimony);
 
     return (
       <>
