@@ -11,6 +11,7 @@ import {
 import idFlag from "../../assets/indonesia.svg";
 import usaFlag from "../../assets/usa.svg";
 import jpFlag from "../../assets/japan.svg";
+import useStore from "../../utils/store";
 import { useState } from "react";
 
 const LanguageComponent = () => {
@@ -18,7 +19,7 @@ const LanguageComponent = () => {
     {
       icon: idFlag,
       name: "indonesian",
-      short: "id"
+      short: "id",
     },
     {
       icon: usaFlag,
@@ -31,11 +32,17 @@ const LanguageComponent = () => {
     },
   ];
 
-  const [isLanguage, setLanguage] = useState('id');
-  
+  const { isLanguage, setLanguage } = useStore();
+  const [isOpen, setIsOpen] = useState(false);
+
+  console.log(isLanguage);
 
   return (
-    <Popover placement="bottom">
+    <Popover
+      isOpen={isOpen}
+      onOpenChange={(open) => setIsOpen(open)}
+      placement="bottom"
+    >
       <PopoverTrigger>
         <Button
           className="hover:!text-cyan-600 text-gray-400"
@@ -72,11 +79,15 @@ const LanguageComponent = () => {
       </PopoverTrigger>
       <PopoverContent>
         <Listbox variant="faded" aria-label="Listbox menu with icons">
-          {listCountry.map((country) => (
+          {listCountry.map((country, index) => (
             <ListboxItem
+              className="capitalize"
               startContent={<img src={country.icon} width={24} />}
-              key={country.name}
-              onPress={() => setLanguage(country.short)}
+              key={index}
+              onPress={() => {
+                setLanguage(country.short);
+                setIsOpen(!isOpen);
+              }}
             >
               {country.name}
             </ListboxItem>

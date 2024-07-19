@@ -8,21 +8,21 @@ import SearchComponent from "../modal/SearchComponent";
 import LanguageComponent from "../popoper";
 
 const Header = () => {
-  const data = [
-    {
-      name: "beranda",
-      link: "/",
-      icon: "",
-    },
-    {
-      name: "kategori",
-      link: "/kategori",
-      icon: "",
-    },
-  ];
+  // const data = [
+  //   {
+  //     name: "beranda",
+  //     link: "/",
+  //     icon: "",
+  //   },
+  //   {
+  //     name: "kategori",
+  //     link: "/kategori",
+  //     icon: "",
+  //   },
+  // ];
 
   // get url
-  const { pathname } = useLocation();
+  // const { pathname } = useLocation();
 
   return (
     <>
@@ -40,7 +40,7 @@ const Header = () => {
         </Link>
 
         {/* navigation */}
-        <nav className="flex items-center gap-x-4 capitalize text-[16px] md:hidden">
+        {/* <nav className="flex items-center gap-x-4 capitalize text-[16px] md:hidden">
           {data.map((nav, index) => (
             <Link
               className={`${
@@ -54,7 +54,7 @@ const Header = () => {
               {nav.name}
             </Link>
           ))}
-        </nav>
+        </nav> */}
 
         {/* favorite & language */}
         <div className="flex items-center gap-x-2">
