@@ -46,9 +46,17 @@ import { formatNumberShort, formatPhoneNumber } from "../../utils/changeNumber";
 
 interface Props {
   desa: any;
+  photo: string;
+  fullname: string;
+  email: string;
+  comment: string;
+  like: number;
+  rating: string;
   control: {
     inputChange: any;
     ratingChange: any;
+    validateMail: any;
+    validateFullName: any;
   };
 }
 
@@ -384,15 +392,15 @@ const InfoDewi = (info: Props) => {
             >
               <div className="flex justify-start">
                 <TestimonyForm
-                  photo={""}
-                  fullname={""}
-                  email={""}
-                  comment={""}
-                  like={0}
-                  rating={0}
+                  photo={info.photo}
+                  fullname={info.fullname}
+                  email={info.email}
+                  comment={info.comment}
+                  like={info.like}
+                  rating={info.rating}
                   control={{
-                    validateEmail: "",
-                    validateFullName: "",
+                    validateEmail: info.control.validateMail,
+                    validateFullName: info.control.validateFullName,
                     inputChange: info.control.inputChange,
                     ratingChange: info.control.ratingChange,
                   }}

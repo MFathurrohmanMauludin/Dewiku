@@ -123,6 +123,7 @@ const TestimonyForm = (data: FormProps) => {
                   type="text"
                   label="Nama Lengkap"
                   variant="bordered"
+                  value={data.fullname}
                   onValueChange={data.control.validateFullName}
                   isInvalid={data.status.fullName}
                   errorMessage="Mohon masukan nama lengkap lebih dari 1 huruf"
@@ -134,6 +135,7 @@ const TestimonyForm = (data: FormProps) => {
                   type="email"
                   label="Email"
                   variant="bordered"
+                  value={data.email}
                   onValueChange={data.control.validateEmail}
                   isInvalid={data.status.email}
                   errorMessage="Mohon masukan email yang valid"
@@ -144,13 +146,14 @@ const TestimonyForm = (data: FormProps) => {
                 <Textarea
                   className="mt-2"
                   variant="bordered"
+                  value={data.comment}
                   placeholder="Apa hal menarik yang anda rasakan di desa ini?"
-                  disableAnimation
-                  disableAutosize
                   classNames={{
                     base: "w-full",
                     input: "resize-y min-h-[100px]",
                   }}
+                  disableAutosize
+                  disableAnimation
                 />
 
                 <span className="flex justify-end text-tiny">
