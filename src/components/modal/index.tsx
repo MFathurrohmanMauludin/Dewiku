@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Button,
   Checkbox,
+  Image,
   Input,
   Link,
   Modal,
@@ -17,6 +18,7 @@ import {
 
 import {
   faCheck,
+  faSearch,
   faStar as faStarSolid,
 } from "@fortawesome/free-solid-svg-icons";
 import { faShareFromSquare, faStar } from "@fortawesome/free-regular-svg-icons";
@@ -30,6 +32,7 @@ import {
   ShareXTwitter,
 } from "../share";
 import QRCode from "react-qr-code";
+import { SearchCard } from "../card";
 
 interface FormProps {
   photo: string;
@@ -60,6 +63,11 @@ interface share {
   link: string;
 }
 
+interface searchProps {
+  searchData: any;
+  control: any;
+}
+
 const TestimonyForm = (data: FormProps) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [isCheck, setCheck] = useState(true);
@@ -75,7 +83,6 @@ const TestimonyForm = (data: FormProps) => {
       onClose(); // Close the modal
     }, 3000);
   };
-
 
   return (
     <>
@@ -394,4 +401,81 @@ const ShareModal = (data: share) => {
   );
 };
 
-export { TestimonyForm, VerifycationModal, ShareModal };
+const SearchModal = (data: searchProps) => {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+  return (
+    <>
+      <Button
+        className="text-gray-400 hover:text-gray-600"
+        size="md"
+        onPress={onOpen}
+        radius="sm"
+        variant="light"
+        isIconOnly
+      >
+        <Tooltip content="pencarian" placement="bottom" showArrow>
+          <FontAwesomeIcon icon={faSearch} fontSize={16} />
+        </Tooltip>
+      </Button>
+
+      <Modal
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        placement="top"
+        size="3xl"
+        classNames={{
+          backdrop: "backdrop-blur-md z-[1000]",
+          wrapper: "z-[1000]",
+          base: "mt-[80px]",
+        }}
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1"></ModalHeader>
+              <ModalBody>
+                <Input
+                  isClearable
+                  type="text"
+                  variant="bordered"
+                  placeholder="Cari desa wisata di sini.."
+                  onValueChange={data.control}
+                  onClear={() => console.log("input cleared")}
+                />
+
+                {data.searchData.length === 0 ? (
+                  <div className="flex flex-col gap-y-2 justify-center items-center h-[300px] overflow-y-auto">
+                    <Image
+                      className="max-w-[260px]"
+                      src="https://img.freepik.com/free-vector/curiosity-search-concept-illustration_114360-11031.jpg"
+                      width={300}
+                      alt="search-desa"
+                    />
+                    <span>Mulai lakukan pencarian segera!</span>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-2 xs:grid-cols-1 sm:grid-cols-1 gap-4 mt-2">
+                    {data.searchData.map((desa: any, index: number) => (
+                      <SearchCard
+                        key={index}
+                        imgUrl={desa.imgUrl}
+                        name={desa.name}
+                        visitors={desa.visitors}
+                        testimony={desa.testimony.length}
+                        control={() => onClose}
+                      />
+                    ))}
+                  </div>
+                )}
+              </ModalBody>
+              <ModalFooter></ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    </>
+  );
+};
+
+export { TestimonyForm, VerifycationModal, ShareModal, SearchModal };

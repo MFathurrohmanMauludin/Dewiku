@@ -3,10 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import SkipToContent from "../skip-content";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHeart,
-  faLanguage,
-} from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faLanguage } from "@fortawesome/free-solid-svg-icons";
+import SearchComponent from "../modal/SearchComponent";
 
 const Header = () => {
   const data = [
@@ -57,33 +55,39 @@ const Header = () => {
           ))}
         </nav>
 
-        {/* sign up & login */}
+        {/* favorite & language */}
         <div className="flex items-center gap-x-2">
-          <Tooltip content="Favorit saya" placement="bottom" showArrow>
-            <Button
-              as={Link}
-              to="#"
-              className="hover:text-rose-600 text-gray-400"
-              startContent={<FontAwesomeIcon icon={faHeart} fontSize={18} />}
-              size="md"
-              variant="light"
-              radius="full"
-              isIconOnly
-            />
-          </Tooltip>
+          <SearchComponent />
 
-          <Tooltip content="bahasa" placement="bottom">
-            <Button
-              as={Link}
-              to="#"
-              className="hover:!text-cyan-600 text-gray-400"
-              startContent={<FontAwesomeIcon icon={faLanguage} fontSize={18} />}
-              size="md"
-              variant="light"
-              radius="full"
-              isIconOnly
-            />
-          </Tooltip>
+          <Button
+            as={Link}
+            to="#"
+            className="hover:text-rose-600 text-gray-400"
+            startContent={
+              <Tooltip content="Favorit saya" placement="bottom" showArrow>
+                <FontAwesomeIcon icon={faHeart} fontSize={18} />
+              </Tooltip>
+            }
+            size="md"
+            variant="light"
+            radius="full"
+            isIconOnly
+          />
+
+          <Button
+            as={Link}
+            to="#"
+            className="hover:!text-cyan-600 text-gray-400"
+            startContent={
+              <Tooltip content="bahasa" placement="bottom" showArrow>
+                <FontAwesomeIcon icon={faLanguage} fontSize={18} />
+              </Tooltip>
+            }
+            size="md"
+            variant="light"
+            radius="full"
+            isIconOnly
+          />
         </div>
       </header>
     </>

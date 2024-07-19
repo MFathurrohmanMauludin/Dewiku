@@ -86,6 +86,14 @@ interface AnotherProps {
   desc: any;
 }
 
+interface SearchProps {
+  name: string;
+  imgUrl: string;
+  visitors: number;
+  testimony: number;
+  control: any;
+}
+
 const BannerCard = (data: BannerCardProps) => {
   return (
     <>
@@ -283,7 +291,7 @@ const DesaCard = (data: DesaCardProps) => {
 
   const getData = DesaWisataData();
   const filteredData = getData.filter((desa) =>
-    desa.name.includes("jatimulyo")
+    desa.name.toLowerCase().includes(data.name.toLocaleLowerCase())
   );
 
   return (
@@ -298,7 +306,11 @@ const DesaCard = (data: DesaCardProps) => {
 
         {/* weather and like/share button */}
         <div className="absolute flex justify-between z-[50] py-1 px-2 top-2 w-full">
-          <Tooltip content="cerah berawan | hangat" showArrow>
+          <Tooltip
+            content="cerah berawan | hangat"
+            placement="bottom-end"
+            showArrow
+          >
             <div className="flex flex-row items-center gap-1 px-2 bg-black/30 backdrop-blur-sm w-fit rounded-full cursor-default">
               <FontAwesomeIcon
                 className="text-yellow-400"
@@ -500,79 +512,6 @@ const KulinerCard = (data: AnotherProps) => {
     </>
   );
 };
-
-// const BudayaCard = () => {
-//   const { isOpen, onOpen, onClose } = useDisclosure();
-
-//   const history = `<p><span style="background-color:rgb(255,255,255);color:rgb(60,72,88);font-family:Montserrat;font-size:18px;">Sendratari Sugriwa Subali mengisahkan tentang pertarungan kolosal antara Mahesasura dan Lembusura yang berwujud manusia berkepala kerbau melawan Sugriwa-Subali yang merupakan kakak beradik berwujud manusia berkepala kera mirip dengan sosok Anoman di kisah Sendratari Ramayana.</span><br><br><span style="background-color:rgb(255,255,255);color:rgb(60,72,88);font-family:Montserrat;font-size:18px;">Pertunjukan Sendratari Sugriwa Subali ini bisa menjadi alternatif bagi mencari alternatif wisata budaya di Jawa Tengah dan juga Daerah Istimewa Yogyakarta.</span></p>`;
-
-//   return (
-//     <>
-//       <Card className="h-[300px]" isPressable onPress={onOpen}>
-//         <CardHeader className="absolute bottom-0 z-10">
-//           <h4 className="text-white font-medium text-large">
-//             Sendratari Sugriwa-Subali
-//           </h4>
-//         </CardHeader>
-//         <Image
-//           removeWrapper
-//           alt="Card background"
-//           className="z-0 w-full h-full object-cover brightness-90 hover:brightness-100 focus-within:brightness-100"
-//           src="https://visitingjogja.jogjaprov.go.id/wp-content/uploads/2020/04/422.jpg"
-//           tabIndex={0}
-//         />
-//       </Card>
-
-//       {/* sejarah makanan */}
-//       <Modal
-//         size="lg"
-//         isOpen={isOpen}
-//         placement="center"
-//         onClose={onClose}
-//         scrollBehavior="inside"
-//         classNames={{
-//           backdrop: "z-[1000]",
-//           wrapper: "z-[1000]",
-//         }}
-//       >
-//         <ModalContent>
-//           {(onClose) => (
-//             <>
-//               <ModalHeader className="flex flex-col">
-//                 <div className="flex flex-row items-stretch gap-x-2">
-//                   <Image
-//                     className="w-[50px] h-[50px]"
-//                     src="https://www.desawisatajatimulyo.com/wp-content/uploads/2022/08/IMG_2521-360x240.jpg"
-//                     alt="image-1"
-//                     radius="md"
-//                     width={100}
-//                   />
-//                   <div className="flex flex-col">
-//                     <b>Sendratari Sugriwa-Subali</b>
-//                     <p className="text-default-500 text-sm">Rp4.000</p>
-//                   </div>
-//                 </div>
-//               </ModalHeader>
-//               <ModalBody>
-//                 <div dangerouslySetInnerHTML={{ __html: history }} />
-//               </ModalBody>
-//               <ModalFooter>
-//                 <Button
-//                   color="danger"
-//                   variant="light"
-//                   radius="full"
-//                   onPress={onClose}
-//                 >
-//                   Tutup
-//                 </Button>
-//               </ModalFooter>
-//             </>
-//           )}
-//         </ModalContent>
-//       </Modal>
-//     </>
-//   );
-// };
 
 const BudayaCard = (data: AnotherProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -953,6 +892,60 @@ const AkomodasiCard = (data: AnotherProps) => {
   );
 };
 
+const SearchCard = (data: SearchProps) => {
+  const getData = DesaWisataData();
+
+  const filteredData = getData.filter((desa) =>
+    desa.name.toLowerCase().includes(data.name.toLocaleLowerCase())
+  );
+
+  return (
+    <>
+      <Link to={`/info-dewi?name=${data.name}`} onClick={data.control}>
+        <Card className="border-1 !w-full" shadow="none" isPressable>
+          <CardHeader className="flex items-start gap-3">
+            <Image
+              className="w-full max-h-[56px]"
+              alt={data.name}
+              height={56}
+              radius="md"
+              src={data.imgUrl}
+            />
+            <div className="flex flex-col gap-y-1">
+              <span className="text-sm text-left capitalize">{data.name}</span>
+              <div className="flex items-center gap-x-6">
+                {/* rating */}
+                <div className="flex items-center gap-x-1 text-sm">
+                  <FontAwesomeIcon
+                    className="text-yellow-500"
+                    icon={faStar}
+                    fontSize={15}
+                  />
+                  <span>
+                    {getAverageRating(filteredData)} ({data.testimony})
+                  </span>
+                </div>
+
+                {/* turis */}
+                <div className="flex items-center gap-x-1 text-sm">
+                  <FontAwesomeIcon
+                    className="text-gray-600"
+                    icon={faSuitcaseRolling}
+                    fontSize={15}
+                  />
+                  <span className="text-sm">
+                    {formatNumberShort(data.visitors)} Turis
+                  </span>
+                </div>
+              </div>
+            </div>
+          </CardHeader>
+        </Card>
+      </Link>
+    </>
+  );
+};
+
 export {
   BannerCard,
   GaleryCard,
@@ -963,4 +956,5 @@ export {
   EventCard,
   BudayaCard,
   AkomodasiCard,
+  SearchCard,
 };
