@@ -1,5 +1,5 @@
 import { Button, Image, Tooltip } from "@nextui-org/react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import SkipToContent from "../skip-content";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,21 +8,6 @@ import SearchComponent from "../modal/SearchComponent";
 import LanguageComponent from "../popoper";
 
 const Header = () => {
-  // const data = [
-  //   {
-  //     name: "beranda",
-  //     link: "/",
-  //     icon: "",
-  //   },
-  //   {
-  //     name: "kategori",
-  //     link: "/kategori",
-  //     icon: "",
-  //   },
-  // ];
-
-  // get url
-  // const { pathname } = useLocation();
 
   return (
     <>

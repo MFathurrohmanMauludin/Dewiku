@@ -28,9 +28,9 @@ const DewiPopularSection = () => {
 
   return (
     <div className="space-y-2 px-6 xs:px-2 py-[80px]">
-      <span className="text-lg font-semibold tracking-wider">
+      {/* <span className="text-lg font-semibold tracking-wider">
         Desa Wisata Populer
-      </span>
+      </span> */}
 
       <div className="grid grid-cols-4 lg:grid-cols-3 xs:grid-cols-1 md:grid-cols-2 gap-4">
         {data.map((desa, index) => (

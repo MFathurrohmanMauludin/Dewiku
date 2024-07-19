@@ -12,19 +12,19 @@ import logo from "../../assets/logo.png";
 const Footer = () => {
   const data = [
     {
-      title: "yogyakarta",
-    },
-    {
       title: "bali",
     },
     {
-      title: "bandung",
+      title: "papua",
+    },
+    {
+      title: "yogyakarta",
     },
     {
       title: "bogor",
     },
     {
-      title: "papua",
+      title: "bandung",
     },
   ];
 
@@ -43,7 +43,7 @@ const Footer = () => {
         </div>
         {/* tentang perusahaan */}
         <div className="flex flex-col grow gap-y-3">
-          <span className="text-[18px] font-semibold">Tentang Kami</span>
+          <span className="text-[18px] font-semibold">Tentang</span>
           <ul className="space-y-2">
             <li>
               <a href="#">Dewiku</a>
@@ -74,17 +74,6 @@ const Footer = () => {
                 </Button>
               </li>
             ))}
-             <li>
-                <Button
-                  as={Link}
-                  to="#"
-                  className="bg-green-700 text-white capitalize"
-                  radius="full"
-                  size="sm"
-                >
-                  Selengkapnya
-                </Button>
-              </li>
           </ul>
         </div>
 
