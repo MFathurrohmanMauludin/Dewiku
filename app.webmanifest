@@ -1,17 +1,18 @@
 {
-    "id": "dipamerin-1",
+    "id": "dewiku-1",
     "start_url": "/",
-    "name": "Dipamerin",
-    "short_name": "Dipamerin",
+    "name": "dewiku",
+    "short_name": "dewiku",
     "description": "",
     "display": "standalone",
     "background_color": "#FFFFFF",
     "theme_color": "#333333",
     "lang": "id",
     "categories": [
-        "kreatifitas",
-        "karya seni",
-        "karya sastra"
+        "desa wisata",
+        "liburan",
+        "wisata indonesia",
+        "wonderfull indonesia"
     ],
     "icons": [
         {
