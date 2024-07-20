@@ -5,9 +5,12 @@ import SkipToContent from "../skip-content";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import SearchComponent from "../modal/SearchComponent";
+import { useTranslation } from "react-i18next";
 import LanguageComponent from "../popoper";
 
 const Header = () => {
+  // translate
+  const { t } = useTranslation(["language"]);
 
   return (
     <>
@@ -24,23 +27,6 @@ const Header = () => {
           />
         </Link>
 
-        {/* navigation */}
-        {/* <nav className="flex items-center gap-x-4 capitalize text-[16px] md:hidden">
-          {data.map((nav, index) => (
-            <Link
-              className={`${
-                pathname === nav.link
-                  ? "text-gray-800 font-semibold"
-                  : "text-gray-600"
-              } p-2 hover:text-gray-800 tracking-wider`}
-              to={nav.link}
-              key={index}
-            >
-              {nav.name}
-            </Link>
-          ))}
-        </nav> */}
-
         {/* favorite & language */}
         <div className="flex items-center gap-x-2">
           <SearchComponent />
@@ -50,7 +36,7 @@ const Header = () => {
             to="#"
             className="hover:text-rose-600 text-gray-400"
             startContent={
-              <Tooltip content="Favorit saya" placement="bottom" showArrow>
+              <Tooltip content={t("favorite")} placement="bottom" showArrow>
                 <FontAwesomeIcon icon={faHeart} fontSize={18} />
               </Tooltip>
             }
@@ -60,7 +46,7 @@ const Header = () => {
             isIconOnly
           />
 
-         <LanguageComponent />
+          <LanguageComponent />
         </div>
       </header>
     </>

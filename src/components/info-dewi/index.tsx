@@ -43,6 +43,7 @@ import { getDayOfWeekNumber } from "../../utils/changeDate";
 import { ShareModal, TestimonyForm, VerifycationModal } from "../modal";
 import { useLocation } from "react-router-dom";
 import { formatNumberShort, formatPhoneNumber } from "../../utils/changeNumber";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   desa: any;
@@ -63,7 +64,7 @@ interface Props {
   status: {
     email: boolean;
     fullName: boolean;
-  }
+  };
 }
 
 const InfoDewi = (info: Props) => {
@@ -77,6 +78,9 @@ const InfoDewi = (info: Props) => {
       label: "video",
     },
   ];
+
+  // translate
+  const { t } = useTranslation(["language"]);
 
   const getData = info.desa;
 
@@ -279,15 +283,15 @@ const InfoDewi = (info: Props) => {
           >
             {/* acara */}
             <Tab
-              key="acara"
+              key={t('event')}
               title={
                 <div
                   className={`flex items-center ${
-                    isSelected === "acara" && "text-blue-500"
+                    isSelected === t('event') && "text-blue-500"
                   } space-x-2`}
                 >
                   <FontAwesomeIcon icon={faCalendar} fontSize={16} />
-                  <span>Event</span>
+                  <span className="capitalize">{t('event')}</span>
                 </div>
               }
             >
@@ -308,7 +312,7 @@ const InfoDewi = (info: Props) => {
                   } space-x-2`}
                 >
                   <FontAwesomeIcon icon={faTree} fontSize={16} />
-                  <span>Alam</span>
+                  <span className="capitalize">{t('nature')}</span>
                 </div>
               }
             >
@@ -329,7 +333,7 @@ const InfoDewi = (info: Props) => {
                   } space-x-2`}
                 >
                   <FontAwesomeIcon icon={faMasksTheater} fontSize={16} />
-                  <span>Budaya</span>
+                  <span className="capitalize">{t('culture')}</span>
                 </div>
               }
             >
@@ -350,7 +354,7 @@ const InfoDewi = (info: Props) => {
                   } space-x-2`}
                 >
                   <FontAwesomeIcon icon={faUtensils} fontSize={16} />
-                  <span>Kuliner</span>
+                  <span className="capitalize">{t('culnary')}</span>
                 </div>
               }
             >
@@ -371,7 +375,7 @@ const InfoDewi = (info: Props) => {
                   } space-x-2`}
                 >
                   <FontAwesomeIcon icon={faTents} fontSize={16} />
-                  <span>Akomodasi</span>
+                  <span className="capitalize">{t('accomodation')}</span>
                 </div>
               }
             >
@@ -392,7 +396,7 @@ const InfoDewi = (info: Props) => {
                   } space-x-2`}
                 >
                   <FontAwesomeIcon icon={faStar} fontSize={16} />
-                  <span>Testimoni</span>
+                  <span className="capitalize">{t('testimony')}</span>
                 </div>
               }
             >
@@ -410,7 +414,7 @@ const InfoDewi = (info: Props) => {
                     validateRating: info.control.validateRating,
                     validateComment: info.control.validateComment,
                     validatePhoto: info.control.validatePhoto,
-                    submitForm: info.control.submitForm
+                    submitForm: info.control.submitForm,
                   }}
                   status={{
                     email: info.status.email,
@@ -436,7 +440,7 @@ const InfoDewi = (info: Props) => {
                   } space-x-2`}
                 >
                   <FontAwesomeIcon icon={faInfoCircle} fontSize={16} />
-                  <span>Tentang</span>
+                  <span className="capitalize">{t('about')}</span>
                 </div>
               }
             >
@@ -457,7 +461,7 @@ const InfoDewi = (info: Props) => {
             shadow="none"
           >
             <span className="text-lg font-semibold tracking-wide">
-              Jam Operasional
+              {t('openHours')}
             </span>
 
             <Table

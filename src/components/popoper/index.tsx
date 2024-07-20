@@ -3,40 +3,14 @@ import {
   PopoverTrigger,
   PopoverContent,
   Button,
-  Tooltip,
-  Listbox,
-  ListboxItem,
+  Tooltip
 } from "@nextui-org/react";
 
-import idFlag from "../../assets/indonesia.svg";
-import usaFlag from "../../assets/usa.svg";
-import jpFlag from "../../assets/japan.svg";
-import useStore from "../../utils/store";
 import { useState } from "react";
+import Language from "../language";
 
 const LanguageComponent = () => {
-  const listCountry = [
-    {
-      icon: idFlag,
-      name: "indonesian",
-      short: "id",
-    },
-    {
-      icon: usaFlag,
-      name: "english",
-      short: "en",
-    },
-    {
-      icon: jpFlag,
-      name: "japanese",
-      short: "jp",
-    },
-  ];
-
-  const { isLanguage, setLanguage } = useStore();
   const [isOpen, setIsOpen] = useState(false);
-
-  console.log(isLanguage);
 
   return (
     <Popover
@@ -79,21 +53,7 @@ const LanguageComponent = () => {
         />
       </PopoverTrigger>
       <PopoverContent>
-        <Listbox variant="faded" aria-label="Listbox menu with icons">
-          {listCountry.map((country, index) => (
-            <ListboxItem
-              className={`capitalize text-gray-600 ${country.short === isLanguage && 'text-green-700'}`}
-              startContent={<img src={country.icon} width={24} />}
-              key={index}
-              onPress={() => {
-                country.short && setLanguage(country.short);
-                setIsOpen(!isOpen);
-              }}
-            >
-              {country.name}
-            </ListboxItem>
-          ))}
-        </Listbox>
+        <Language />
       </PopoverContent>
     </Popover>
   );

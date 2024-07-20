@@ -4,4 +4,4 @@ Disallow: /nogooglebot/
 User-agent: *
 Allow: /
 
-Sitemap: https://dipamerin.netlify.app/
+Sitemap: https://dewiku.netlify.app/
