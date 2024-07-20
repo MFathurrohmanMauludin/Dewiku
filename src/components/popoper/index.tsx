@@ -3,13 +3,16 @@ import {
   PopoverTrigger,
   PopoverContent,
   Button,
-  Tooltip
+  Tooltip,
 } from "@nextui-org/react";
 
 import { useState } from "react";
 import Language from "../language";
+import { useTranslation } from "react-i18next";
 
 const LanguageComponent = () => {
+  // translate
+  const { t } = useTranslation(["language"]);
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -22,7 +25,7 @@ const LanguageComponent = () => {
         <Button
           className="hover:!text-cyan-600 text-gray-400"
           startContent={
-            <Tooltip content="bahasa" placement="bottom" showArrow>
+            <Tooltip content={t("language")} placement="bottom" showArrow>
               <svg
                 width="24"
                 height="24"

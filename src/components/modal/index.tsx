@@ -33,6 +33,7 @@ import {
 } from "../share";
 import QRCode from "react-qr-code";
 import { SearchCard } from "../card";
+import { useTranslation } from "react-i18next";
 
 interface FormProps {
   photo: string;
@@ -247,6 +248,7 @@ const TestimonyForm = (data: FormProps) => {
 
 const VerifycationModal = (data: verification) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -255,7 +257,7 @@ const VerifycationModal = (data: verification) => {
         onPress={onOpen}
         size="sm"
         startContent={
-          <Tooltip content="Terverifikasi">
+          <Tooltip content={t('verified')}>
             <FontAwesomeIcon
               className="py-[4px] px-[4.8px] text-white bg-green-600 rounded-full"
               icon={faCheck}
@@ -306,8 +308,8 @@ const VerifycationModal = (data: verification) => {
                 </div>
 
                 <p className="mt-3">
-                  Desa ini telah tervefikasi oleh <br />
-                  <strong>Kementerian Pariwisata dan Ekonomi Kreatif</strong>
+                  {t('verifiedBy')} <br />
+                  <strong>{t('ministry')}</strong>
                 </p>
               </ModalBody>
             </>
@@ -320,6 +322,7 @@ const VerifycationModal = (data: verification) => {
 
 const ShareModal = (data: share) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -328,14 +331,14 @@ const ShareModal = (data: share) => {
         onPress={onOpen}
         size="md"
         startContent={
-          <Tooltip content="bagikan">
+          <Tooltip content={t('share')}>
             <FontAwesomeIcon icon={faShareFromSquare} fontSize={18} />
           </Tooltip>
         }
         variant="light"
         radius="full"
       >
-        Bagikan
+        {t('share')}
       </Button>
 
       <Modal
@@ -352,8 +355,8 @@ const ShareModal = (data: share) => {
         <ModalContent className="pb-3">
           {() => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
-                Bagikan Informasi ini
+              <ModalHeader className="flex flex-col gap-1 capitalize">
+                {t("shareHeaderModal")}
               </ModalHeader>
 
               {/* verifikasi */}
@@ -404,6 +407,9 @@ const ShareModal = (data: share) => {
 const SearchModal = (data: searchProps) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
+  // translate
+  const { t } = useTranslation(["language"]);
+
   return (
     <>
       <Button
@@ -414,7 +420,7 @@ const SearchModal = (data: searchProps) => {
         variant="light"
         isIconOnly
       >
-        <Tooltip content="pencarian" placement="bottom" showArrow>
+        <Tooltip content={t("search")} placement="bottom" showArrow>
           <FontAwesomeIcon icon={faSearch} fontSize={16} />
         </Tooltip>
       </Button>
@@ -439,7 +445,7 @@ const SearchModal = (data: searchProps) => {
                   isClearable
                   type="text"
                   variant="bordered"
-                  placeholder="Cari desa wisata di sini.."
+                  placeholder={`${t("searchPlaceHolder")}...`}
                   onValueChange={data.control}
                   onClear={() => console.log("input cleared")}
                 />
@@ -452,7 +458,7 @@ const SearchModal = (data: searchProps) => {
                       width={300}
                       alt="search-desa"
                     />
-                    <span>Mulai lakukan pencarian segera!</span>
+                    <span>{t("searchNotice")}</span>
                   </div>
                 ) : (
                   <div className="grid grid-cols-2 xs:grid-cols-1 sm:grid-cols-1 gap-4 mt-2">

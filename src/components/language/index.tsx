@@ -18,8 +18,8 @@ const Language = (list: Props) => {
 
     const langs = [
         { label: "English", value: "en", icon: usaIcon },
-        { label: "Indonesia", value: "id", icon: idIcon },
-        { label: "Japan", value: "jp", icon: jpIcon },
+        { label: "Indonesian", value: "id", icon: idIcon },
+        { label: "Japanese", value: "jp", icon: jpIcon },
     ];
 
     // for change your language without refresh page

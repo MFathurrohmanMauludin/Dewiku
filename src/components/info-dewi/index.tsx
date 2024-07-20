@@ -68,19 +68,19 @@ interface Props {
 }
 
 const InfoDewi = (info: Props) => {
+  // translate
+  const { t } = useTranslation(["language"]);
+
   const data = [
     {
       key: "photo",
-      label: "foto",
+      label: t('photo'),
     },
     {
       key: "video",
-      label: "video",
+      label: t('video'),
     },
   ];
-
-  // translate
-  const { t } = useTranslation(["language"]);
 
   const getData = info.desa;
 
@@ -209,11 +209,11 @@ const InfoDewi = (info: Props) => {
           </div>
         </Card>
 
-        {/* galery photo */}
+        {/* galeri foto */}
         <Card className="border-1" shadow="none">
           <div className="flex items-center justify-between">
-            <span className="text-lg px-3 py-2 font-semibold tracking-wide">
-              Galeri
+            <span className="text-lg px-3 py-2 font-semibold tracking-wide capitalize">
+              {t('gallery')}
             </span>
 
             <Select
@@ -460,7 +460,7 @@ const InfoDewi = (info: Props) => {
             className="relative border-1 space-y-2 px-3 pt-2 pb-4"
             shadow="none"
           >
-            <span className="text-lg font-semibold tracking-wide">
+            <span className="text-lg font-semibold tracking-wide capitalize">
               {t('openHours')}
             </span>
 
@@ -493,8 +493,8 @@ const InfoDewi = (info: Props) => {
             className="relative border-1 space-y-2 px-3 pt-2 pb-4"
             shadow="none"
           >
-            <span className="text-lg font-semibold tracking-wide">
-              Peta Lokasi
+            <span className="text-lg font-semibold tracking-wide capitalize">
+              {t('locationmap')}
             </span>
 
             <iframe
@@ -514,8 +514,8 @@ const InfoDewi = (info: Props) => {
             className="relative border-1 space-y-2 px-3 pt-2 pb-4"
             shadow="none"
           >
-            <span className="text-lg font-semibold tracking-wide">
-              Penghargaan
+            <span className="text-lg font-semibold tracking-wide capitalize">
+              {t('achievement')}
             </span>
 
             <div className="grid grid-cols-1 gap-y-1 capitalize">
@@ -537,11 +537,11 @@ const InfoDewi = (info: Props) => {
             className="relative border-1 space-y-2 px-3 pt-2 pb-4"
             shadow="none"
           >
-            <span className="text-lg font-semibold tracking-wide">Kontak</span>
+            <span className="text-lg font-semibold tracking-wide">{t('contact')}</span>
 
             <div className="space-y-2 mt-2 text-[14px]">
               <div className="flex flex-col capitalize">
-                <span className="font-semibold">Telepon</span>
+                <span className="font-semibold">{t('telephone')}</span>
                 <LinkExternal
                   href={`https://api.whatsapp.com/send?phone=${detail.contact.telp.number}`}
                   className="!text-sm leading-snug text-gray-800 hover:text-green-700"
@@ -553,12 +553,12 @@ const InfoDewi = (info: Props) => {
               </div>
 
               <div className="flex flex-col">
-                <span className="font-semibold">Kantor</span>
+                <span className="font-semibold">{t('office')}</span>
                 <p className="tracking-wide">{detail.contact.office}</p>
               </div>
 
               <div className="flex flex-col">
-                <span className="font-semibold">Ikuti Kami</span>
+                <span className="font-semibold">{t('followsus')}</span>
                 <div className="flex flex-row gap-x-2 mt-1">
                   <LinkExternal href={detail.contact.socmed.ig}>
                     <Image

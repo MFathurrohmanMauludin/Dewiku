@@ -27,6 +27,8 @@
     "accomodation": "宿泊施設",
     "testimony": "証言",
     "verified": "確認済み",
+    "verifiedBy": "この村は以下によって確認されました。",
+    "ministry": "観光創造経済省",
     "share": "共有",
     "gallery": "ギャラリー",
     "photo": "写真",
@@ -35,8 +37,12 @@
     "time": "時間",
     "openHours": "稼働時間",
     "locationmap": "地図",
+    "achievement": "パフォーマンス",
+    "telephone": "電話",
     "contact": "連絡先",
     "office": "オフィス",
+    "shareHeaderModal": "この情報を共有する",
     "searchNotice": "すぐに検索を開始しましょう！",
-    "searchPlaceHolder": "ここで観光地を検索"
+    "searchPlaceHolder": "ここで観光地を検索",
+    "ticket": "チケット"
 }

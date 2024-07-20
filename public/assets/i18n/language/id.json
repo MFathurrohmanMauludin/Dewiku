@@ -27,6 +27,8 @@
     "accomodation": "akomodasi",
     "testimony": "testimoni",
     "verified": "terverifikasi",
+    "verifiedBy": "This village has been verified by",
+    "ministry": "Kementerian Pariwisata dan Ekonomi Kreatif",
     "share": "bagikan",
     "gallery": "galeri",
     "photo": "foto",
@@ -35,8 +37,12 @@
     "time": "waktu",
     "openHours": "jam operasioanal",
     "locationmap": "peta lokasi",
+    "achievement": "penghargaan",
     "contact": "kontak",
+    "telephone": "telepon",
     "office": "kantor",
-    "searchNotice": "Mulai lakukan pencarian segera!",
-    "searchPlaceHolder": "cari desa wisata di sini"
+    "shareHeaderModal": "bagikan informasi ini ke",
+    "searchNotice": "mulai lakukan pencarian segera!",
+    "searchPlaceHolder": "cari desa wisata di sini",
+    "ticket": "tiket"
 }

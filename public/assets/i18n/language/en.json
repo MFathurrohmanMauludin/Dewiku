@@ -27,6 +27,8 @@
     "accomodation": "accommodation",
     "testimony": "testimony",
     "verified": "verified",
+    "verifiedBy": "This village has been verified by",
+    "ministry": "Ministry of Tourism and Creative Economy",
     "share": "share",
     "gallery": "gallery",
     "photo": "photo",
@@ -35,8 +37,12 @@
     "time": "time",
     "openHours": "opearating time",
     "locationmap": "location map",
+    "achievement": "achievement",
     "contact": "contact",
+    "telephone": "phone number",
     "office": "office",
-    "searchNotice": "Start searching now!",
-    "searchPlaceHolder": "search for tourist villages here"
+    "shareHeaderModal": "share this information with",
+    "searchNotice": "start searching now!",
+    "searchPlaceHolder": "search for tourist villages here",
+    "ticket": "ticket"
 }
