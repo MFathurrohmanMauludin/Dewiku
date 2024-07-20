@@ -8,6 +8,7 @@ import instagramIcon from "../../assets/instagram.svg";
 import { Button, Image } from "@nextui-org/react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
   const data = [
@@ -28,6 +29,8 @@ const Footer = () => {
     },
   ];
 
+  const { t } = useTranslation();
+
   return (
     <footer>
       {/* logo & other */}
@@ -42,24 +45,24 @@ const Footer = () => {
           />
         </div>
         {/* tentang perusahaan */}
-        <div className="flex flex-col grow gap-y-3">
-          <span className="text-[18px] font-semibold">Tentang</span>
+        <div className="flex flex-col grow gap-y-3 capitalize">
+          <span className="text-[18px] font-semibold">{t('about')}</span>
           <ul className="space-y-2">
             <li>
-              <a href="#">Dewiku</a>
+              <a href="#" className="capitalize">{t('logo')}</a>
             </li>
             <li>
-              <a href="#">Sponsor Kami</a>
+              <a href="#">{t('sponsorus')}</a>
             </li>
             <li>
-              <a href="#">Mitra Kami</a>
+              <a href="#">{t('ourpartners')}</a>
             </li>
           </ul>
         </div>
 
         {/* pertanyaan yang sering ditanyakan */}
-        <div className="flex flex-col grow gap-y-3 max-w-[300px]">
-          <span className="text-[18px] font-semibold">Banyak Dikunjungi</span>
+        <div className="flex flex-col grow gap-y-3 max-w-[300px] capitalize">
+          <span className="text-[18px] font-semibold">{t('visitedalot')}</span>
           <ul className="flex flex-wrap gap-2">
             {data.map((karya, index) => (
               <li key={index}>
@@ -78,17 +81,17 @@ const Footer = () => {
         </div>
 
         {/* dukungan untuk pengguna */}
-        <div className="flex flex-col grow gap-y-3">
-          <span className="text-[18px] font-semibold">Dukungan</span>
+        <div className="flex flex-col grow gap-y-3 capitalize">
+          <span className="text-[18px] font-semibold">{t('support')}</span>
           <ul className="space-y-2">
             <li>
-              <a href="#">Hubungi Kami</a>
+              <a href="#">{t('contactus')}</a>
             </li>
             <li>
-              <a href="#">Syarat & Ketentuan</a>
+              <a href="#">{t('terms&conditions')}</a>
             </li>
             <li>
-              <a href="#">Kebijakan Privasi</a>
+              <a href="#">{t('privacypolicy')}</a>
             </li>
             <li>
               <a href="#">FAQ</a>
@@ -97,9 +100,9 @@ const Footer = () => {
         </div>
 
         {/* sosial media */}
-        <div className="grow space-y-4">
+        <div className="grow space-y-4 capitalize">
           <div className="flex flex-col gap-y-3">
-            <span className="text-[18px] font-semibold">Ikuti Kami</span>
+            <span className="text-[18px] font-semibold">{t('followsus')}</span>
             <ul className="flex flex-row md:flex-wrap space-x-4">
               <li>
                 <a href="#" aria-label="ikuti instagram kami">
@@ -141,8 +144,8 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="flex flex-col gap-y-3">
-            <span className="text-[14px] font-medium">Unduh Versi Mobile</span>
+          <div className="flex flex-col gap-y-3 capitalize">
+            <span className="text-[14px] font-medium">{t('download')}</span>
             <ul className="flex flex-row space-x-4">
               <li>
                 <a className="text-slate-900" href="#">

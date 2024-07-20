@@ -74,11 +74,11 @@ const InfoDewi = (info: Props) => {
   const data = [
     {
       key: "photo",
-      label: t('photo'),
+      label: t("photo"),
     },
     {
       key: "video",
-      label: t('video'),
+      label: t("video"),
     },
   ];
 
@@ -213,7 +213,7 @@ const InfoDewi = (info: Props) => {
         <Card className="border-1" shadow="none">
           <div className="flex items-center justify-between">
             <span className="text-lg px-3 py-2 font-semibold tracking-wide capitalize">
-              {t('gallery')}
+              {t("gallery")}
             </span>
 
             <Select
@@ -283,15 +283,15 @@ const InfoDewi = (info: Props) => {
           >
             {/* acara */}
             <Tab
-              key={t('event')}
+              key={t("event")}
               title={
                 <div
                   className={`flex items-center ${
-                    isSelected === t('event') && "text-blue-500"
+                    isSelected === t("event") && "text-blue-500"
                   } space-x-2`}
                 >
                   <FontAwesomeIcon icon={faCalendar} fontSize={16} />
-                  <span className="capitalize">{t('event')}</span>
+                  <span className="capitalize">{t("event")}</span>
                 </div>
               }
             >
@@ -312,7 +312,7 @@ const InfoDewi = (info: Props) => {
                   } space-x-2`}
                 >
                   <FontAwesomeIcon icon={faTree} fontSize={16} />
-                  <span className="capitalize">{t('nature')}</span>
+                  <span className="capitalize">{t("nature")}</span>
                 </div>
               }
             >
@@ -333,7 +333,7 @@ const InfoDewi = (info: Props) => {
                   } space-x-2`}
                 >
                   <FontAwesomeIcon icon={faMasksTheater} fontSize={16} />
-                  <span className="capitalize">{t('culture')}</span>
+                  <span className="capitalize">{t("culture")}</span>
                 </div>
               }
             >
@@ -354,7 +354,7 @@ const InfoDewi = (info: Props) => {
                   } space-x-2`}
                 >
                   <FontAwesomeIcon icon={faUtensils} fontSize={16} />
-                  <span className="capitalize">{t('culnary')}</span>
+                  <span className="capitalize">{t("culnary")}</span>
                 </div>
               }
             >
@@ -375,7 +375,7 @@ const InfoDewi = (info: Props) => {
                   } space-x-2`}
                 >
                   <FontAwesomeIcon icon={faTents} fontSize={16} />
-                  <span className="capitalize">{t('accomodation')}</span>
+                  <span className="capitalize">{t("accomodation")}</span>
                 </div>
               }
             >
@@ -396,7 +396,7 @@ const InfoDewi = (info: Props) => {
                   } space-x-2`}
                 >
                   <FontAwesomeIcon icon={faStar} fontSize={16} />
-                  <span className="capitalize">{t('testimony')}</span>
+                  <span className="capitalize">{t("testimony")}</span>
                 </div>
               }
             >
@@ -440,7 +440,7 @@ const InfoDewi = (info: Props) => {
                   } space-x-2`}
                 >
                   <FontAwesomeIcon icon={faInfoCircle} fontSize={16} />
-                  <span className="capitalize">{t('about')}</span>
+                  <span className="capitalize">{t("about")}</span>
                 </div>
               }
             >
@@ -461,7 +461,7 @@ const InfoDewi = (info: Props) => {
             shadow="none"
           >
             <span className="text-lg font-semibold tracking-wide capitalize">
-              {t('openHours')}
+              {t("openHours")}
             </span>
 
             <Table
@@ -471,9 +471,9 @@ const InfoDewi = (info: Props) => {
               selectionMode="single"
               defaultSelectedKeys={[getDayOfWeekNumber().toString()]}
             >
-              <TableHeader className="capitalize">
-                <TableColumn>{t('day')}</TableColumn>
-                <TableColumn>{t('time')}</TableColumn>
+              <TableHeader>
+                <TableColumn className="capitalize">{t("day")}</TableColumn>
+                <TableColumn className="capitalize">{t("time")}</TableColumn>
               </TableHeader>
               <TableBody>
                 {detail.openHours.map((data: any, index: number) => (
@@ -494,7 +494,7 @@ const InfoDewi = (info: Props) => {
             shadow="none"
           >
             <span className="text-lg font-semibold tracking-wide capitalize">
-              {t('locationmap')}
+              {t("locationmap")}
             </span>
 
             <iframe
@@ -515,7 +515,7 @@ const InfoDewi = (info: Props) => {
             shadow="none"
           >
             <span className="text-lg font-semibold tracking-wide capitalize">
-              {t('achievement')}
+              {t("achievement")}
             </span>
 
             <div className="grid grid-cols-1 gap-y-1 capitalize">
@@ -534,14 +534,16 @@ const InfoDewi = (info: Props) => {
 
           {/* kontak dan social media */}
           <Card
-            className="relative border-1 space-y-2 px-3 pt-2 pb-4"
+            className="relative border-1 space-y-2 px-3 pt-2 pb-4 capitalize"
             shadow="none"
           >
-            <span className="text-lg font-semibold tracking-wide">{t('contact')}</span>
+            <span className="text-lg font-semibold tracking-wide">
+              {t("contact")}
+            </span>
 
             <div className="space-y-2 mt-2 text-[14px]">
               <div className="flex flex-col capitalize">
-                <span className="font-semibold">{t('telephone')}</span>
+                <span className="font-semibold">{t("telephone")}</span>
                 <LinkExternal
                   href={`https://api.whatsapp.com/send?phone=${detail.contact.telp.number}`}
                   className="!text-sm leading-snug text-gray-800 hover:text-green-700"
@@ -553,12 +555,12 @@ const InfoDewi = (info: Props) => {
               </div>
 
               <div className="flex flex-col">
-                <span className="font-semibold">{t('office')}</span>
+                <span className="font-semibold">{t("office")}</span>
                 <p className="tracking-wide">{detail.contact.office}</p>
               </div>
 
               <div className="flex flex-col">
-                <span className="font-semibold">{t('followsus')}</span>
+                <span className="font-semibold">{t("followsus")}</span>
                 <div className="flex flex-row gap-x-2 mt-1">
                   <LinkExternal href={detail.contact.socmed.ig}>
                     <Image
