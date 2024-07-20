@@ -471,9 +471,9 @@ const InfoDewi = (info: Props) => {
               selectionMode="single"
               defaultSelectedKeys={[getDayOfWeekNumber().toString()]}
             >
-              <TableHeader>
-                <TableColumn>Hari</TableColumn>
-                <TableColumn>Waktu</TableColumn>
+              <TableHeader className="capitalize">
+                <TableColumn>{t('day')}</TableColumn>
+                <TableColumn>{t('time')}</TableColumn>
               </TableHeader>
               <TableBody>
                 {detail.openHours.map((data: any, index: number) => (

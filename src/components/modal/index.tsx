@@ -74,6 +74,7 @@ const TestimonyForm = (data: FormProps) => {
   const [isCheck, setCheck] = useState(true);
   const limitText = 500 - data.comment.length;
   const [isSendData, setSendData] = useState(false);
+  const { t } = useTranslation();
 
   const sendData = (onClose: () => void) => {
     setSendData(true);
@@ -93,7 +94,7 @@ const TestimonyForm = (data: FormProps) => {
         size="sm"
         color="success"
       >
-        buat testimoni
+        {t("createTestimony")}
       </Button>
 
       <Modal
@@ -257,7 +258,7 @@ const VerifycationModal = (data: verification) => {
         onPress={onOpen}
         size="sm"
         startContent={
-          <Tooltip content={t('verified')}>
+          <Tooltip content={t("verified")}>
             <FontAwesomeIcon
               className="py-[4px] px-[4.8px] text-white bg-green-600 rounded-full"
               icon={faCheck}
@@ -308,8 +309,8 @@ const VerifycationModal = (data: verification) => {
                 </div>
 
                 <p className="mt-3">
-                  {t('verifiedBy')} <br />
-                  <strong>{t('ministry')}</strong>
+                  {t("verifiedBy")} <br />
+                  <strong>{t("ministry")}</strong>
                 </p>
               </ModalBody>
             </>
@@ -327,18 +328,16 @@ const ShareModal = (data: share) => {
   return (
     <>
       <Button
-        className="hover:!bg-green-700 hover:text-white bg-white/10 backdrop-blur-sm text-white text-md"
+        className="hover:!bg-green-700 hover:text-white bg-white/10 backdrop-blur-sm text-white text-md capitalize"
         onPress={onOpen}
         size="md"
         startContent={
-          <Tooltip content={t('share')}>
             <FontAwesomeIcon icon={faShareFromSquare} fontSize={18} />
-          </Tooltip>
         }
         variant="light"
         radius="full"
       >
-        {t('share')}
+        {t("share")}
       </Button>
 
       <Modal
