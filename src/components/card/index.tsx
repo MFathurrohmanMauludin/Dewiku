@@ -23,6 +23,12 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
   Tooltip,
   useDisclosure,
 } from "@nextui-org/react";
@@ -33,9 +39,13 @@ import {
   getAverageRating,
   ThousandSeparators,
 } from "../../utils/changeNumber";
-import { formatShortIndonesiaDate } from "../../utils/changeDate";
+import {
+  formatShortIndonesiaDate,
+  getDayOfWeekNumber,
+} from "../../utils/changeDate";
 import Rating from "react-rating";
 import { DesaWisataData } from "../../utils/data";
+import { useTranslation } from "react-i18next";
 
 interface GaleryProps {
   title: string;
@@ -68,6 +78,7 @@ interface DesaCardProps {
   like: number;
   visitors: number;
   openhours: boolean;
+  schedule: any;
   hours: any;
 }
 
@@ -287,7 +298,9 @@ const GaleryCard = (data: GaleryProps) => {
 };
 
 const DesaCard = (data: DesaCardProps) => {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [isLike, setIsLike] = useState(false);
+  const { t } = useTranslation();
 
   const getData = DesaWisataData();
   const filteredData = getData.filter((desa) =>
@@ -405,9 +418,65 @@ const DesaCard = (data: DesaCardProps) => {
               size="sm"
               variant="light"
               radius="full"
+              onPress={onOpen}
             >
-              {data.openhours ? "buka" : "tutup"}
+              {data.openhours ? t("opened") : t("closed")}
             </Button>
+
+            <Modal
+              isOpen={isOpen}
+              placement="center"
+              onOpenChange={onOpenChange}
+              classNames={{
+                backdrop: "backdrop-blur-md z-[1000]",
+                wrapper: "z-[1000]"
+              }}
+            >
+              <ModalContent>
+                {(onClose) => (
+                  <>
+                    <ModalHeader className="flex flex-col gap-1">
+                      {t("openHours")}
+                    </ModalHeader>
+                    <ModalBody>
+                      <Table
+                        removeWrapper
+                        aria-label="jam operasional"
+                        color="success"
+                        selectionMode="single"
+                        defaultSelectedKeys={[getDayOfWeekNumber().toString()]}
+                      >
+                        <TableHeader>
+                          <TableColumn className="capitalize">
+                            {t("day")}
+                          </TableColumn>
+                          <TableColumn className="capitalize">
+                            {t("time")}
+                          </TableColumn>
+                        </TableHeader>
+                        <TableBody>
+                          {data.schedule.map((data: any, index: number) => (
+                            <TableRow key={index}>
+                              <TableCell className="capitalize">
+                                {data.day}
+                              </TableCell>
+                              <TableCell className="uppercase">
+                                {data.open} - {data.close} {data.type}
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button color="danger" variant="light" onPress={onClose}>
+                        Close
+                      </Button>
+                    </ModalFooter>
+                  </>
+                )}
+              </ModalContent>
+            </Modal>
           </div>
         </div>
       </Card>

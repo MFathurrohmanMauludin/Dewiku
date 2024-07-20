@@ -3,28 +3,38 @@ import { DesaCard } from "../card";
 // Import Swiper styles
 import "swiper/css";
 import { DesaWisataData } from "../../utils/data";
-import { getHours, getToday, timeStringToMinutes } from "../../utils/changeDate";
+import {
+  getHours,
+  getToday,
+  timeStringToMinutes,
+} from "../../utils/changeDate";
 
 const DewiPopularSection = () => {
   const data = DesaWisataData();
 
   // jam buka dan tutup operasional
- const filterOpenHoursByDay = (data: any, day: string) => {
+  const filterOpenHoursByDay = (data: any, day: string) => {
     const desa = data[0]; // assuming you have only one object in the array, adjust if necessary
     const openHours = desa.openHours;
-    return openHours.find((hour: any) => hour.day.toLowerCase() === day.toLowerCase());
-  }
+    return openHours.find(
+      (hour: any) => hour.day.toLowerCase() === day.toLowerCase()
+    );
+  };
 
   const day = filterOpenHoursByDay(data, getToday()).day;
   const opened = filterOpenHoursByDay(data, getToday()).open;
   const closed = filterOpenHoursByDay(data, getToday()).close;
-  
-  const isOpen = (): boolean  => {
+
+  const isOpen = (): boolean => {
     const timeNow = timeStringToMinutes(getHours());
     const openedHours = timeStringToMinutes(opened);
     const closedHours = timeStringToMinutes(closed);
-    return (day === getToday().toLocaleLowerCase()) && ( (timeNow >= openedHours) && (timeNow <= closedHours)) ? true : false;
-  }  
+    return day === getToday().toLocaleLowerCase() &&
+      timeNow >= openedHours &&
+      timeNow <= closedHours
+      ? true
+      : false;
+  };
 
   return (
     <div className="space-y-2 px-6 xs:px-2 py-[80px]">
@@ -45,6 +55,7 @@ const DewiPopularSection = () => {
             imgUrl={desa.imgUrl}
             testimony={desa.testimony.length}
             openhours={isOpen()}
+            schedule={desa.openHours}
           />
         ))}
       </div>
