@@ -52,8 +52,8 @@ const LanguageComponent = () => {
           isIconOnly
         />
       </PopoverTrigger>
-      <PopoverContent>
-        <Language />
+      <PopoverContent onMouseLeave={() => setIsOpen(!isOpen)}>
+        <Language control={() => setIsOpen(!isOpen)} />
       </PopoverContent>
     </Popover>
   );

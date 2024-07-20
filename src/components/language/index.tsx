@@ -7,7 +7,11 @@ import usaIcon from "../../assets/usa.svg";
 import { Listbox, ListboxItem } from "@nextui-org/react";
 import i18next from "i18next";
 
-const Language = () => {
+interface Props {
+    control: any;
+}
+
+const Language = (list: Props) => {
     const localStorageKey = 'selectedLanguage';
     const storedLanguage = localStorage.getItem(localStorageKey) || "en";
     const [selectedKeys, setSelectedKeys] = useState<any>(new Set([storedLanguage]));
@@ -44,7 +48,9 @@ const Language = () => {
                     classNames={{ base: 'px-2' }}
                     startContent={
                         <img src={lang.icon} width={24} alt={lang.label} />
-                    }>
+                    }
+                    onPress={list.control}
+                    >
                     {lang.label}
                 </ListboxItem>
             ))}
