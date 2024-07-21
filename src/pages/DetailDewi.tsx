@@ -21,16 +21,19 @@ class DetailDewi extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
+    const desaData = DesaWisataData();
+    const testimonyData = desaData[0]?.testimony || [];
+
     this.state = {
-      desa: DesaWisataData(),
-      testimony: [],
+      desa: desaData,
+      testimony: testimonyData,
       name: "",
       imgUrl: "",
       like: 0,
       email: "",
       comment: "",
       rating: 0,
-      date: new Date().toLocaleDateString(),
+      date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' }),
       statusEmail: false,
       statusFullName: false,
     };
@@ -47,9 +50,16 @@ class DetailDewi extends React.Component<Props, State> {
       rating: this.state.rating,
       date: this.state.date,
     };
-    this.setState((prevState) => ({
-      testimony: [...prevState.testimony, newTestimony],
-    }));
+
+    this.setState(
+      (prevState) => ({
+        testimony: [...prevState.testimony, newTestimony],
+      }),
+      () => {
+        // Perform any actions dependent on the new state here.
+        console.log("Testimony updated:", this.state.testimony);
+      }
+    );
   };
 
   // validasi rating
@@ -107,6 +117,7 @@ class DetailDewi extends React.Component<Props, State> {
   };
 
   render() {
+    console.log(this.state.testimony);
 
     return (
       <>
@@ -130,6 +141,7 @@ class DetailDewi extends React.Component<Props, State> {
             email: this.state.statusEmail,
             fullName: this.state.statusFullName,
           }}
+          testimony={this.state.testimony}
         />
       </>
     );

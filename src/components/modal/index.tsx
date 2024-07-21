@@ -150,6 +150,7 @@ const TestimonyForm = (data: FormProps) => {
                       "optional"
                     )})`}</span>
                   }
+                  placeholder="example: https://example.com/japan-flag.jpg"
                   variant="bordered"
                   value={data.photo}
                   onValueChange={data.control.validatePhoto}

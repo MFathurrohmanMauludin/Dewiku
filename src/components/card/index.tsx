@@ -64,8 +64,9 @@ interface RatingProps {
   name: string;
   imgUrl: string;
   rating: number;
-  comment: string;
   like: number;
+  email: string;
+  comment: string;
   date: string;
 }
 
@@ -155,7 +156,8 @@ const RatingCard = (data: RatingProps) => {
               radius="full"
               size="lg"
               src={data.imgUrl}
-              classNames={{ img: "object-top" }}
+              classNames={{ img: "object-top", base: "bg-green-700 text-white" }}
+              name={data.name}
             />
             <div className="flex flex-col gap-1 items-start justify-center">
               <div className="flex flex-row gap-x-2">
