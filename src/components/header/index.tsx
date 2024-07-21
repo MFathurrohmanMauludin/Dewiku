@@ -33,7 +33,7 @@ const Header = () => {
 
           <Button
             as={Link}
-            to="#"
+            to="/favorit"
             className="hover:text-rose-600 text-gray-400"
             startContent={
               <Tooltip content={t("favorite")} placement="bottom" showArrow>

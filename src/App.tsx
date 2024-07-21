@@ -11,6 +11,7 @@ import { I18nextProvider } from 'react-i18next';
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import i18n from "./utils/i18n";
+import Favorite from "./pages/Favorite";
 
 
 
@@ -34,6 +35,7 @@ const App = () => {
         <Routes>
           <Route path="/" Component={Home} />
           <Route path="/info-dewi" Component={DetailDewi} />
+          <Route path="/favorit" Component={Favorite} />
           <Route path="/syarat-&-ketentuan" Component={Syarat_Ketentuan} />
         </Routes>
         <Footer />
