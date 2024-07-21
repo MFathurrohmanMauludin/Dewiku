@@ -46,15 +46,17 @@ interface WeatherData {
   cod: number;
 }
 
-
 export const getWeatherData = async (lat: number, lon: number): Promise<WeatherData> => {
+  const localStorageKey = "selectedLanguage";
+  const storedLanguage = localStorage.getItem(localStorageKey) || "en";
+
   try {
     const response = await axios.get<WeatherData>(BASE_URL, {
       params: {
         lat,
         lon,
         appid: API_KEY,
-        lang: 'id'
+        lang: storedLanguage === 'jp' ? 'ja' : storedLanguage
       },
     });  
     return response.data;

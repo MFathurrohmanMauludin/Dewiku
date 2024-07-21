@@ -221,14 +221,14 @@ const InfoDewi = (info: Props) => {
 
                 <div className="flex items-center gap-x-2">
                   <Button
-                    className={`bg-white/10 backdrop-blur-sm text-white text-md ${
+                    className={`bg-white/10 backdrop-blur-sm text-white text-sm ${
                       isLike ? "text-rose-700" : "text-white"
                     } hover:text-rose-700`}
                     startContent={
                       <div className="flex items-center gap-x-2">
                         <FontAwesomeIcon
                           icon={isLike ? faHeartSolid : faHeart}
-                          fontSize={18}
+                          fontSize={16}
                         />
                         <span>
                           {isLike

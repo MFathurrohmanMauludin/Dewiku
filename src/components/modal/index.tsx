@@ -334,11 +334,11 @@ const ShareModal = (data: share) => {
   return (
     <>
       <Button
-        className="hover:!bg-green-700 hover:text-white bg-white/10 backdrop-blur-sm text-white text-md capitalize"
+        className="hover:!bg-green-700 hover:text-white bg-white/10 backdrop-blur-sm text-white text-md capitalize text-sm"
         onPress={onOpen}
         size="md"
         startContent={
-          <FontAwesomeIcon icon={faShareFromSquare} fontSize={18} />
+          <FontAwesomeIcon icon={faShareFromSquare} fontSize={16} />
         }
         variant="light"
         radius="full"
