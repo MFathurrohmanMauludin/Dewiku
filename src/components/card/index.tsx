@@ -46,6 +46,7 @@ import Rating from "react-rating";
 import { DesaWisataData } from "../../utils/data";
 import { useTranslation } from "react-i18next";
 import { getWeatherData } from "../../utils/weather";
+import weatherIcon from "../../utils/weatherIcons";
 
 interface GaleryProps {
   title: string;
@@ -355,6 +356,9 @@ const DesaCard = (data: DesaCardProps) => {
     fetchWeather();
   }, []);
 
+  const weatherFilterIcon = weatherIcon.find((data) => data.code.includes(weatherCodeIcon));
+
+
   return (
     <>
       <Card className="!max-w-full w-full border-1" shadow="none">
@@ -378,7 +382,7 @@ const DesaCard = (data: DesaCardProps) => {
           >
             <div className="flex flex-row items-center gap-1 px-2 bg-black/30 backdrop-blur-sm w-fit rounded-full cursor-default">
               <Image
-                src={`https://openweathermap.org/img/wn/${weatherCodeIcon}@2x.png`}
+                src={weatherFilterIcon?.image}
                 width={24}
                 alt={weatherCodeIcon}
               />
