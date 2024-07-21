@@ -1,14 +1,12 @@
 const formatIndonesiaDate = (data: string) => new Date(data).toLocaleDateString('id', { day:'numeric', month: 'short', year: 'numeric', weekday: 'long' });
 
-const formatShortIndonesiaDate = (data: string) => new Date(data).toLocaleDateString('id', { day:'numeric', month: 'long', year: 'numeric' });
-
 const getDayOfWeekNumber = (): number => {
     const today = new Date();
     const dayOfWeek = today.getDay() - 1;
     
     // Adjusting so that Monday is 1 and Sunday is 7
     return dayOfWeek === 0 ? 7 : dayOfWeek;
-  };
+};
 
 
   function getDayName(dayIndex: number): string {
@@ -43,4 +41,4 @@ const getDayOfWeekNumber = (): number => {
     return hours * 60 + minutes;
   }
   
-export {formatIndonesiaDate, formatShortIndonesiaDate, getDayOfWeekNumber, getToday, getHours, timeStringToMinutes};
+export {formatIndonesiaDate, getDayOfWeekNumber, getToday, getHours, timeStringToMinutes};

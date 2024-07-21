@@ -40,7 +40,6 @@ import {
   ThousandSeparators,
 } from "../../utils/changeNumber";
 import {
-  formatShortIndonesiaDate,
   getDayOfWeekNumber,
 } from "../../utils/changeDate";
 import Rating from "react-rating";
@@ -125,6 +124,24 @@ const BannerCard = (data: BannerCardProps) => {
 
 const RatingCard = (data: RatingProps) => {
   const [isLike, setIsLike] = useState(false);
+  const localStorageKey = "selectedLanguage";
+  const storedLanguage = localStorage.getItem(localStorageKey) || "en";
+
+    // format date
+    const options: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    };
+  
+    const formatDate = (data: any) => {
+      const date = new Date(data);
+      const formatter = new Intl.DateTimeFormat(
+        storedLanguage === "jp" ? "ja" : storedLanguage,
+        options
+      );
+      return formatter.format(date);
+    };
 
   return (
     <>
@@ -146,7 +163,7 @@ const RatingCard = (data: RatingProps) => {
                   {data.name}
                 </span>
                 <h5 className="text-xs tracking-tight text-default-400">
-                  {formatShortIndonesiaDate(data.date)}
+                  {formatDate(data.date)}
                 </h5>
               </div>
 
@@ -313,20 +330,23 @@ const DesaCard = (data: DesaCardProps) => {
 
   // get weather
   const [temperature, setTemperature] = useState<number | null>(null);
-  const [cityName, setCityName] = useState<string>('');
-  const [weatherName, setWeatherName] = useState<string>('');
-  const [weatherCodeIcon, setWeatherCodeIcon] = useState<string>('');
+  const [cityName, setCityName] = useState<string>("");
+  const [weatherName, setWeatherName] = useState<string>("");
+  const [weatherCodeIcon, setWeatherCodeIcon] = useState<string>("");
 
   useEffect(() => {
     const fetchWeather = async () => {
       try {
-        const getData = await getWeatherData(data.weather.lat, data.weather.lon);
+        const getData = await getWeatherData(
+          data.weather.lat,
+          data.weather.lon
+        );
         setCityName(getData.name);
         setWeatherName(getData.weather[0].description);
         setWeatherCodeIcon(getData.weather[0].icon);
         setTemperature(getData.main.temp);
       } catch (err) {
-        console.log('Failed to fetch weather data');
+        console.log("Failed to fetch weather data");
       }
     };
 
@@ -547,7 +567,7 @@ const KulinerCard = (data: AnotherProps) => {
         </CardBody>
         <CardFooter className="flex flex-col items-start">
           <b className="capitalize">{data.name}</b>
-          <p className="text-default-500 text-sm">
+          <p className="text-default-500 text-sm capitalize">
             Rp{ThousandSeparators(data.price)} /{t("portion")}
           </p>
         </CardFooter>
@@ -653,7 +673,7 @@ const BudayaCard = (data: AnotherProps) => {
         </CardBody>
         <CardFooter className="flex flex-col items-start">
           <b className="capitalize">{data.name}</b>
-          <p className="text-default-500 text-sm">
+          <p className="text-default-500 text-sm capitalize">
             Rp{ThousandSeparators(data.price)} /{t("ticket")}
           </p>
         </CardFooter>
@@ -685,7 +705,7 @@ const BudayaCard = (data: AnotherProps) => {
                   />
                   <div className="flex flex-col">
                     <b className="capitalize">{data.name}</b>
-                    <p className="text-default-500 text-sm">
+                    <p className="text-default-500 text-sm capitalize">
                       Rp{ThousandSeparators(data.price)} /{t("ticket")}
                     </p>
                   </div>
@@ -758,7 +778,7 @@ const AlamCard = (data: AnotherProps) => {
         </CardBody>
         <CardFooter className="flex flex-col items-start">
           <b className="capitalize">{data.name}</b>
-          <span className="text-default-500 text-sm">
+          <span className="text-default-500 text-sm capitalize">
             Rp{ThousandSeparators(data.price)} /{t("ticket")}
           </span>
         </CardFooter>
@@ -790,7 +810,7 @@ const AlamCard = (data: AnotherProps) => {
                   />
                   <div className="flex flex-col">
                     <b className="capitalize">{data.name}</b>
-                    <span className="text-default-500 text-sm">
+                    <span className="text-default-500 text-sm capitalize">
                       Rp{ThousandSeparators(data.price)} /{t("ticket")}
                     </span>
                   </div>
@@ -841,6 +861,22 @@ const EventCard = (data: EventProps) => {
   const storedLanguage = localStorage.getItem(localStorageKey) || "en";
   const { t } = useTranslation();
 
+  // format date
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  };
+
+  const formatDate = (data: any) => {
+    const date = new Date(data);
+    const formatter = new Intl.DateTimeFormat(
+      storedLanguage === "jp" ? "ja" : storedLanguage,
+      options
+    );
+    return formatter.format(date);
+  };
+
   return (
     <>
       <Card
@@ -856,15 +892,13 @@ const EventCard = (data: EventProps) => {
             width="100%"
             alt=""
             className="w-full object-cover h-[200px]"
-            src={
-              "https://www.desawisatajatimulyo.com/wp-content/uploads/2022/09/IMG_5128-1024x683.jpg"
-            }
+            src={data.imgUrl}
           />
         </CardBody>
         <CardFooter className="flex flex-col items-start">
           <b className="capitalize">{data.name}</b>
-          <p className="text-default-500 text-sm">
-            Dilaksanakan: {formatShortIndonesiaDate(data.schedule_date)}{" "}
+          <p className="text-default-500 text-sm capitalize">
+            {t("held")}: {formatDate(data.schedule_date)}{" "}
           </p>
         </CardFooter>
       </Card>
@@ -895,9 +929,9 @@ const EventCard = (data: EventProps) => {
                   />
                   <div className="flex flex-col">
                     <b className="capitalize">{data.name}</b>
-                    <p className="text-default-500 text-sm">
-                      Dilaksanakan:{" "}
-                      {formatShortIndonesiaDate(data.schedule_date)}
+                    <p className="text-default-500 text-sm capitalize">
+                      {t('held')}:{" "}
+                      {formatDate(data.schedule_date)}
                     </p>
                   </div>
                 </div>
@@ -955,7 +989,7 @@ const AkomodasiCard = (data: AnotherProps) => {
         </CardBody>
         <CardFooter className="flex flex-col items-start">
           <b className="capitalize">{data.name}</b>
-          <p className="text-default-500 text-sm">
+          <p className="text-default-500 text-sm capitalize">
             Rp{ThousandSeparators(data.price)} /{t("night")}
           </p>
         </CardFooter>
