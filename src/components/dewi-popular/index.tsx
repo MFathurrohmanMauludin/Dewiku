@@ -51,7 +51,7 @@ const DewiPopularSection = () => {
             key={index}
             name={desa.name}
             location={desa.location.city}
-            weather={25}
+            weather={desa.weatherLocation}
             like={desa.like}
             visitors={desa.visitors}
             hours={desa.openHours}

@@ -4,8 +4,8 @@ const DesaWisataData = () => [
     imgUrl:
       "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEicjpSwM2KC7Ln684sDJwrTBieNvTtRGMllDcGy1YmAC_7Jo7yQHEtNO4dMWWc7yIT7QiUiGORMYeAUmi5lDMfg-TW_KPckFfarbeVf7rsECfN2TtM7k-DegbQEPqHWlyYnXALYExoOTLI/s1600/IMG_20161212_101915.jpg",
     weatherLocation: {
-      lat: "48.137154",
-      lon: "11.576124",
+      lat: -7.752440669103307,
+      lon: 110.13076359453223,
     },
     location: {
       maps: "!1m18!1m12!1m3!1d3953.3503402489273!2d110.12818867404908!3d-7.752616076869493!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7aee2f7077f711%3A0x930b72080bcaff27!2sDesa%20Wisata%20Jatimulyo%20-%20Kulon%20Progo!5e0!3m2!1sen!2sid!4v1720793257450!5m2!1sen!2sid",

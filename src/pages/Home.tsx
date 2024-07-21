@@ -13,12 +13,11 @@ class Home extends React.Component<Props, State> {
   }
 
   render() {
-
     return (
       <>
         <div id="main-content" />
         {/* <Hero /> */}
-        <DewiPopularSection/>
+        <DewiPopularSection />
       </>
     );
   }

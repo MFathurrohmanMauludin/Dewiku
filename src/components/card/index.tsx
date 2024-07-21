@@ -3,7 +3,6 @@ import {
   faPalette,
   faStar as faStarSolid,
   faSuitcaseRolling,
-  faSun,
 } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
 
@@ -33,7 +32,7 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   formatNumberShort,
   getAverageRating,
@@ -46,6 +45,7 @@ import {
 import Rating from "react-rating";
 import { DesaWisataData } from "../../utils/data";
 import { useTranslation } from "react-i18next";
+import { getWeather } from "../../utils/weather";
 
 interface GaleryProps {
   title: string;
@@ -74,7 +74,7 @@ interface DesaCardProps {
   imgUrl: string;
   location: string;
   testimony: number;
-  weather: number;
+  weather: any;
   like: number;
   visitors: number;
   openhours: boolean;
@@ -300,12 +300,38 @@ const GaleryCard = (data: GaleryProps) => {
 const DesaCard = (data: DesaCardProps) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [isLike, setIsLike] = useState(false);
+
+  // translate
   const { t } = useTranslation();
 
+  // get data
   const getData = DesaWisataData();
   const filteredData = getData.filter((desa) =>
     desa.name.toLowerCase().includes(data.name.toLocaleLowerCase())
   );
+
+  // get weather
+  const [temperature, setTemperature] = useState<number | null>(null);
+  const [cityName, setCityName] = useState<string>('');
+  const [weatherName, setWeatherName] = useState<string>('');
+  const [weatherCodeIcon, setWeatherCodeIcon] = useState<string>('');
+
+  useEffect(() => {
+    const fetchWeather = async () => {
+      try {
+        const getData = await getWeather(data.weather.lat, data.weather.lon); // Example coordinates
+        setTemperature(getData.data[0].temp);
+        setCityName(getData.data[0].city_name);
+        setWeatherName(getData.data[0].weather.description);
+        setWeatherCodeIcon(getData.data[0].weather.icon);
+      } catch (error) {
+        console.error('Error fetching weather data:', error);
+      }
+    };
+
+    fetchWeather();
+  }, []);
+
 
   return (
     <>
@@ -320,20 +346,16 @@ const DesaCard = (data: DesaCardProps) => {
         {/* weather and like/share button */}
         <div className="absolute flex justify-between z-[50] py-1 px-2 top-2 w-full">
           <Tooltip
-            content="cerah berawan | hangat"
-            placement="bottom-end"
+            content={<span className="capitalize">{weatherName} | {cityName}</span>}
+            placement="bottom-start"
             showArrow
           >
             <div className="flex flex-row items-center gap-1 px-2 bg-black/30 backdrop-blur-sm w-fit rounded-full cursor-default">
-              <FontAwesomeIcon
-                className="text-yellow-400"
-                icon={faSun}
-                fontSize={24}
-              />
+              <Image src={`https://cdn.weatherbit.io/static/img/icons/${weatherCodeIcon}.png`} width={24} alt={weatherCodeIcon}/>
 
               <span className="text-md text-white">
-                {data.weather}
-                <sup className="text-[12px]">o</sup>C
+                  {temperature}
+                  <sup className="text-[12px]">o</sup>C
               </span>
             </div>
           </Tooltip>
