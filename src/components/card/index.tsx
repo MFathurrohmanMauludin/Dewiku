@@ -343,17 +343,19 @@ const DesaCard = (data: DesaCardProps) => {
               isLike ? "text-rose-700" : "text-white"
             } hover:text-rose-700`}
             startContent={
-              <div className="flex items-center gap-x-2">
-                <FontAwesomeIcon
-                  icon={isLike ? faHeartSolid : faHeart}
-                  fontSize={18}
-                />
-                <span>
-                  {isLike
-                    ? formatNumberShort(data.like + 1)
-                    : formatNumberShort(data.like)}
-                </span>
-              </div>
+              <Tooltip content={!isLike ? t("like") : t("unlike")} placement="bottom">
+                <div className="flex items-center gap-x-2">
+                  <FontAwesomeIcon
+                    icon={isLike ? faHeartSolid : faHeart}
+                    fontSize={18}
+                  />
+                  <span>
+                    {isLike
+                      ? formatNumberShort(data.like + 1)
+                      : formatNumberShort(data.like)}
+                  </span>
+                </div>
+              </Tooltip>
             }
             onClick={() => setIsLike(!isLike)}
             variant="solid"
@@ -402,9 +404,10 @@ const DesaCard = (data: DesaCardProps) => {
                   icon={faSuitcaseRolling}
                   fontSize={15}
                 />
-                <span className="text-sm">
-                  {formatNumberShort(data.visitors)} Turis
-                </span>
+                <div className="text-sm">
+                  {formatNumberShort(data.visitors)}{" "}
+                  <span className="capitalize">{t("tourist")}</span>
+                </div>
               </div>
             </div>
 
@@ -512,7 +515,7 @@ const KulinerCard = (data: AnotherProps) => {
         <CardFooter className="flex flex-col items-start">
           <b className="capitalize">{data.name}</b>
           <p className="text-default-500 text-sm">
-            Rp{ThousandSeparators(data.price)} /{t('portion')}
+            Rp{ThousandSeparators(data.price)} /{t("portion")}
           </p>
         </CardFooter>
       </Card>
@@ -544,17 +547,21 @@ const KulinerCard = (data: AnotherProps) => {
                   <div className="flex flex-col">
                     <b className="capitalize">{data.name}</b>
                     <p className="text-default-500 text-sm">
-                      Rp{ThousandSeparators(data.price)} /{t('portion')}
+                      Rp{ThousandSeparators(data.price)} /{t("portion")}
                     </p>
                   </div>
                 </div>
               </ModalHeader>
               <ModalBody className="flex flex-col gap-y-3">
-                <div dangerouslySetInnerHTML={{ __html: data.desc[storedLanguage] }} />
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: data.desc[storedLanguage],
+                  }}
+                />
 
                 {data.location !== "" && (
                   <div className="space-y-2">
-                    <strong className="capitalize">{t('locationmap')}</strong>
+                    <strong className="capitalize">{t("locationmap")}</strong>
                     <iframe
                       src={`https://www.google.com/maps/embed?pb=${data.location}`}
                       className="rounded-lg h-[300px] w-full"
@@ -660,7 +667,7 @@ const BudayaCard = (data: AnotherProps) => {
 
                 {data.location !== "" && (
                   <div className="space-y-2">
-                        <strong className="capitalize">{t('locationmap')}</strong>
+                    <strong className="capitalize">{t("locationmap")}</strong>
                     <iframe
                       src={`https://www.google.com/maps/embed?pb=${data.location}`}
                       className="rounded-lg h-[300px] w-full"
@@ -764,7 +771,7 @@ const AlamCard = (data: AnotherProps) => {
                 />
 
                 <div className="space-y-2">
-                      <strong className="capitalize">{t('locationmap')}</strong>
+                  <strong className="capitalize">{t("locationmap")}</strong>
                   <iframe
                     src={`https://www.google.com/maps/embed?pb=${data.location}`}
                     className="rounded-lg h-[300px] w-full"
@@ -889,7 +896,8 @@ const EventCard = (data: EventProps) => {
 };
 
 const AkomodasiCard = (data: AnotherProps) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();  const localStorageKey = "selectedLanguage";
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const localStorageKey = "selectedLanguage";
   const storedLanguage = localStorage.getItem(localStorageKey) || "en";
 
   const { t } = useTranslation();
@@ -915,7 +923,7 @@ const AkomodasiCard = (data: AnotherProps) => {
         <CardFooter className="flex flex-col items-start">
           <b className="capitalize">{data.name}</b>
           <p className="text-default-500 text-sm">
-            Rp{ThousandSeparators(data.price)} /{t('night')}
+            Rp{ThousandSeparators(data.price)} /{t("night")}
           </p>
         </CardFooter>
       </Card>
@@ -947,17 +955,21 @@ const AkomodasiCard = (data: AnotherProps) => {
                   <div className="flex flex-col">
                     <b className="capitalize">{data.name}</b>
                     <p className="text-default-500 text-sm">
-                      Rp{ThousandSeparators(data.price)} /{t('night')}
+                      Rp{ThousandSeparators(data.price)} /{t("night")}
                     </p>
                   </div>
                 </div>
               </ModalHeader>
               <ModalBody className="flex flex-col gap-y-3">
-                <div dangerouslySetInnerHTML={{ __html: data.desc[storedLanguage] }} />
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: data.desc[storedLanguage],
+                  }}
+                />
 
                 {data.location !== "" && (
                   <div className="space-y-2">
-                        <strong className="capitalize">{t('locationmap')}</strong>
+                    <strong className="capitalize">{t("locationmap")}</strong>
                     <iframe
                       src={`https://www.google.com/maps/embed?pb=${data.location}`}
                       className="rounded-lg h-[300px] w-full"
