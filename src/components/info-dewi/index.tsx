@@ -68,6 +68,9 @@ interface Props {
 }
 
 const InfoDewi = (info: Props) => {
+  const localStorageKey = 'selectedLanguage';
+  const storedLanguage = localStorage.getItem(localStorageKey) || "en";
+
   // translate
   const { t } = useTranslation(["language"]);
 
@@ -446,7 +449,7 @@ const InfoDewi = (info: Props) => {
             >
               <Card>
                 <CardBody>
-                  <div dangerouslySetInnerHTML={{ __html: detail.desc }} />
+                  <div dangerouslySetInnerHTML={{ __html: detail.desc[storedLanguage] }} />
                 </CardBody>
               </Card>
             </Tab>
@@ -476,7 +479,7 @@ const InfoDewi = (info: Props) => {
                 <TableColumn className="capitalize">{t("time")}</TableColumn>
               </TableHeader>
               <TableBody>
-                {detail.openHours.map((data: any, index: number) => (
+                {detail.openHours[storedLanguage].map((data: any, index: number) => (
                   <TableRow key={index}>
                     <TableCell className="capitalize">{data.day}</TableCell>
                     <TableCell className="uppercase">
@@ -526,7 +529,7 @@ const InfoDewi = (info: Props) => {
                   href={`https://${data.link !== "" ? data.link : "#"}`}
                   isExternal
                 >
-                  {data.name}
+                  {data.name[storedLanguage]}
                 </LinkExternal>
               ))}
             </div>

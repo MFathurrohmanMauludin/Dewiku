@@ -236,7 +236,7 @@ const TestimonyForm = (data: FormProps) => {
                   onPress={() => sendData(onClose)}
                   radius="full"
                 >
-                  Submit
+                  {t('submit')}
                 </Button>
               </ModalFooter>
             </>

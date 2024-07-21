@@ -429,7 +429,7 @@ const DesaCard = (data: DesaCardProps) => {
               onOpenChange={onOpenChange}
               classNames={{
                 backdrop: "backdrop-blur-md z-[1000]",
-                wrapper: "z-[1000]"
+                wrapper: "z-[1000]",
               }}
             >
               <ModalContent>
@@ -486,6 +486,7 @@ const DesaCard = (data: DesaCardProps) => {
 
 const KulinerCard = (data: AnotherProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -508,7 +509,7 @@ const KulinerCard = (data: AnotherProps) => {
         <CardFooter className="flex flex-col items-start">
           <b className="capitalize">{data.name}</b>
           <p className="text-default-500 text-sm">
-            Rp{ThousandSeparators(data.price)} /Porsi
+            Rp{ThousandSeparators(data.price)} /{t('portion')}
           </p>
         </CardFooter>
       </Card>
@@ -540,7 +541,7 @@ const KulinerCard = (data: AnotherProps) => {
                   <div className="flex flex-col">
                     <b className="capitalize">{data.name}</b>
                     <p className="text-default-500 text-sm">
-                      Rp{ThousandSeparators(data.price)} /Porsi
+                      Rp{ThousandSeparators(data.price)} /{t('portion')}
                     </p>
                   </div>
                 </div>
@@ -571,7 +572,7 @@ const KulinerCard = (data: AnotherProps) => {
                   radius="full"
                   onPress={onClose}
                 >
-                  Tutup
+                  {t("closed")}
                 </Button>
               </ModalFooter>
             </>
@@ -584,6 +585,9 @@ const KulinerCard = (data: AnotherProps) => {
 
 const BudayaCard = (data: AnotherProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const localStorageKey = "selectedLanguage";
+  const storedLanguage = localStorage.getItem(localStorageKey) || "en";
+  const { t } = useTranslation();
 
   return (
     <>
@@ -606,7 +610,7 @@ const BudayaCard = (data: AnotherProps) => {
         <CardFooter className="flex flex-col items-start">
           <b className="capitalize">{data.name}</b>
           <p className="text-default-500 text-sm">
-            Rp{ThousandSeparators(data.price)} /Tiket
+            Rp{ThousandSeparators(data.price)} /{t("ticket")}
           </p>
         </CardFooter>
       </Card>
@@ -638,13 +642,17 @@ const BudayaCard = (data: AnotherProps) => {
                   <div className="flex flex-col">
                     <b className="capitalize">{data.name}</b>
                     <p className="text-default-500 text-sm">
-                      Rp{ThousandSeparators(data.price)} /Porsi
+                      Rp{ThousandSeparators(data.price)} /{t("ticket")}
                     </p>
                   </div>
                 </div>
               </ModalHeader>
               <ModalBody className="flex flex-col gap-y-3">
-                <div dangerouslySetInnerHTML={{ __html: data.desc }} />
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: data.desc[storedLanguage],
+                  }}
+                />
 
                 {data.location !== "" && (
                   <div className="space-y-2">
@@ -669,7 +677,7 @@ const BudayaCard = (data: AnotherProps) => {
                   radius="full"
                   onPress={onClose}
                 >
-                  Tutup
+                  {t("closed")}
                 </Button>
               </ModalFooter>
             </>
@@ -682,6 +690,9 @@ const BudayaCard = (data: AnotherProps) => {
 
 const AlamCard = (data: AnotherProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const localStorageKey = "selectedLanguage";
+  const storedLanguage = localStorage.getItem(localStorageKey) || "en";
+  const { t } = useTranslation();
 
   return (
     <>
@@ -704,7 +715,7 @@ const AlamCard = (data: AnotherProps) => {
         <CardFooter className="flex flex-col items-start">
           <b className="capitalize">{data.name}</b>
           <span className="text-default-500 text-sm">
-            Rp{ThousandSeparators(data.price)} /Tiket
+            Rp{ThousandSeparators(data.price)} /{t("ticket")}
           </span>
         </CardFooter>
       </Card>
@@ -736,13 +747,17 @@ const AlamCard = (data: AnotherProps) => {
                   <div className="flex flex-col">
                     <b className="capitalize">{data.name}</b>
                     <span className="text-default-500 text-sm">
-                      Rp{ThousandSeparators(data.price)} /Tiket
+                      Rp{ThousandSeparators(data.price)} /{t("ticket")}
                     </span>
                   </div>
                 </div>
               </ModalHeader>
               <ModalBody className="flex flex-col gap-y-3">
-                <div dangerouslySetInnerHTML={{ __html: data.desc }} />
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: data.desc[storedLanguage],
+                  }}
+                />
 
                 <div className="space-y-2">
                   <strong>Lokasi</strong>
@@ -765,7 +780,7 @@ const AlamCard = (data: AnotherProps) => {
                   radius="full"
                   onPress={onClose}
                 >
-                  Tutup
+                  {t("closed")}
                 </Button>
               </ModalFooter>
             </>
@@ -778,6 +793,9 @@ const AlamCard = (data: AnotherProps) => {
 
 const EventCard = (data: EventProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const localStorageKey = "selectedLanguage";
+  const storedLanguage = localStorage.getItem(localStorageKey) || "en";
+  const { t } = useTranslation();
 
   return (
     <>
@@ -843,7 +861,9 @@ const EventCard = (data: EventProps) => {
               <ModalBody>
                 <div
                   className="flex flex-col items-center gap-y-2 text-[14px]"
-                  dangerouslySetInnerHTML={{ __html: data.desc }}
+                  dangerouslySetInnerHTML={{
+                    __html: data.desc[storedLanguage],
+                  }}
                 />
               </ModalBody>
               <ModalFooter>
@@ -853,7 +873,7 @@ const EventCard = (data: EventProps) => {
                   radius="full"
                   onPress={onClose}
                 >
-                  Tutup
+                  {t("closed")}
                 </Button>
               </ModalFooter>
             </>
@@ -866,6 +886,8 @@ const EventCard = (data: EventProps) => {
 
 const AkomodasiCard = (data: AnotherProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { t } = useTranslation();
+
   return (
     <>
       <Card
@@ -887,7 +909,7 @@ const AkomodasiCard = (data: AnotherProps) => {
         <CardFooter className="flex flex-col items-start">
           <b className="capitalize">{data.name}</b>
           <p className="text-default-500 text-sm">
-            Rp{ThousandSeparators(data.price)} /Malam
+            Rp{ThousandSeparators(data.price)} /{t('night')}
           </p>
         </CardFooter>
       </Card>
@@ -919,7 +941,7 @@ const AkomodasiCard = (data: AnotherProps) => {
                   <div className="flex flex-col">
                     <b className="capitalize">{data.name}</b>
                     <p className="text-default-500 text-sm">
-                      Rp{ThousandSeparators(data.price)} /Malam
+                      Rp{ThousandSeparators(data.price)} /{t('night')}
                     </p>
                   </div>
                 </div>
@@ -950,7 +972,7 @@ const AkomodasiCard = (data: AnotherProps) => {
                   radius="full"
                   onPress={onClose}
                 >
-                  Tutup
+                  {t("closed")}
                 </Button>
               </ModalFooter>
             </>

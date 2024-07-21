@@ -313,11 +313,7 @@ const DesaWisataData = () => [
     },
     award: [
       {
-        name: {
-          en: ``,
-          jp: ``,
-          id: `DESA JATIMULYO JUARA 3 LOMBA DESA WISATA NUSANTARA`,
-        },
+        name: "DESA JATIMULYO JUARA 3 LOMBA DESA WISATA NUSANTARA",
         link: "www.desawisatajatimulyo.com/2022/09/15/prestasi",
       },
       {

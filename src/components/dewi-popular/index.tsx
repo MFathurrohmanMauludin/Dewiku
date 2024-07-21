@@ -10,16 +10,19 @@ import {
 } from "../../utils/changeDate";
 
 const DewiPopularSection = () => {
+  const localStorageKey = 'selectedLanguage';
+  const storedLanguage = localStorage.getItem(localStorageKey) || "en";
+  
   const data = DesaWisataData();
 
   // jam buka dan tutup operasional
   const filterOpenHoursByDay = (data: any, day: string) => {
     const desa = data[0]; // assuming you have only one object in the array, adjust if necessary
-    const openHours = desa.openHours;
+    const openHours = desa.openHours.id;
     return openHours.find(
-      (hour: any) => hour.day.toLowerCase() === day.toLowerCase()
+      (hour: any) => hour.day.toLowerCase().includes(day.toLowerCase())
     );
-  };
+  };  
 
   const day = filterOpenHoursByDay(data, getToday()).day;
   const opened = filterOpenHoursByDay(data, getToday()).open;
@@ -43,7 +46,7 @@ const DewiPopularSection = () => {
       </span> */}
 
       <div className="grid grid-cols-4 lg:grid-cols-3 xs:grid-cols-1 md:grid-cols-2 gap-4">
-        {data.map((desa, index) => (
+        {data.map((desa: any, index: number) => (
           <DesaCard
             key={index}
             name={desa.name}
@@ -55,7 +58,7 @@ const DewiPopularSection = () => {
             imgUrl={desa.imgUrl}
             testimony={desa.testimony.length}
             openhours={isOpen()}
-            schedule={desa.openHours}
+            schedule={desa.openHours[storedLanguage]}
           />
         ))}
       </div>
