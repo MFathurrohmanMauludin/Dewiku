@@ -36,6 +36,7 @@ import { useEffect, useState } from "react";
 import {
   formatNumberShort,
   getAverageRating,
+  kelvinToCelsius,
   ThousandSeparators,
 } from "../../utils/changeNumber";
 import {
@@ -45,7 +46,7 @@ import {
 import Rating from "react-rating";
 import { DesaWisataData } from "../../utils/data";
 import { useTranslation } from "react-i18next";
-import { getWeather } from "../../utils/weather";
+import { getWeatherData } from "../../utils/weather";
 
 interface GaleryProps {
   title: string;
@@ -319,19 +320,18 @@ const DesaCard = (data: DesaCardProps) => {
   useEffect(() => {
     const fetchWeather = async () => {
       try {
-        const getData = await getWeather(data.weather.lat, data.weather.lon); // Example coordinates
-        setTemperature(getData.data[0].temp);
-        setCityName(getData.data[0].city_name);
-        setWeatherName(getData.data[0].weather.description);
-        setWeatherCodeIcon(getData.data[0].weather.icon);
-      } catch (error) {
-        console.error('Error fetching weather data:', error);
+        const getData = await getWeatherData(data.weather.lat, data.weather.lon);
+        setCityName(getData.name);
+        setWeatherName(getData.weather[0].description);
+        setWeatherCodeIcon(getData.weather[0].icon);
+        setTemperature(getData.main.temp);
+      } catch (err) {
+        console.log('Failed to fetch weather data');
       }
     };
 
     fetchWeather();
   }, []);
-
 
   return (
     <>
@@ -346,16 +346,24 @@ const DesaCard = (data: DesaCardProps) => {
         {/* weather and like/share button */}
         <div className="absolute flex justify-between z-[50] py-1 px-2 top-2 w-full">
           <Tooltip
-            content={<span className="capitalize">{weatherName} | {cityName}</span>}
+            content={
+              <span className="capitalize">
+                {weatherName} | {cityName}
+              </span>
+            }
             placement="bottom-start"
             showArrow
           >
             <div className="flex flex-row items-center gap-1 px-2 bg-black/30 backdrop-blur-sm w-fit rounded-full cursor-default">
-              <Image src={`https://cdn.weatherbit.io/static/img/icons/${weatherCodeIcon}.png`} width={24} alt={weatherCodeIcon}/>
+              <Image
+                src={`https://openweathermap.org/img/wn/${weatherCodeIcon}@2x.png`}
+                width={24}
+                alt={weatherCodeIcon}
+              />
 
-              <span className="text-md text-white">
-                  {temperature}
-                  <sup className="text-[12px]">o</sup>C
+              <span className="text-sm text-white">
+                {kelvinToCelsius(temperature || 0)}
+                <sup className="text-[10px]">o</sup>C
               </span>
             </div>
           </Tooltip>
@@ -365,11 +373,14 @@ const DesaCard = (data: DesaCardProps) => {
               isLike ? "text-rose-700" : "text-white"
             } hover:text-rose-700`}
             startContent={
-              <Tooltip content={!isLike ? t("like") : t("unlike")} placement="bottom">
-                <div className="flex items-center gap-x-2">
+              <Tooltip
+                content={!isLike ? t("like") : t("unlike")}
+                placement="bottom"
+              >
+                <div className="flex items-center text-sm gap-x-2">
                   <FontAwesomeIcon
                     icon={isLike ? faHeartSolid : faHeart}
-                    fontSize={18}
+                    fontSize={16}
                   />
                   <span>
                     {isLike

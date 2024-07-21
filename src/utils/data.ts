@@ -31,7 +31,7 @@ const DesaWisataData = () => [
       {
         name: "grebeg sampah",
         imgUrl:
-          "https://www.desawisatajatimulyo.com/wp-content/uploads/2022/09/IMG_5128-1024x683.jpg",
+          "https://i.ibb.co.com/0qhdcfg/grebeg-sampah.jpg",
         schedule_date: "9/10/2022",
         desc: {
           en: `<p style="margin-left:0px;"><span style="font-family:'Times New Roman', Times, serif;font-size:14px;"></span></p>
@@ -62,7 +62,7 @@ const DesaWisataData = () => [
       {
         name: "Dawet Sambel Khas Jatimulyo",
         imgUrl:
-          "https://www.desawisatajatimulyo.com/wp-content/uploads/2022/08/IMG_2521-360x240.jpg",
+          "https://i.ibb.co.com/n06QtFq/sambal-dawet.jpg",
         price: 4000,
         location: "",
         desc: {
@@ -85,7 +85,7 @@ const DesaWisataData = () => [
       {
         name: "Omah Watu Blencong",
         imgUrl:
-          "https://www.desawisatajatimulyo.com/wp-content/uploads/2022/09/IMG_2526.jpg",
+          "https://i.ibb.co.com/ZK9hC3p/homestay-1.jpg",
         price: 200000,
         location:
           "!1m18!1m12!1m3!1d988.3399759820152!2d110.12964470000003!3d-7.751597899999987!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7aee24a41cb525%3A0xfc21dfaa13f7ef0e!2sOmah%20Watu%20Blencong!5e0!3m2!1sen!2sid!4v1721171090213!5m2!1sen!2sid",

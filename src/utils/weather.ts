@@ -1,32 +1,65 @@
-// src/weatherService.ts
 import axios from 'axios';
 
-const API_KEY = 'f5bf017bb2574a29b0c454b89d7e72fb'; // Replace with your actual API key
-const BASE_URL = 'https://api.weatherbit.io/v2.0/current';
+const API_KEY = '05ecbee2f30477e2d907534538a7b570'; // Replace with your actual API key
+const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather';
 
-interface WeatherResponse {
-  data: [
-    {
-      temp: number;
-      city_name: string;
-      weather: {
-        description: string;
-        icon: string;
-      }
-      // Add other properties you need
-    }
-  ];
-  // Add other properties you need
+interface WeatherData {
+  coord: {
+    lon: number;
+    lat: number;
+  };
+  weather: {
+    id: number;
+    main: string;
+    description: string;
+    icon: string;
+  }[];
+  base: string;
+  main: {
+    temp: number;
+    feels_like: number;
+    temp_min: number;
+    temp_max: number;
+    pressure: number;
+    humidity: number;
+  };
+  visibility: number;
+  wind: {
+    speed: number;
+    deg: number;
+  };
+  clouds: {
+    all: number;
+  };
+  dt: number;
+  sys: {
+    type: number;
+    id: number;
+    message: number;
+    country: string;
+    sunrise: number;
+    sunset: number;
+  };
+  timezone: number;
+  id: number;
+  name: string;
+  cod: number;
 }
 
-export const getWeather = async (lat: number, lon: number): Promise<WeatherResponse> => {
-  const response = await axios.get<WeatherResponse>(BASE_URL, {
-    params: {
-      lat,
-      lon,
-      key: API_KEY,
-      include: 'minutely',
-    },
-  });
-  return response.data;
+
+export const getWeatherData = async (lat: number, lon: number): Promise<WeatherData> => {
+  try {
+    const response = await axios.get<WeatherData>(BASE_URL, {
+      params: {
+        lat,
+        lon,
+        appid: API_KEY,
+        lang: 'id'
+      },
+    });  
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching weather data:', error);
+    throw error;
+  }
 };

@@ -2,7 +2,6 @@ import { faCalendar, faStar } from "@fortawesome/free-regular-svg-icons";
 import {
   faInfoCircle,
   faMasksTheater,
-  faSun,
   faTents,
   faTree,
   faHeart as faHeartSolid,
@@ -42,8 +41,13 @@ import {
 import { getDayOfWeekNumber } from "../../utils/changeDate";
 import { ShareModal, TestimonyForm, VerifycationModal } from "../modal";
 import { useLocation } from "react-router-dom";
-import { formatNumberShort, formatPhoneNumber } from "../../utils/changeNumber";
+import {
+  formatNumberShort,
+  formatPhoneNumber,
+  kelvinToCelsius,
+} from "../../utils/changeNumber";
 import { useTranslation } from "react-i18next";
+import { getWeatherData } from "../../utils/weather";
 
 interface Props {
   desa: any;
@@ -68,7 +72,7 @@ interface Props {
 }
 
 const InfoDewi = (info: Props) => {
-  const localStorageKey = 'selectedLanguage';
+  const localStorageKey = "selectedLanguage";
   const storedLanguage = localStorage.getItem(localStorageKey) || "en";
 
   // translate
@@ -128,6 +132,31 @@ const InfoDewi = (info: Props) => {
     };
   }, []);
 
+  // get weather
+  const [temperature, setTemperature] = useState<number | null>(null);
+  const [cityName, setCityName] = useState<string>("");
+  const [weatherName, setWeatherName] = useState<string>("");
+  const [weatherCodeIcon, setWeatherCodeIcon] = useState<string>("");
+
+  useEffect(() => {
+    const fetchWeather = async () => {
+      try {
+        const getData = await getWeatherData(
+          detail.weatherLocation.lat,
+          detail.weatherLocation.lon
+        );
+        setCityName(getData.name);
+        setWeatherName(getData.weather[0].description);
+        setWeatherCodeIcon(getData.weather[0].icon);
+        setTemperature(getData.main.temp);
+      } catch (err) {
+        console.log("Failed to fetch weather data");
+      }
+    };
+
+    fetchWeather();
+  }, []);
+
   return (
     <div className="px-6 sm:px-2 md:px-4 py-[80px]">
       {/* top */}
@@ -167,16 +196,25 @@ const InfoDewi = (info: Props) => {
 
               {/* weather and like/share button */}
               <div className="absolute flex justify-between z-10 py-1 px-2 top-2 w-full">
-                <Tooltip content="cerah berawan | hangat" showArrow>
+                <Tooltip
+                  content={
+                    <span className="capitalize">
+                      {weatherName} | {cityName}
+                    </span>
+                  }
+                  placement="bottom-start"
+                  showArrow
+                >
                   <div className="flex flex-row items-center gap-1 px-2 bg-black/30 backdrop-blur-sm w-fit rounded-full cursor-default">
-                    <FontAwesomeIcon
-                      className="text-yellow-400"
-                      icon={faSun}
-                      fontSize={24}
+                    <Image
+                      src={`https://openweathermap.org/img/wn/${weatherCodeIcon}@2x.png`}
+                      width={24}
+                      alt={weatherCodeIcon}
                     />
 
-                    <span className="text-md text-white">
-                      20<sup className="text-[12px]">o</sup>C
+                    <span className="text-sm text-white">
+                      {kelvinToCelsius(temperature || 0)}
+                      <sup className="text-[10px]">o</sup>C
                     </span>
                   </div>
                 </Tooltip>
@@ -242,6 +280,7 @@ const InfoDewi = (info: Props) => {
               {isType === "photo" &&
                 galery.flatMap((data: any, index: number) => (
                   <Image
+                    key={index}
                     className={`object-cover w-[200px] h-[200px] cursor-pointer ${
                       isPhoto === data.url
                         ? "border-4 border-green-500 brightness-75"
@@ -257,6 +296,7 @@ const InfoDewi = (info: Props) => {
               {isType === "video" &&
                 galery.flatMap((data: any, index: number) => (
                   <Image
+                    key={index}
                     className={`object-cover w-[200px] h-[200px] cursor-pointer ${
                       isVideo === data.url
                         ? "border-4 border-green-500 brightness-75"
@@ -449,7 +489,11 @@ const InfoDewi = (info: Props) => {
             >
               <Card>
                 <CardBody>
-                  <div dangerouslySetInnerHTML={{ __html: detail.desc[storedLanguage] }} />
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: detail.desc[storedLanguage],
+                    }}
+                  />
                 </CardBody>
               </Card>
             </Tab>
@@ -479,14 +523,16 @@ const InfoDewi = (info: Props) => {
                 <TableColumn className="capitalize">{t("time")}</TableColumn>
               </TableHeader>
               <TableBody>
-                {detail.openHours[storedLanguage].map((data: any, index: number) => (
-                  <TableRow key={index}>
-                    <TableCell className="capitalize">{data.day}</TableCell>
-                    <TableCell className="uppercase">
-                      {data.open} - {data.close} {data.type}
-                    </TableCell>
-                  </TableRow>
-                ))}
+                {detail.openHours[storedLanguage].map(
+                  (data: any, index: number) => (
+                    <TableRow key={index}>
+                      <TableCell className="capitalize">{data.day}</TableCell>
+                      <TableCell className="uppercase">
+                        {data.open} - {data.close} {data.type}
+                      </TableCell>
+                    </TableRow>
+                  )
+                )}
               </TableBody>
             </Table>
           </Card>
