@@ -486,6 +486,9 @@ const DesaCard = (data: DesaCardProps) => {
 
 const KulinerCard = (data: AnotherProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const localStorageKey = "selectedLanguage";
+  const storedLanguage = localStorage.getItem(localStorageKey) || "en";
+
   const { t } = useTranslation();
 
   return (
@@ -547,11 +550,11 @@ const KulinerCard = (data: AnotherProps) => {
                 </div>
               </ModalHeader>
               <ModalBody className="flex flex-col gap-y-3">
-                <div dangerouslySetInnerHTML={{ __html: data.desc }} />
+                <div dangerouslySetInnerHTML={{ __html: data.desc[storedLanguage] }} />
 
                 {data.location !== "" && (
                   <div className="space-y-2">
-                    <strong>Lokasi</strong>
+                    <strong className="capitalize">{t('locationmap')}</strong>
                     <iframe
                       src={`https://www.google.com/maps/embed?pb=${data.location}`}
                       className="rounded-lg h-[300px] w-full"
@@ -587,6 +590,7 @@ const BudayaCard = (data: AnotherProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const localStorageKey = "selectedLanguage";
   const storedLanguage = localStorage.getItem(localStorageKey) || "en";
+
   const { t } = useTranslation();
 
   return (
@@ -656,7 +660,7 @@ const BudayaCard = (data: AnotherProps) => {
 
                 {data.location !== "" && (
                   <div className="space-y-2">
-                    <strong>Lokasi</strong>
+                        <strong className="capitalize">{t('locationmap')}</strong>
                     <iframe
                       src={`https://www.google.com/maps/embed?pb=${data.location}`}
                       className="rounded-lg h-[300px] w-full"
@@ -760,7 +764,7 @@ const AlamCard = (data: AnotherProps) => {
                 />
 
                 <div className="space-y-2">
-                  <strong>Lokasi</strong>
+                      <strong className="capitalize">{t('locationmap')}</strong>
                   <iframe
                     src={`https://www.google.com/maps/embed?pb=${data.location}`}
                     className="rounded-lg h-[300px] w-full"
@@ -885,7 +889,9 @@ const EventCard = (data: EventProps) => {
 };
 
 const AkomodasiCard = (data: AnotherProps) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure();  const localStorageKey = "selectedLanguage";
+  const storedLanguage = localStorage.getItem(localStorageKey) || "en";
+
   const { t } = useTranslation();
 
   return (
@@ -947,11 +953,11 @@ const AkomodasiCard = (data: AnotherProps) => {
                 </div>
               </ModalHeader>
               <ModalBody className="flex flex-col gap-y-3">
-                <div dangerouslySetInnerHTML={{ __html: data.desc }} />
+                <div dangerouslySetInnerHTML={{ __html: data.desc[storedLanguage] }} />
 
                 {data.location !== "" && (
                   <div className="space-y-2">
-                    <strong>Lokasi</strong>
+                        <strong className="capitalize">{t('locationmap')}</strong>
                     <iframe
                       src={`https://www.google.com/maps/embed?pb=${data.location}`}
                       className="rounded-lg h-[300px] w-full"

@@ -112,15 +112,15 @@ const TestimonyForm = (data: FormProps) => {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
-                Berikan Testimoni Anda
+              <ModalHeader className="flex flex-col gap-1 capitalize">
+                {t("testimonyFormHeader")}
               </ModalHeader>
 
               {/* form */}
               <ModalBody>
                 {/* rating */}
                 <div className="flex flex-col items-center gap-y-4 pb-4">
-                  <span>Berapa penilaian anda untuk desa wisata ini?</span>
+                  <span className="capitalize">{t("questionForm")}</span>
                   <Rating
                     className="space-x-2"
                     emptySymbol={
@@ -145,7 +145,11 @@ const TestimonyForm = (data: FormProps) => {
                 {/* photo */}
                 <Input
                   type="text"
-                  label="Foto (opsional)"
+                  label={
+                    <span className="capitalize">{`${t("photo")} (${t(
+                      "optional"
+                    )})`}</span>
+                  }
                   variant="bordered"
                   value={data.photo}
                   onValueChange={data.control.validatePhoto}
@@ -154,12 +158,14 @@ const TestimonyForm = (data: FormProps) => {
                 {/* full name */}
                 <Input
                   type="text"
-                  label="Nama Lengkap"
+                  label={
+                    <span className="capitalize">{`${t("fullname")}`}</span>
+                  }
                   variant="bordered"
                   value={data.fullname}
                   onValueChange={data.control.validateFullName}
                   isInvalid={data.status.fullName}
-                  errorMessage="Mohon masukan nama lengkap lebih dari 1 huruf"
+                  errorMessage={t("alertFullname")}
                   isRequired
                 />
 
@@ -171,7 +177,7 @@ const TestimonyForm = (data: FormProps) => {
                   value={data.email}
                   onValueChange={data.control.validateEmail}
                   isInvalid={data.status.email}
-                  errorMessage="Mohon masukan email yang valid"
+                  errorMessage={t("alertEmail")}
                   isRequired
                 />
 
@@ -180,7 +186,7 @@ const TestimonyForm = (data: FormProps) => {
                   className="mt-2"
                   variant="bordered"
                   value={data.comment}
-                  placeholder="Apa hal menarik yang anda rasakan di desa ini?"
+                  placeholder={t('questionTextArea')}
                   classNames={{
                     base: "w-full",
                     input: "resize-y min-h-[100px]",
@@ -191,7 +197,7 @@ const TestimonyForm = (data: FormProps) => {
                 />
 
                 <div className="flex justify-end items-center gap-x-1 text-sm">
-                  <span>karakter tersisa:</span>
+                  <span>{t('characterLimit')}:</span>
                   {limitText <= 10 ? (
                     <span className="text-red-600">{limitText}</span>
                   ) : (
@@ -209,11 +215,11 @@ const TestimonyForm = (data: FormProps) => {
                     onChange={() => setCheck(!isCheck)}
                   >
                     <p className="text-sm">
-                      Saya setuju dengan{" "}
+                      {t("term")}{" "}
                       <Link href="/syarat-&-ketentuan" size="sm">
-                        Syarat & Ketentuan
+                        {t("term&condition")}
                       </Link>{" "}
-                      yang berlaku
+                      {t("applicable")}
                     </p>
                   </Checkbox>
                 </div>
@@ -226,7 +232,7 @@ const TestimonyForm = (data: FormProps) => {
                   onPress={onClose}
                   radius="full"
                 >
-                  Cancel
+                  {t('cancel')}
                 </Button>
 
                 <Button
@@ -236,7 +242,7 @@ const TestimonyForm = (data: FormProps) => {
                   onPress={() => sendData(onClose)}
                   radius="full"
                 >
-                  {t('submit')}
+                  {t("submit")}
                 </Button>
               </ModalFooter>
             </>
@@ -332,7 +338,7 @@ const ShareModal = (data: share) => {
         onPress={onOpen}
         size="md"
         startContent={
-            <FontAwesomeIcon icon={faShareFromSquare} fontSize={18} />
+          <FontAwesomeIcon icon={faShareFromSquare} fontSize={18} />
         }
         variant="light"
         radius="full"
