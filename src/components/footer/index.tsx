@@ -13,19 +13,19 @@ import { useTranslation } from "react-i18next";
 const Footer = () => {
   const data = [
     {
-      title: "bali",
+      name: "bali",
     },
     {
-      title: "papua",
+      name: "papua",
     },
     {
-      title: "yogyakarta",
+      name: "yogyakarta",
     },
     {
-      title: "bogor",
+      name: "bogor",
     },
     {
-      title: "bandung",
+      name: "bandung",
     },
   ];
 
@@ -64,16 +64,16 @@ const Footer = () => {
         <div className="flex flex-col grow gap-y-3 max-w-[300px] capitalize">
           <span className="text-[18px] font-semibold">{t('visitedalot')}</span>
           <ul className="flex flex-wrap gap-2">
-            {data.map((karya, index) => (
+            {data.map((city, index) => (
               <li key={index}>
                 <Button
                   as={Link}
-                  to="#"
+                  to={`/cari-desa-wisata?kota=${city.name}`}
                   className="bg-green-700 text-white capitalize"
                   radius="full"
                   size="sm"
                 >
-                  {karya.title}
+                  {city.name}
                 </Button>
               </li>
             ))}

@@ -14,6 +14,7 @@ import i18n from "./utils/i18n";
 import Favorite from "./pages/Favorite";
 import DewiPopularAll from "./pages/DewiPopularAll";
 import DewiAnotherAll from "./pages/DewiAnotherAll";
+import DewiSearch from "./pages/DewiSearch";
 
 
 
@@ -41,6 +42,7 @@ const App = () => {
           <Route path="/syarat-&-ketentuan" Component={Syarat_Ketentuan} />
           <Route path="/desa-wisata-populer" Component={DewiPopularAll}/>
           <Route path="/desa-wisata-lainnya" Component={DewiAnotherAll}/>
+          <Route path="/cari-desa-wisata" Component={DewiSearch}/>
         </Routes>
         <Footer />
         </I18nextProvider>
