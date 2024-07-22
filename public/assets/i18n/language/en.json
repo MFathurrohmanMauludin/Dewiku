@@ -65,6 +65,7 @@
     "logo": "dewiku",
     "held": "held",
     "openMap": "open map",
-    "dewiPopular": "Popular Tourist Villages For You",
-    "dewiAnother": "",
+    "dewiPopular": "Popular tourist villages for you",
+    "dewiAnother": "Another tourist village for you",
+    "seeMore": "see all"
 }

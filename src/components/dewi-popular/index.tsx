@@ -11,7 +11,8 @@ import {
 import { Button } from "@nextui-org/react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {  faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "react-i18next";
 
 const DewiPopularSection = () => {
   const localStorageKey = "selectedLanguage";
@@ -43,16 +44,17 @@ const DewiPopularSection = () => {
       : false;
   };
 
+  // translate
+  const { t } = useTranslation();
+
   return (
     <div className="space-y-2 px-6 xs:px-2 pt-[80px]">
       <div className="flex items-center justify-between">
-        <span className="text-xl font-semibold tracking-wider">
-          Desa Wisata Populer Untuk Anda
-        </span>
+        <span className="text-xl font-semibold tracking-wider">{t("dewiPopular")}</span>
 
         <Button
           as={Link}
-          className="hover:text-green-700"
+          className="hover:text-green-700 capitalize"
           to={"/desa-wisata-populer"}
           endContent={
             <>
@@ -64,7 +66,7 @@ const DewiPopularSection = () => {
           size="md"
           radius="full"
         >
-          Lihat Semua
+          {t('seeMore')}
         </Button>
       </div>
 

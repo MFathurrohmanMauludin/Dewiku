@@ -12,6 +12,7 @@ import { Button } from "@nextui-org/react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "react-i18next";
 
 const DewiLainnya = () => {
   const localStorageKey = "selectedLanguage";
@@ -43,17 +44,20 @@ const DewiLainnya = () => {
       : false;
   };
 
+  // translate
+  const { t } = useTranslation();
+
   return (
     <div className="space-y-2 px-6 xs:px-2 py-[24px]">
       <div className="flex items-center justify-between">
         <span className="text-xl font-semibold tracking-wider">
-          Desa Wisata Lainnya Untuk Anda
+          {t("dewiAnother")}
         </span>
 
         <Button
           as={Link}
-          className="hover:text-green-700"
-          to={"/desa-wisata-populer"}
+          className="hover:text-green-700 capitalize"
+          to={"/desa-wisata-lainnya"}
           endContent={
             <>
               <FontAwesomeIcon icon={faArrowRight} fontSize={14} />
@@ -64,7 +68,7 @@ const DewiLainnya = () => {
           size="md"
           radius="full"
         >
-          Lihat Semua
+          {t("seeMore")}
         </Button>
       </div>
 
