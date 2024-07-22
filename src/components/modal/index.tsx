@@ -58,6 +58,7 @@ interface FormProps {
 
 interface verification {
   link: string;
+  name: string;
 }
 
 interface share {
@@ -294,7 +295,7 @@ const VerifycationModal = (data: verification) => {
           {() => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                Desa Wisata Jatimulyo
+                {data.name}
               </ModalHeader>
 
               {/* verifikasi */}

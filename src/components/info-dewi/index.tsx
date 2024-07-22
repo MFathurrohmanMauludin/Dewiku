@@ -171,7 +171,7 @@ const InfoDewi = (info: Props) => {
                 {detail.name}
               </span>
               {detail.verification.status && (
-                <VerifycationModal link={detail.verification.link} />
+                <VerifycationModal link={detail.verification.link} name={detail.name} />
               )}
             </div>
 
