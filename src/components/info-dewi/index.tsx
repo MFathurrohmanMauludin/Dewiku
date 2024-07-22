@@ -101,14 +101,15 @@ const InfoDewi = (info: Props) => {
     : "";
 
   const detail = getData.filter((data: any) => data.name === nameValue)[0];
+  const video = detail.galery.filter((item: any) => item.type === 'video');
+  const photo = detail.galery.filter((item: any) => item.type === 'photo');
 
   const [isSelected, setIsSelected] = useState("acara");
   const [isLike, setIsLike] = useState(false);
   const [isType, setIsType] = useState<string>("photo");
-  const [isPhoto, setIsPhoto] = useState(
-    "https://jadesta.kemenparekraf.go.id/imgpost/32182.jpg"
-  );
-  const [isVideo, setIsVideo] = useState("t1koHOkzJ5s?si=rMeJgUI6FXoFpVOP");
+  const [isPhoto, setIsPhoto] = useState(photo[0].url);
+  const [isVideo, setIsVideo] = useState(video[0].url);  
+  
 
   const [deviceWidth, setDeviceWidth] = useState<number>(window.innerWidth);
 
@@ -189,7 +190,7 @@ const InfoDewi = (info: Props) => {
               ) : (
                 <Image
                   src={isPhoto}
-                  className="object-cover w-full"
+                  className="object-cover w-full h-[500px] sm:h-[300px] md:h-[300px]"
                   width={720}
                   alt={detail.name}
                 />

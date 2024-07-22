@@ -568,25 +568,25 @@ const DesaWisataData = () => [
     ],
     galery: [
       {
-        url: "https://jadesta.kemenparekraf.go.id/imgpost/32182.jpg",
+        url: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/a5/c4/87/hamparan-spong-di-core.jpg?w=1000&h=1000",
         type: "photo",
       },
       {
-        url: "https://jadesta.kemenparekraf.go.id/imgpost/32213.jpg",
+        url: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/0b/a6/df/photo0jpg.jpg?w=1200",
         type: "photo",
       },
       {
-        url: "https://jadesta.kemenparekraf.go.id/imgpost/32217.jpg",
+        url: "https://www.balipuspanews.com/wp-content/uploads/2021/05/IMG-20210524-WA0000-e1621810834311.jpg",
         type: "photo",
       },
       {
-        thumbnail: "https://i.ytimg.com/vi/t1koHOkzJ5s/hqdefault.jpg",
-        url: "t1koHOkzJ5s?si=rMeJgUI6FXoFpVOP",
+        thumbnail: "https://i.ytimg.com/vi/WSwk9v0Aiv0/hqdefault.jpg",
+        url: "WSwk9v0Aiv0?si=7EQuTgIy8aobRwAO",
         type: "video",
       },
       {
-        thumbnail: "https://i.ytimg.com/vi/iKRB59sWg6Y/maxresdefault.jpg",
-        url: "iKRB59sWg6Y?si=4nHmvY-sIlPVmHjo",
+        thumbnail: "https://i.ytimg.com/vi/GTanS2kWBdw/maxresdefault.jpg",
+        url: "GTanS2kWBdw?si=1B0Zeq_nGZ1O8FqA",
         type: "video",
       },
     ],
