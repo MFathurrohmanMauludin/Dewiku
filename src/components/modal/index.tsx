@@ -295,7 +295,7 @@ const VerifycationModal = (data: verification) => {
         <ModalContent>
           {() => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
+              <ModalHeader className="flex flex-col gap-1 capitalize">
                 {data.name}
               </ModalHeader>
 
