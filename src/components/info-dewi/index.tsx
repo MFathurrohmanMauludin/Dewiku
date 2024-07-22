@@ -48,7 +48,6 @@ import {
 } from "../../utils/changeNumber";
 import { useTranslation } from "react-i18next";
 import { getWeatherData } from "../../utils/weather";
-import weatherIcon from "../../utils/weatherIcons";
 
 interface Props {
   desa: any;
@@ -159,8 +158,6 @@ const InfoDewi = (info: Props) => {
     fetchWeather();
   }, []);
 
-  const weatherFilterIcon = weatherIcon.find((data) => data.code.includes(weatherCodeIcon));
-
   return (
     <div className="px-6 sm:px-2 md:px-4 py-[80px]">
       {/* top */}
@@ -209,9 +206,9 @@ const InfoDewi = (info: Props) => {
                   placement="bottom-start"
                   showArrow
                 >
-                  <div className="flex flex-row items-center gap-1 px-2 bg-black/30 backdrop-blur-sm w-fit rounded-full cursor-default">
+                  <div className="flex flex-row items-center gap-1 px-2 bg-white/30 backdrop-blur-sm w-fit rounded-full cursor-default">
                     <Image
-                      src={weatherFilterIcon?.image}
+                      src={`https://openweathermap.org/img/wn/${weatherCodeIcon}.png`}
                       width={24}
                       alt={weatherCodeIcon}
                     />
@@ -560,6 +557,18 @@ const InfoDewi = (info: Props) => {
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
+
+            <Button
+              as={LinkExternal}
+              className="bg-green-700 text-white"
+              href="https://maps.app.goo.gl/vn3jpLJxXJfwkGE4A"
+              variant="light"
+              color="success"
+              radius="full"
+              isExternal
+            >
+              {t('openMap')}
+            </Button>
           </Card>
 
           {/* penghargaan */}

@@ -63,5 +63,8 @@
     "submit": "submit",
     "night": "night",
     "logo": "dewiku",
-    "held": "held"
+    "held": "held",
+    "openMap": "open map",
+    "dewiPopular": "Popular Tourist Villages For You",
+    "dewiAnother": "",
 }

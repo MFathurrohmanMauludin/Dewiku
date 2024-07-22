@@ -39,14 +39,11 @@ import {
   kelvinToCelsius,
   ThousandSeparators,
 } from "../../utils/changeNumber";
-import {
-  getDayOfWeekNumber,
-} from "../../utils/changeDate";
+import { getDayOfWeekNumber } from "../../utils/changeDate";
 import Rating from "react-rating";
 import { DesaWisataData } from "../../utils/data";
 import { useTranslation } from "react-i18next";
 import { getWeatherData } from "../../utils/weather";
-import weatherIcon from "../../utils/weatherIcons";
 
 interface GaleryProps {
   title: string;
@@ -129,21 +126,21 @@ const RatingCard = (data: RatingProps) => {
   const localStorageKey = "selectedLanguage";
   const storedLanguage = localStorage.getItem(localStorageKey) || "en";
 
-    // format date
-    const options: Intl.DateTimeFormatOptions = {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    };
-  
-    const formatDate = (data: any) => {
-      const date = new Date(data);
-      const formatter = new Intl.DateTimeFormat(
-        storedLanguage === "jp" ? "ja" : storedLanguage,
-        options
-      );
-      return formatter.format(date);
-    };
+  // format date
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  };
+
+  const formatDate = (data: any) => {
+    const date = new Date(data);
+    const formatter = new Intl.DateTimeFormat(
+      storedLanguage === "jp" ? "ja" : storedLanguage,
+      options
+    );
+    return formatter.format(date);
+  };
 
   return (
     <>
@@ -157,7 +154,10 @@ const RatingCard = (data: RatingProps) => {
               radius="full"
               size="lg"
               src={data.imgUrl}
-              classNames={{ img: "object-top", base: "bg-green-700 text-white" }}
+              classNames={{
+                img: "object-top",
+                base: "bg-green-700 text-white",
+              }}
               name={data.name}
             />
             <div className="flex flex-col gap-1 items-start justify-center">
@@ -356,9 +356,6 @@ const DesaCard = (data: DesaCardProps) => {
     fetchWeather();
   }, []);
 
-  const weatherFilterIcon = weatherIcon.find((data) => data.code.includes(weatherCodeIcon));
-
-
   return (
     <>
       <Card className="!max-w-full w-full border-1" shadow="none">
@@ -380,9 +377,10 @@ const DesaCard = (data: DesaCardProps) => {
             placement="bottom-start"
             showArrow
           >
-            <div className="flex flex-row items-center gap-1 px-2 bg-black/30 backdrop-blur-sm w-fit rounded-full cursor-default">
+            <div className="flex flex-row items-center gap-1 px-2 bg-white/30 backdrop-blur-sm w-fit rounded-full cursor-default">
               <Image
-                src={weatherFilterIcon?.image}
+                className="h-[24px] w-[24px]"
+                src={`https://openweathermap.org/img/wn/${weatherCodeIcon}.png`}
                 width={24}
                 alt={weatherCodeIcon}
               />
@@ -936,8 +934,7 @@ const EventCard = (data: EventProps) => {
                   <div className="flex flex-col">
                     <b className="capitalize">{data.name}</b>
                     <p className="text-default-500 text-sm capitalize">
-                      {t('held')}:{" "}
-                      {formatDate(data.schedule_date)}
+                      {t("held")}: {formatDate(data.schedule_date)}
                     </p>
                   </div>
                 </div>
@@ -1081,6 +1078,8 @@ const SearchCard = (data: SearchProps) => {
     desa.name.toLowerCase().includes(data.name.toLocaleLowerCase())
   );
 
+  const { t } = useTranslation();
+
   return (
     <>
       <Link to={`/info-dewi?name=${data.name}`} onClick={data.control}>
@@ -1115,8 +1114,8 @@ const SearchCard = (data: SearchProps) => {
                     icon={faSuitcaseRolling}
                     fontSize={15}
                   />
-                  <span className="text-sm">
-                    {formatNumberShort(data.visitors)} Turis
+                  <span className="text-sm capitalize">
+                    {formatNumberShort(data.visitors)} {t("tourist")}
                   </span>
                 </div>
               </div>
