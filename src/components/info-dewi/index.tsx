@@ -6,6 +6,8 @@ import {
   faTree,
   faHeart as faHeartSolid,
   faUtensils,
+  faBox,
+  faCheckSquare,
 } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import instagramIcon from "../../assets/instagram.svg";
@@ -101,15 +103,14 @@ const InfoDewi = (info: Props) => {
     : "";
 
   const detail = getData.filter((data: any) => data.name === nameValue)[0];
-  const video = detail.galery.filter((item: any) => item.type === 'video');
-  const photo = detail.galery.filter((item: any) => item.type === 'photo');
+  const video = detail.galery.filter((item: any) => item.type === "video");
+  const photo = detail.galery.filter((item: any) => item.type === "photo");
 
   const [isSelected, setIsSelected] = useState("acara");
   const [isLike, setIsLike] = useState(false);
   const [isType, setIsType] = useState<string>("photo");
   const [isPhoto, setIsPhoto] = useState(photo[0].url);
-  const [isVideo, setIsVideo] = useState(video[0].url);  
-  
+  const [isVideo, setIsVideo] = useState(video[0].url);
 
   const [deviceWidth, setDeviceWidth] = useState<number>(window.innerWidth);
 
@@ -171,7 +172,10 @@ const InfoDewi = (info: Props) => {
                 {detail.name}
               </span>
               {detail.verification.status && (
-                <VerifycationModal link={detail.verification.link} name={detail.name} />
+                <VerifycationModal
+                  link={detail.verification.link}
+                  name={detail.name}
+                />
               )}
             </div>
 
@@ -518,7 +522,7 @@ const InfoDewi = (info: Props) => {
               aria-label="jam operasional"
               color="success"
               selectionMode="single"
-              defaultSelectedKeys={[getDayOfWeekNumber().toString()]}
+              defaultSelectedKeys={[(getDayOfWeekNumber() - 1).toString()]}
             >
               <TableHeader>
                 <TableColumn className="capitalize">{t("day")}</TableColumn>
@@ -537,6 +541,25 @@ const InfoDewi = (info: Props) => {
                 )}
               </TableBody>
             </Table>
+          </Card>
+
+          {/* fasilitas */}
+          <Card
+            className="relative border-1 space-y-2 px-3 pt-2 pb-4"
+            shadow="none"
+          >
+            <span className="text-lg font-semibold tracking-wide capitalize">
+              {t("facility")}
+            </span>
+
+            <ul>
+              {detail.facility[storedLanguage].map((data: any) => (
+                <li className="flex items-center capitalize gap-x-1">
+                  <FontAwesomeIcon className="text-green-600" icon={faCheckSquare} fontSize={14} /> 
+                  <span>{data}</span>
+                </li>
+              ))}
+            </ul>
           </Card>
 
           {/* peta lokasi */}
@@ -561,14 +584,14 @@ const InfoDewi = (info: Props) => {
 
             <Button
               as={LinkExternal}
-              className="bg-green-700 text-white"
-              href="https://maps.app.goo.gl/vn3jpLJxXJfwkGE4A"
+              className="bg-green-700 text-white capitalize"
+              href={detail.location.share}
               variant="light"
               color="success"
               radius="full"
               isExternal
             >
-              {t('openMap')}
+              {t("openMap")}
             </Button>
           </Card>
 

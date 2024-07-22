@@ -7,14 +7,33 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import SearchComponent from "../modal/SearchComponent";
 import { useTranslation } from "react-i18next";
 import LanguageComponent from "../popoper";
+import { useEffect } from "react";
+import useStore from "../../utils/store";
 
 const Header = () => {
   // translate
   const { t } = useTranslation(["language"]);
+  const { isScroll, setScroll } = useStore();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScroll(window.scrollY > 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <>
-      <header className="flex items-center justify-between py-3 px-6 w-full bg-white fixed z-[999] rounded-b-lg">
+      <header
+        className={`flex items-center justify-between py-3 px-6 w-full ${
+          isScroll ? "bg-white backdrop-blur-sm" : "bg-transparent"
+        } fixed z-[999] rounded-b-lg`}
+      >
         <SkipToContent />
         {/* logo */}
         <Link to={"/"}>
@@ -34,7 +53,9 @@ const Header = () => {
           <Button
             as={Link}
             to="/favorit"
-            className="hover:text-rose-600 text-gray-400"
+            className={`${
+              isScroll ? "text-rose-600" : "text-white"
+            } `}
             startContent={
               <Tooltip content={t("favorite")} placement="bottom" showArrow>
                 <FontAwesomeIcon icon={faHeart} fontSize={18} />

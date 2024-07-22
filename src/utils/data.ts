@@ -9,6 +9,7 @@ const DesaWisataData = () => [
     },
     location: {
       maps: "!1m18!1m12!1m3!1d3953.3503402489273!2d110.12818867404908!3d-7.752616076869493!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7aee2f7077f711%3A0x930b72080bcaff27!2sDesa%20Wisata%20Jatimulyo%20-%20Kulon%20Progo!5e0!3m2!1sen!2sid!4v1720793257450!5m2!1sen!2sid",
+      share: "https://maps.app.goo.gl/o1hPCZJC5jWD2SAN9",
       city: "daerah istimewa yogyakarta",
       address: "Jatimulyo, Girimulyo, Kabupaten Kulonprogo, DI Yogyakarta",
     },
@@ -296,10 +297,10 @@ const DesaWisataData = () => [
     },
     contact: {
       telp: {
-        name: "suhandri",
-        number: "6281229914791",
+        name: "Kadek Sena Andiyana A.Md, S.Tr.Par",
+        number: "6281236577115",
       },
-      email: "dewijatimulyo@gmail.com",
+      email: "desawisatabondalem@gmail.com",
       socmed: {
         ig: "https://www.instagram.com/desawisatajatimulyo",
         fb: "",
@@ -307,34 +308,26 @@ const DesaWisataData = () => [
         ytb: "https://www.youtube.com/@desawisatajatimulyoofficia3149",
       },
       office:
-        "Jln. Kiskendo - Sermo Sokomoyo RT 8 RW 2, Jatimulyo, Girimulyo Kulon Progo",
+        "Desa Bondalem, Kecamatan Tejakula, Kabupaten Buleleng, Bali",
     },
     verification: {
-      link: "https://jadesta.kemenparekraf.go.id/desa/jatimulyo",
+      link: "https://jadesta.kemenparekraf.go.id/desa/bondalem",
       status: true,
     },
     award: [
       {
         name: {
-          en: ``,
-          jp: ``,
-          id: `DESA JATIMULYO JUARA 3 LOMBA DESA WISATA NUSANTARA`,
-        },
-        link: "www.desawisatajatimulyo.com/2022/09/15/prestasi",
-      },
-      {
-        name: {
-          en: `ADWI 2024 (top 50)`,
-          jp: `ADWI 2024 (上位 50)`,
-          id: `ADWI 2024 (50 besar)`,
+          en: `ADWI 2023 (top 300)`,
+          jp: `ADWI 2023 (上位 300)`,
+          id: `ADWI 2023 (300 besar)`,
         },
         link: "",
       },
       {
         name: {
-          en: `ADWI 2021 (top 100)`,
-          jp: `ADWI 2021 (上位 100)`,
-          id: `ADWI 2021 (100 Besar)`,
+          en: `ADWI 2022 (top 500)`,
+          jp: `ADWI 2022 (上位 500)`,
+          id: `ADWI 2022 (500 Besar)`,
         },
         link: "",
       },
@@ -414,6 +407,7 @@ const DesaWisataData = () => [
     location: {
       maps: "!1m18!1m12!1m3!1d2957280.9856059016!2d112.0172314105194!3d-7.777435310436497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd1ed2a7070a101%3A0xbb23f068f28aebd9!2sBondalem!5e0!3m2!1sen!2sid!4v1721615765071!5m2!1sen!2sid",
       city: "bali",
+      share: "https://maps.app.goo.gl/ApMFAnABR8pfzMfH8",
       address: "Jl. Airsanih - Tejakula, Bondalem, Kec. Tejakula, Kabupaten Buleleng, Bali 81173",
     },
     visitors: 8574,

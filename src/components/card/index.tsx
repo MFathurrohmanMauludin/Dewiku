@@ -504,7 +504,7 @@ const DesaCard = (data: DesaCardProps) => {
                         aria-label="jam operasional"
                         color="success"
                         selectionMode="single"
-                        defaultSelectedKeys={[getDayOfWeekNumber().toString()]}
+                        defaultSelectedKeys={[(getDayOfWeekNumber() - 1).toString()]}
                       >
                         <TableHeader>
                           <TableColumn className="capitalize">

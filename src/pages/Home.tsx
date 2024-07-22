@@ -1,6 +1,7 @@
 import React from "react";
 import DewiPopularSection from "../components/dewi-popular";
 import DewiLainnya from "../components/dewi-lainnya";
+import Hero from "../components/hero";
 
 interface Props {}
 
@@ -17,7 +18,7 @@ class Home extends React.Component<Props, State> {
     return (
       <>
         <div id="main-content" />
-        {/* <Hero /> */}
+        <Hero />
         <DewiPopularSection />
         <DewiLainnya />
       </>

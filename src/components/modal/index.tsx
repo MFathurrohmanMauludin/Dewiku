@@ -34,6 +34,7 @@ import {
 import QRCode from "react-qr-code";
 import { SearchCard } from "../card";
 import { useTranslation } from "react-i18next";
+import useStore from "../../utils/store";
 
 interface FormProps {
   photo: string;
@@ -416,11 +417,12 @@ const SearchModal = (data: searchProps) => {
 
   // translate
   const { t } = useTranslation(["language"]);
+  const {isScroll} = useStore();
 
   return (
     <>
       <Button
-        className="text-gray-400 hover:text-gray-600"
+        className={`${isScroll ? 'hover:text-gray-800 text-gray-600': 'text-white'} `}
         size="md"
         onPress={onOpen}
         radius="sm"

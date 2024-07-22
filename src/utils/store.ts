@@ -1,13 +1,13 @@
 import {create} from 'zustand'
 
-interface LanguageState {
-  isLanguage: string;
-  setLanguage: (language: string) => void;
+interface ScrollState {
+  isScroll: boolean;
+  setScroll: (Scroll: boolean) => void;
 }
 
-const useStore = create<LanguageState>((set) => ({
-  isLanguage: 'id',
-  setLanguage: (language) => set({ isLanguage: language }),
+const useStore = create<ScrollState>((set) => ({
+  isScroll: false,
+  setScroll: (scroll) => set({ isScroll: scroll }),
 }));
 
 export default useStore;

@@ -9,11 +9,13 @@ import {
 import { useState } from "react";
 import Language from "../language";
 import { useTranslation } from "react-i18next";
+import useStore from "../../utils/store";
 
 const LanguageComponent = () => {
   // translate
   const { t } = useTranslation(["language"]);
   const [isOpen, setIsOpen] = useState(false);
+  const {isScroll} = useStore(); 
 
   return (
     <Popover
@@ -23,7 +25,7 @@ const LanguageComponent = () => {
     >
       <PopoverTrigger>
         <Button
-          className="hover:!text-cyan-600 text-gray-400"
+          className={`${isScroll ? 'hover:text-cyan-800 text-cyan-600' : 'text-white'}`}
           startContent={
             <Tooltip content={t("language")} placement="bottom" showArrow>
               <svg
