@@ -133,7 +133,8 @@ const Hero = () => {
           </Tooltip>
         </div>
 
-        <div className="absolute flex flex-row gap-x-2 top-30 right-10 xs:top-16 xs:right-5">
+        {/* right */}
+        <div className="absolute flex flex-row gap-x-2 top-30 right-10 xs:bottom-10 xs:right-4">
           <Button
             className="bg-white/20 backdrop-blur-sm text-gray-600"
             startContent={<FontAwesomeIcon icon={faArrowLeft} fontSize={16} />}
