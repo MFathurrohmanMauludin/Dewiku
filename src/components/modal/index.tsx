@@ -35,6 +35,7 @@ import QRCode from "react-qr-code";
 import { SearchCard } from "../card";
 import { useTranslation } from "react-i18next";
 import useStore from "../../utils/store";
+import { useLocation } from "react-router-dom";
 
 interface FormProps {
   photo: string;
@@ -189,7 +190,7 @@ const TestimonyForm = (data: FormProps) => {
                   className="mt-2"
                   variant="bordered"
                   value={data.comment}
-                  placeholder={t('questionTextArea')}
+                  placeholder={t("questionTextArea")}
                   classNames={{
                     base: "w-full",
                     input: "resize-y min-h-[100px]",
@@ -200,7 +201,7 @@ const TestimonyForm = (data: FormProps) => {
                 />
 
                 <div className="flex justify-end items-center gap-x-1 text-sm">
-                  <span>{t('characterLimit')}:</span>
+                  <span>{t("characterLimit")}:</span>
                   {limitText <= 10 ? (
                     <span className="text-red-600">{limitText}</span>
                   ) : (
@@ -235,7 +236,7 @@ const TestimonyForm = (data: FormProps) => {
                   onPress={onClose}
                   radius="full"
                 >
-                  {t('cancel')}
+                  {t("cancel")}
                 </Button>
 
                 <Button
@@ -414,15 +415,20 @@ const ShareModal = (data: share) => {
 
 const SearchModal = (data: searchProps) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { pathname } = useLocation();
 
   // translate
   const { t } = useTranslation(["language"]);
-  const {isScroll} = useStore();
+  const { isScroll } = useStore();
 
   return (
     <>
       <Button
-        className={`${isScroll ? 'hover:text-gray-800 text-gray-600': 'text-white'} `}
+        className={`${
+          isScroll || pathname !== "/"
+            ? "hover:text-gray-800 text-gray-600"
+            : "text-white"
+        } `}
         size="md"
         onPress={onOpen}
         radius="sm"

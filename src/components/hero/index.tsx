@@ -9,7 +9,11 @@ import { kelvinToCelsius } from "../../utils/changeNumber";
 import { VerifycationModal } from "../modal";
 import useStore from "../../utils/store";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowLeft,
+  faArrowRight,
+  faStar,
+} from "@fortawesome/free-solid-svg-icons";
 
 // import required modules
 
@@ -98,7 +102,7 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* right content */}
+        {/* center content */}
         <div
           className={`absolute flex flex-col gap-y-4 top-5 right-50 xs:top-16 xs:right-5 ${
             isScroll ? "z-0" : "z-[999]"
@@ -127,6 +131,20 @@ const Hero = () => {
               </span>
             </div>
           </Tooltip>
+        </div>
+
+        <div className="absolute flex flex-row gap-x-2 top-30 right-10 xs:top-16 xs:right-5">
+          <Button
+            className="bg-white/20 backdrop-blur-sm text-gray-600"
+            startContent={<FontAwesomeIcon icon={faArrowLeft} fontSize={16} />}
+            disabled
+            isIconOnly
+          />
+          <Button
+            className="bg-white/20 backdrop-blur-sm text-white hover:text-green-300"
+            startContent={<FontAwesomeIcon icon={faArrowRight} fontSize={16} />}
+            isIconOnly
+          />
         </div>
       </div>
     </>

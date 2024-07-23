@@ -1,5 +1,5 @@
 import { Button, Image, Tooltip } from "@nextui-org/react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import SkipToContent from "../skip-content";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,6 +14,7 @@ const Header = () => {
   // translate
   const { t } = useTranslation(["language"]);
   const { isScroll, setScroll } = useStore();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,7 +32,7 @@ const Header = () => {
     <>
       <header
         className={`flex items-center justify-between py-3 px-6 w-full ${
-          isScroll ? "bg-white backdrop-blur-sm" : "bg-transparent"
+          isScroll ? "bg-white/20 backdrop-blur-sm" : "bg-transparent"
         } fixed z-[999] rounded-b-lg`}
       >
         <SkipToContent />
@@ -54,7 +55,9 @@ const Header = () => {
             as={Link}
             to="/favorit"
             className={`${
-              isScroll ? "text-rose-600" : "text-white"
+              isScroll || pathname !== "/"
+                ? "text-gray-500"
+                : "text-white"
             } `}
             startContent={
               <Tooltip content={t("favorite")} placement="bottom" showArrow>
