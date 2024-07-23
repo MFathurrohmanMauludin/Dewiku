@@ -58,7 +58,7 @@ const Hero = () => {
         <div className="absolute top-0 right-0 bottom-0 left-0 bg-gray-900 opacity-30"></div>
 
         {/* left content */}
-        <div className="absolute flex flex-col items-start xs:items-center top-50 left-10 xs:left-0 xs:px-4 xs:top-50">
+        <div className="absolute flex flex-col items-start xs:items-center top-50 left-8 xs:left-0 xs:px-4 xs:top-50">
           <div className="flex flex-row items-center gap-x-1 px-2 py-2  bg-gray-900/30 rounded-md">
             <span className="text-lg text-white">Desa Wisata Jatimulyo</span>
             <VerifycationModal
@@ -134,7 +134,7 @@ const Hero = () => {
         </div>
 
         {/* right */}
-        <div className="absolute flex flex-row gap-x-2 top-30 right-10 xs:bottom-10 xs:right-4">
+        <div className="absolute flex flex-row gap-x-2 top-30 right-8 xs:bottom-10 xs:right-4">
           <Button
             className="bg-white/20 backdrop-blur-sm text-gray-600"
             startContent={<FontAwesomeIcon icon={faArrowLeft} fontSize={16} />}
