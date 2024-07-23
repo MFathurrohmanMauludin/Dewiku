@@ -45,7 +45,7 @@ const Hero = () => {
   return (
     <>
       <div
-        className="relative h-screen w-full flex items-center justify-center text-center bg-cover bg-center"
+        className="relative h-[600px] w-full flex items-center justify-center text-center bg-cover bg-center"
         style={{
           backgroundImage:
             "url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEicjpSwM2KC7Ln684sDJwrTBieNvTtRGMllDcGy1YmAC_7Jo7yQHEtNO4dMWWc7yIT7QiUiGORMYeAUmi5lDMfg-TW_KPckFfarbeVf7rsECfN2TtM7k-DegbQEPqHWlyYnXALYExoOTLI/s1600/IMG_20161212_101915.jpg)",
@@ -54,15 +54,15 @@ const Hero = () => {
         <div className="absolute top-0 right-0 bottom-0 left-0 bg-gray-900 opacity-30"></div>
 
         {/* left content */}
-        <div className="absolute flex flex-col items-start top-50 left-10">
-          <div className="flex flex-row items-center gap-x-1  px-2 py-2  bg-gray-900/30 rounded-md">
+        <div className="absolute flex flex-col items-start xs:items-center top-50 left-10 xs:left-0 xs:px-4 xs:top-50">
+          <div className="flex flex-row items-center gap-x-1 px-2 py-2  bg-gray-900/30 rounded-md">
             <span className="text-lg text-white">Desa Wisata Jatimulyo</span>
             <VerifycationModal
               link={"https://jadesta.kemenparekraf.go.id/desa/bondalem"}
               name={"desa wisata jatimulyo"}
             />
           </div>
-          <p className="text-5xl text-left text-white font-semibold max-w-[600px] tracking-wider leading-tight py-3">
+          <p className="text-5xl xs:text-2xl xs:text-center text-left text-white font-semibold max-w-[600px] tracking-wider leading-tight xs:leading-snug py-3">
             Hilangkan penatmu dengan desa wisata kami yang hebat
           </p>
 
@@ -88,7 +88,7 @@ const Hero = () => {
             </AvatarGroup>
           </div>
 
-          <div className="flex flex-row gap-x-2 mt-4">
+          <div className="flex flex-row gap-x-2 mt-6">
             <Button className="min-w-[120px] bg-green-700 text-white hover:!backdrop-blur-md">
               Cek Segera
             </Button>
@@ -100,7 +100,7 @@ const Hero = () => {
 
         {/* right content */}
         <div
-          className={`absolute flex flex-col gap-y-4 top-5 right-50 ${
+          className={`absolute flex flex-col gap-y-4 top-5 right-50 xs:top-16 xs:right-5 ${
             isScroll ? "z-0" : "z-[999]"
           }`}
         >
