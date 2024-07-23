@@ -32,7 +32,7 @@ const Header = () => {
     <>
       <header
         className={`flex items-center justify-between py-3 px-6 w-full ${
-          isScroll ? "bg-white/20 backdrop-blur-sm" : "bg-transparent"
+          isScroll ? "bg-white/30 backdrop-blur-sm" : "bg-transparent"
         } fixed z-[999] rounded-b-lg`}
       >
         <SkipToContent />
@@ -56,7 +56,7 @@ const Header = () => {
             to="/favorit"
             className={`${
               isScroll || pathname !== "/"
-                ? "text-gray-500"
+                ? "text-rose-500"
                 : "text-white"
             } `}
             startContent={
