@@ -14,6 +14,7 @@ import {
   faArrowRight,
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "react-i18next";
 
 // import required modules
 
@@ -23,6 +24,7 @@ const Hero = () => {
   const [cityName, setCityName] = useState<string>("");
   const [weatherName, setWeatherName] = useState<string>("");
   const [weatherCodeIcon, setWeatherCodeIcon] = useState<string>("");
+  const { t } = useTranslation();
   const { isScroll } = useStore();
 
   useEffect(() => {
@@ -93,11 +95,11 @@ const Hero = () => {
           </div>
 
           <div className="flex flex-row gap-x-2 mt-6">
-            <Button className="min-w-[120px] bg-green-700 text-white hover:!backdrop-blur-md">
-              Cek Segera
+            <Button className="min-w-[120px] bg-green-700 text-white hover:!backdrop-blur-md capitalize">
+              {t("checkNow")}
             </Button>
-            <Button className="min-w-[120px] bg-white text-green-700 hover:!backdrop-blur-md">
-              Hubungi
+            <Button className="min-w-[120px] bg-white text-green-700 hover:!backdrop-blur-md capitalize">
+              {t("call")}
             </Button>
           </div>
         </div>
