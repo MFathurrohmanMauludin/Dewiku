@@ -6,7 +6,6 @@ import {
   faTree,
   faHeart as faHeartSolid,
   faUtensils,
-  faBox,
   faCheckSquare,
 } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
@@ -150,7 +149,7 @@ const InfoDewi = (info: Props) => {
         );
         setCityName(getData.name);
         setWeatherName(getData.weather[0].description);
-        setWeatherCodeIcon(getData.weather[0].icon);
+        setWeatherCodeIcon(`https://openweathermap.org/img/wn/${getData.weather[0].icon}.png`);
         setTemperature(getData.main.temp);
       } catch (err) {
         console.log("Failed to fetch weather data");
@@ -213,7 +212,7 @@ const InfoDewi = (info: Props) => {
                 >
                   <div className="flex flex-row items-center gap-1 px-2 bg-white/30 backdrop-blur-sm w-fit rounded-full cursor-default">
                     <Image
-                      src={`https://openweathermap.org/img/wn/${weatherCodeIcon}.png`}
+                      src={weatherCodeIcon}
                       width={24}
                       alt={weatherCodeIcon}
                     />

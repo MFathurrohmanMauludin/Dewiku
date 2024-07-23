@@ -2,11 +2,14 @@
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
-import { Button, Image, Tooltip } from "@nextui-org/react";
+import { Avatar, AvatarGroup, Button, Image, Tooltip } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { getWeatherData } from "../../utils/weather";
 import { kelvinToCelsius } from "../../utils/changeNumber";
 import { VerifycationModal } from "../modal";
+import useStore from "../../utils/store";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 // import required modules
 
@@ -16,6 +19,7 @@ const Hero = () => {
   const [cityName, setCityName] = useState<string>("");
   const [weatherName, setWeatherName] = useState<string>("");
   const [weatherCodeIcon, setWeatherCodeIcon] = useState<string>("");
+  const { isScroll } = useStore();
 
   useEffect(() => {
     const fetchWeather = async () => {
@@ -26,7 +30,9 @@ const Hero = () => {
         );
         setCityName(getData.name);
         setWeatherName(getData.weather[0].description);
-        setWeatherCodeIcon(getData.weather[0].icon);
+        setWeatherCodeIcon(
+          `https://openweathermap.org/img/wn/${getData.weather[0].icon}.png`
+        );
         setTemperature(getData.main.temp);
       } catch (err) {
         console.log("Failed to fetch weather data");
@@ -39,26 +45,48 @@ const Hero = () => {
   return (
     <>
       <div
-        className="relative h-screen w-full flex items-center justify-center text-center bg-cover bg-center rounded-b-2xl"
+        className="relative h-screen w-full flex items-center justify-center text-center bg-cover bg-center"
         style={{
           backgroundImage:
             "url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEicjpSwM2KC7Ln684sDJwrTBieNvTtRGMllDcGy1YmAC_7Jo7yQHEtNO4dMWWc7yIT7QiUiGORMYeAUmi5lDMfg-TW_KPckFfarbeVf7rsECfN2TtM7k-DegbQEPqHWlyYnXALYExoOTLI/s1600/IMG_20161212_101915.jpg)",
         }}
       >
-        <div className="absolute top-0 right-0 bottom-0 left-0 bg-gray-900 opacity-40"></div>
+        <div className="absolute top-0 right-0 bottom-0 left-0 bg-gray-900 opacity-30"></div>
 
         {/* left content */}
         <div className="absolute flex flex-col items-start top-50 left-10">
-          <div className="flex flex-row items-center gap-x-1  px-2 py-2  bg-gray-900/30">
+          <div className="flex flex-row items-center gap-x-1  px-2 py-2  bg-gray-900/30 rounded-md">
             <span className="text-lg text-white">Desa Wisata Jatimulyo</span>
             <VerifycationModal
               link={"https://jadesta.kemenparekraf.go.id/desa/bondalem"}
               name={"desa wisata jatimulyo"}
             />
           </div>
-          <p className="text-5xl text-left text-white font-semibold max-w-[600px] tracking-wider leading-tight">
+          <p className="text-5xl text-left text-white font-semibold max-w-[600px] tracking-wider leading-tight py-3">
             Hilangkan penatmu dengan desa wisata kami yang hebat
           </p>
+
+          {/* rating */}
+          <div className="flex flex-row items-center gap-x-2">
+            <div className="space-x-1 bg-white/20 backdrop-blur-sm  px-3 py-2 rounded-full">
+              <FontAwesomeIcon
+                className="text-yellow-400"
+                icon={faStar}
+                fontSize={16}
+              />
+              <span className="text-white">4.5</span>
+            </div>
+            <AvatarGroup
+              classNames={{ count: "bg-white text-green-700 text-md" }}
+              max={3}
+            >
+              <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+              <Avatar src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
+              <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
+              <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026302d" />
+              <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026702d" />
+            </AvatarGroup>
+          </div>
 
           <div className="flex flex-row gap-x-2 mt-4">
             <Button className="min-w-[120px] bg-green-700 text-white hover:!backdrop-blur-md">
@@ -71,7 +99,11 @@ const Hero = () => {
         </div>
 
         {/* right content */}
-        <div className="absolute flex flex-col gap-y-4 top-5 right-50 z-[999]">
+        <div
+          className={`absolute flex flex-col gap-y-4 top-5 right-50 ${
+            isScroll ? "z-0" : "z-[999]"
+          }`}
+        >
           <Tooltip
             content={
               <span className="capitalize">
@@ -84,7 +116,7 @@ const Hero = () => {
             <div className="flex flex-row items-center gap-1 px-2 bg-white/20 backdrop-blur-sm w-fit rounded-full cursor-default">
               <Image
                 className="h-[36px] w-[36px]"
-                src={`https://openweathermap.org/img/wn/${weatherCodeIcon}.png`}
+                src={weatherCodeIcon}
                 width={56}
                 alt={weatherCodeIcon}
               />

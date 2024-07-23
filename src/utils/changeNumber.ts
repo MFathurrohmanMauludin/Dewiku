@@ -68,8 +68,8 @@ function formatPhoneNumber(phoneNumber: string): string {
   return formattedNumber.slice(0, 4) + ' ' + parts.join(' ');
 };
 
-function kelvinToCelsius(kelvin: number): string {
-  return (kelvin - 273.15).toFixed(2);
+function kelvinToCelsius(kelvin: number): number {
+  return Math.round(kelvin - 273.15);
 }
 
 export {
