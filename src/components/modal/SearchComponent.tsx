@@ -22,11 +22,13 @@ class SearchComponent extends React.Component<Props, State> {
   }
 
   searchDesa = (search: string) => {
-    const filterData = this.state.desaWisata.filter((desa: any) =>
-      desa.name.toLowerCase().includes(search.toLowerCase())
+    const filterData = this.state.desaWisata.filter(
+      (desa: any) =>
+        desa.name.toLowerCase().includes(search.toLowerCase()) ||
+        desa.location.city.toLowerCase().includes(search.toLocaleLowerCase())
     );
 
-    this.setState({ filter: search.length !== 0 ? filterData : []});
+    this.setState({ filter: search.length !== 0 ? filterData : [] });
   };
 
   render() {
