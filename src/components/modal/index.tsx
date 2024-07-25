@@ -485,6 +485,7 @@ const SearchModal = (data: searchProps) => {
                         visitors={desa.visitors}
                         testimony={desa.testimony.length}
                         control={() => onClose}
+                        location={desa.location.city}
                       />
                     ))}
                   </div>
