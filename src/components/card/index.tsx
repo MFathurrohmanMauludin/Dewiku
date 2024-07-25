@@ -98,6 +98,7 @@ interface AnotherProps {
 
 interface SearchProps {
   name: string;
+  location: string;
   imgUrl: string;
   visitors: number;
   testimony: number;
@@ -1084,16 +1085,20 @@ const SearchCard = (data: SearchProps) => {
     <>
       <Link to={`/info-dewi?name=${data.name}`} onClick={data.control}>
         <Card className="border-1 !w-full" shadow="none" isPressable>
-          <CardHeader className="flex items-start gap-3">
+          <CardHeader className="flex items-center gap-3">
             <Image
-              className="w-full max-h-[56px]"
+              className="w-full max-h-[64px]"
               alt={data.name}
               height={56}
               radius="md"
               src={data.imgUrl}
             />
             <div className="flex flex-col gap-y-1">
-              <span className="text-sm text-left capitalize">{data.name}</span>
+              <span className="text-md text-left capitalize font-semibold tracking-wide leading-none">{data.name}</span>
+              <div className="flex items-center gap-x-2 text-gray-600">
+                <FontAwesomeIcon icon={faMap} fontSize={14}/>
+                <span className="text-sm capitalize leading-tight">{data.location}</span>
+              </div>
               <div className="flex items-center gap-x-6">
                 {/* rating */}
                 <div className="flex items-center gap-x-1 text-sm">
