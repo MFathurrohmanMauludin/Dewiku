@@ -186,14 +186,14 @@ const Hero = () => {
         {/* right */}
         <div className="absolute flex flex-row gap-x-2 top-30 right-8 xs:bottom-10 xs:right-4">
           <Button
-            className="bg-white/20 backdrop-blur-sm text-gray-600"
+            className={`bg-white/20 backdrop-blur-sm ${isSlide <= 0 ? 'text-gray-600' : 'text-white'}`}
             startContent={<FontAwesomeIcon icon={faArrowLeft} fontSize={16} />}
             isDisabled={isSlide <= 0}
             onPress={handlePrevSlide}
             isIconOnly
           />
           <Button
-            className="bg-white/20 backdrop-blur-sm text-white hover:text-green-300"
+            className={`bg-white/20 backdrop-blur-sm ${isSlide === desa.length - 1 ? 'text-gray-600' : 'text-white'}`}
             startContent={<FontAwesomeIcon icon={faArrowRight} fontSize={16} />}
             onPress={handleNextSlide}
             isDisabled={isSlide === desa.length - 1}
