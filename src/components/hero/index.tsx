@@ -12,6 +12,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
 import { DesaWisataData } from "../../utils/data";
+import { Link } from "react-router-dom";
+import { Link as ExternalLink } from "@nextui-org/react";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Hero = () => {
   // data
@@ -22,6 +25,7 @@ const Hero = () => {
   const [cityName, setCityName] = useState<string>("");
   const [weatherName, setWeatherName] = useState<string>("");
   const [weatherCodeIcon, setWeatherCodeIcon] = useState<string>("");
+  const [isVisible, SetIsVisible] = useState(true);
   const [isSlide, setIsSlide] = useState<number>(0);
   const { t } = useTranslation();
   const { isScroll } = useStore();
@@ -29,11 +33,15 @@ const Hero = () => {
   // handle next slide
   const handleNextSlide = () => {
     setIsSlide(isSlide + 1);
+    SetIsVisible(false);
+    setTimeout(() => SetIsVisible(true), 500);
   };
 
   // handle prev slide
   const handlePrevSlide = () => {
     setIsSlide(isSlide - 1);
+    SetIsVisible(false);
+    setTimeout(() => SetIsVisible(true), 500);
   };
 
   useEffect(() => {
@@ -47,7 +55,7 @@ const Hero = () => {
           desa[isSlide].weatherLocation.lat,
           desa[isSlide].weatherLocation.lon
         );
-        
+
         setCityName(getData.name);
         setWeatherName(getData.weather[0].description);
         setWeatherCodeIcon(
@@ -58,7 +66,7 @@ const Hero = () => {
         console.log("Failed to fetch weather data", err);
       }
     };
-    
+
     fetchWeather();
   }, [isSlide, desa]);
 
@@ -76,8 +84,22 @@ const Hero = () => {
 
         {/* left content */}
         <div className="absolute flex flex-col items-start xs:items-center top-50 left-8 xs:left-0 xs:px-4 xs:top-50">
-          <div className="flex flex-row items-center gap-x-1 px-2 py-2 bg-gray-900/30 rounded-md">
-            <span className="text-lg text-white capitalize">{detail.name}</span>
+          <div className="flex flex-row items-center justify-between gap-x-1 px-2 py-2 bg-gray-900/30 rounded-md min-w-[246px]">
+          <div className="min-w-[246px]">
+            <AnimatePresence>
+              {isVisible && (
+                <motion.div
+                  className="text-lg text-white capitalize"
+                  initial={{ opacity: 0, translateY: 20 }}
+                  animate={{ opacity: 1, translateY: 0 }}
+                  exit={{ opacity: 0, translateY: -20 }}
+                >
+                  {detail.name}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
             <VerifycationModal
               link={detail.verification.link}
               name={detail.name}
@@ -102,17 +124,29 @@ const Hero = () => {
               max={3}
             >
               {detail.testimony.flatMap((data) => (
-                <Avatar classNames={{img: "!bg-cover !object-top"}} src={data.imgUrl} />
+                <Avatar
+                  classNames={{ img: "!bg-cover !object-top" }}
+                  src={data.imgUrl}
+                />
               ))}
             </AvatarGroup>
           </div>
 
           {/* slide click */}
           <div className="flex flex-row gap-x-2 mt-6">
-            <Button className="min-w-[120px] bg-green-700 text-white hover:!backdrop-blur-md capitalize">
+            <Button
+              as={Link}
+              to={`/info-dewi?name=${detail.name}`}
+              className="min-w-[120px] bg-green-700 text-white hover:!backdrop-blur-md capitalize"
+            >
               {t("checkNow")}
             </Button>
-            <Button className="min-w-[120px] bg-white text-green-700 hover:!backdrop-blur-md capitalize">
+            <Button
+              as={ExternalLink}
+              href={`https://api.whatsapp.com/send?phone=${detail.contact.telp.number}`}
+              className="min-w-[120px] bg-white text-green-700 hover:!backdrop-blur-md capitalize"
+              isExternal
+            >
               {t("call")}
             </Button>
           </div>
