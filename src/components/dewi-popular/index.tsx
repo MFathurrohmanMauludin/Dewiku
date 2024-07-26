@@ -14,14 +14,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
 
-const DewiPopularSection = () => {
+export interface FavoriteProps {
+  control: {
+    saveFavorite: any;
+    deleteFavorite: any;
+  }
+}
+
+const DewiPopularSection = (favorite: FavoriteProps) => {
   const localStorageKey = "selectedLanguage";
   const storedLanguage = localStorage.getItem(localStorageKey) || "en";
 
   const data = DesaWisataData();
-  const filterData = data.filter(
-    (data: any) => data.visitors >= 5000
-  );
+  const filterData = data.filter((data: any) => data.visitors >= 5000);
   const limitedData = filterData.slice(0, 4);
 
   // jam buka dan tutup operasional
@@ -54,7 +59,9 @@ const DewiPopularSection = () => {
   return (
     <div className="space-y-2 px-6 xs:px-2 pt-[40px]">
       <div className="flex items-center justify-between">
-        <span className="text-xl xs:text-medium font-semibold tracking-wider">{t("dewiPopular")}</span>
+        <span className="text-xl xs:text-medium font-semibold tracking-wider">
+          {t("dewiPopular")}
+        </span>
 
         <Button
           as={Link}
@@ -70,7 +77,7 @@ const DewiPopularSection = () => {
           size="md"
           radius="full"
         >
-          {t('seeMore')}
+          {t("seeMore")}
         </Button>
       </div>
 
@@ -88,6 +95,10 @@ const DewiPopularSection = () => {
             testimony={desa.testimony.length}
             openhours={isOpen()}
             schedule={desa.openHours[storedLanguage]}
+            control={{
+              save: favorite.control.saveFavorite,
+              delete: favorite.control.deleteFavorite,
+            }}
           />
         ))}
       </div>

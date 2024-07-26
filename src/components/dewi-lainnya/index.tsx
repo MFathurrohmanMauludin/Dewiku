@@ -13,15 +13,14 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
+import { FavoriteProps } from "../dewi-popular";
 
-const DewiLainnya = () => {
+const DewiLainnya = (favorite: FavoriteProps) => {
   const localStorageKey = "selectedLanguage";
   const storedLanguage = localStorage.getItem(localStorageKey) || "en";
 
   const data = DesaWisataData();
-  const filterData = data.filter(
-    (data: any) => data.visitors <= 5000
-  );
+  const filterData = data.filter((data: any) => data.visitors <= 5000);
   const limitedData = filterData.slice(0, 4);
 
   // jam buka dan tutup operasional
@@ -90,6 +89,10 @@ const DewiLainnya = () => {
             testimony={desa.testimony.length}
             openhours={isOpen()}
             schedule={desa.openHours[storedLanguage]}
+            control={{
+              save: favorite.control.saveFavorite,
+              delete: favorite.control.deleteFavorite,
+            }}
           />
         ))}
       </div>

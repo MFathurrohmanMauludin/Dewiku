@@ -79,6 +79,10 @@ interface DesaCardProps {
   openhours: boolean;
   schedule: any;
   hours: any;
+  control: {
+    save: any;
+    delete: any;
+  }
 }
 
 interface EventProps {
@@ -417,7 +421,12 @@ const DesaCard = (data: DesaCardProps) => {
                 </div>
               </Tooltip>
             }
-            onClick={() => setIsLike(!isLike)}
+            onClick={() => {
+              setIsLike(!isLike)
+              data.control.save(data.name);
+              isLike && data.control.delete(data.name);
+            }
+          }
             variant="solid"
             size="sm"
             radius="full"
