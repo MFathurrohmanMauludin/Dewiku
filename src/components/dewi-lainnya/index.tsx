@@ -19,6 +19,9 @@ const DewiLainnya = () => {
   const storedLanguage = localStorage.getItem(localStorageKey) || "en";
 
   const data = DesaWisataData();
+  const filterData = data.filter(
+    (data: any) => data.visitors <= 5000
+  );
 
   // jam buka dan tutup operasional
   const filterOpenHoursByDay = (data: any, day: string) => {
@@ -29,9 +32,9 @@ const DewiLainnya = () => {
     );
   };
 
-  const day = filterOpenHoursByDay(data, getToday()).day;
-  const opened = filterOpenHoursByDay(data, getToday()).open;
-  const closed = filterOpenHoursByDay(data, getToday()).close;
+  const day = filterOpenHoursByDay(filterData, getToday()).day;
+  const opened = filterOpenHoursByDay(filterData, getToday()).open;
+  const closed = filterOpenHoursByDay(filterData, getToday()).close;
 
   const isOpen = (): boolean => {
     const timeNow = timeStringToMinutes(getHours());
@@ -73,7 +76,7 @@ const DewiLainnya = () => {
       </div>
 
       <div className="grid grid-cols-4 lg:grid-cols-3 xs:grid-cols-1 md:grid-cols-2 gap-4">
-        {data.map((desa: any, index: number) => (
+        {filterData.map((desa: any, index: number) => (
           <DesaCard
             key={index}
             name={desa.name}
