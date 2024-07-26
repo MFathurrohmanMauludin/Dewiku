@@ -22,6 +22,7 @@ const DewiLainnya = () => {
   const filterData = data.filter(
     (data: any) => data.visitors <= 5000
   );
+  const limitedData = filterData.slice(0, 4);
 
   // jam buka dan tutup operasional
   const filterOpenHoursByDay = (data: any, day: string) => {
@@ -76,7 +77,7 @@ const DewiLainnya = () => {
       </div>
 
       <div className="grid grid-cols-4 lg:grid-cols-3 xs:grid-cols-1 md:grid-cols-2 gap-4">
-        {filterData.map((desa: any, index: number) => (
+        {limitedData.map((desa: any, index: number) => (
           <DesaCard
             key={index}
             name={desa.name}
