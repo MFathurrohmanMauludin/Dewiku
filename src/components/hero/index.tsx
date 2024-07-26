@@ -32,6 +32,7 @@ const Hero = () => {
   const [isSlide, setIsSlide] = useState<number>(0);
   const { t } = useTranslation();
   const { isScroll } = useStore();
+  const [deviceWidth, setDeviceWidth] = useState<number>(window.innerWidth);
 
   // handle next slide
   const handleNextSlide = () => {
@@ -46,6 +47,29 @@ const Hero = () => {
     SetIsVisible(false);
     setTimeout(() => SetIsVisible(true), 500);
   };
+
+  useEffect(() => {
+    const fetchDeviceWidth = async () => {
+      // Simulate an asynchronous operation
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Update the state with the device width
+      setDeviceWidth(window.innerWidth);
+    };
+
+    fetchDeviceWidth();
+
+    // Optionally, you can add a resize event listener
+    const handleResize = () => {
+      setDeviceWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     setIsSlide(isSlide >= desa.length ? 0 : isSlide);
@@ -74,7 +98,7 @@ const Hero = () => {
   }, [isSlide, desa]);
 
   const detail = desa[isSlide];
-
+  
   return (
     <>
       <div
@@ -86,8 +110,9 @@ const Hero = () => {
         <div className="absolute top-0 right-0 bottom-0 left-0 bg-gray-900 opacity-30"></div>
 
         {/* left content */}
-        <div className="absolute flex flex-col items-start xs:items-center top-50 left-8 xs:left-0 xs:px-4 xs:top-50">
+        <div className="absolute flex flex-col items-start xs:items-center xs:w-full top-50 left-8 xs:left-0 xs:px-4 xs:top-50">
           <div className="flex flex-row items-center justify-between gap-x-1 px-2 py-2 bg-gray-900/30 rounded-md min-w-[246px]">
+            {/* desa wisata */}
             <div className="min-w-[246px]">
               <AnimatePresence>
                 {isVisible && (
@@ -109,14 +134,15 @@ const Hero = () => {
             />
           </div>
 
-          <div className="min-h-[212px]">
+          <div className={`min-h-[212px] xs:min-h-[124px]`}>
+            {/* slogan */}
             <AnimatePresence>
               {isVisible && (
                 <motion.div
                   className="text-5xl xs:text-2xl xs:text-center text-left text-white font-semibold max-w-[600px] tracking-wider leading-tight xs:leading-snug py-3"
-                  initial={{ opacity: 1, x: 110 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -100 }}
+                  initial={deviceWidth >= 720 ? { opacity: 1,  x: 100} : { opacity: 1,  y: 50}}
+                  animate={deviceWidth >= 720 ? { opacity: 1,  x: 0} : { opacity: 1,  y: 0}}
+                  exit={deviceWidth >= 720 ? { opacity: 1,  x: -100} : { opacity: 1,  y: -50}}
                   transition={{ type: "tween", duration: 0.2 }}
                 >
                   {detail.slogan[storedLanguage]}
@@ -176,9 +202,9 @@ const Hero = () => {
               className={`absolute flex flex-col gap-y-4 top-5 right-50 xs:top-16 xs:right-5 ${
                 isScroll ? "z-0" : "z-[999]"
               }`}
-              initial={{ opacity: .5, scale: .5 }}
+              initial={{ opacity: 0.5, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: .5, scale: .5 }}
+              exit={{ opacity: 0.5, scale: 0.5 }}
               transition={{ type: "spring", duration: 0.3 }}
             >
               <Tooltip
@@ -212,7 +238,7 @@ const Hero = () => {
         <div className="absolute flex flex-row gap-x-2 top-30 right-8 xs:bottom-10 xs:right-4">
           <Button
             className={`bg-white/20 backdrop-blur-sm ${
-              isSlide <= 0 ? "text-gray-600" : "text-white"
+              isSlide <= 0 ? "text-gray-300" : "text-white"
             }`}
             startContent={<FontAwesomeIcon icon={faArrowLeft} fontSize={16} />}
             isDisabled={isSlide <= 0}
@@ -221,7 +247,7 @@ const Hero = () => {
           />
           <Button
             className={`bg-white/20 backdrop-blur-sm ${
-              isSlide === desa.length - 1 ? "text-gray-600" : "text-white"
+              isSlide === desa.length - 1 ? "text-gray-300" : "text-white"
             }`}
             startContent={<FontAwesomeIcon icon={faArrowRight} fontSize={16} />}
             onPress={handleNextSlide}

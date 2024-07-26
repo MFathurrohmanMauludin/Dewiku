@@ -20,6 +20,11 @@ const Brands = () => {
       imgUrl:
         "https://upload.wikimedia.org/wikipedia/id/thumb/5/55/BNI_logo.svg/320px-BNI_logo.svg.png",
     },
+    {
+      name: "starlink",
+      imgUrl:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Starlink_Logo.svg/1200px-Starlink_Logo.svg.png",
+    },
   ];
 
   return (

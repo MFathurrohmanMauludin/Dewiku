@@ -54,7 +54,7 @@ const DewiLainnya = () => {
   return (
     <div className="space-y-2 px-6 xs:px-2 py-[24px]">
       <div className="flex items-center justify-between">
-        <span className="text-xl font-semibold tracking-wider">
+        <span className="text-xl xs:text-medium font-semibold tracking-wider">
           {t("dewiAnother")}
         </span>
 

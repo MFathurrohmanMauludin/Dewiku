@@ -54,7 +54,7 @@ const DewiPopularSection = () => {
   return (
     <div className="space-y-2 px-6 xs:px-2 pt-[40px]">
       <div className="flex items-center justify-between">
-        <span className="text-xl font-semibold tracking-wider">{t("dewiPopular")}</span>
+        <span className="text-xl xs:text-medium font-semibold tracking-wider">{t("dewiPopular")}</span>
 
         <Button
           as={Link}
