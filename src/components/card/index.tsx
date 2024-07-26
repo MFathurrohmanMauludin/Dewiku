@@ -347,7 +347,9 @@ const DesaCard = (data: DesaCardProps) => {
         );
         setCityName(getData.name);
         setWeatherName(getData.weather[0].description);
-        setWeatherCodeIcon(`https://openweathermap.org/img/wn/${getData.weather[0].icon}.png`);
+        setWeatherCodeIcon(
+          `https://openweathermap.org/img/wn/${getData.weather[0].icon}.png`
+        );
         setTemperature(getData.main.temp);
       } catch (err) {
         console.log("Failed to fetch weather data");
@@ -355,7 +357,7 @@ const DesaCard = (data: DesaCardProps) => {
     };
 
     fetchWeather();
-  }, []);
+  }, [data.weather.lat, data.weather.lon]); // Depend on weather location coordinates
 
   return (
     <>
@@ -505,7 +507,9 @@ const DesaCard = (data: DesaCardProps) => {
                         aria-label="jam operasional"
                         color="success"
                         selectionMode="single"
-                        defaultSelectedKeys={[(getDayOfWeekNumber() - 1).toString()]}
+                        defaultSelectedKeys={[
+                          (getDayOfWeekNumber() - 1).toString(),
+                        ]}
                       >
                         <TableHeader>
                           <TableColumn className="capitalize">
@@ -1094,10 +1098,14 @@ const SearchCard = (data: SearchProps) => {
               src={data.imgUrl}
             />
             <div className="flex flex-col gap-y-1">
-              <span className="text-md text-left capitalize font-semibold tracking-wide leading-none">{data.name}</span>
+              <span className="text-md text-left capitalize font-semibold tracking-wide leading-none">
+                {data.name}
+              </span>
               <div className="flex items-center gap-x-2 text-gray-600">
-                <FontAwesomeIcon icon={faMap} fontSize={14}/>
-                <span className="text-sm capitalize leading-tight">{data.location}</span>
+                <FontAwesomeIcon icon={faMap} fontSize={14} />
+                <span className="text-sm capitalize leading-tight">
+                  {data.location}
+                </span>
               </div>
               <div className="flex items-center gap-x-6">
                 {/* rating */}
