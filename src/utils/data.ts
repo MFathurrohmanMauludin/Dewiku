@@ -13,6 +13,11 @@ const DesaWisataData = () => [
       city: "daerah istimewa yogyakarta",
       address: "Jatimulyo, Girimulyo, Kabupaten Kulonprogo, DI Yogyakarta",
     },
+    slogan: {
+      en: "Get rid of your fatigue with our great tourist village",
+      jp: "素敵な観光村で疲れを癒しましょう",
+      id: "Hilangkan penatmu dengan desa wisata kami yang hebat",
+    },
     visitors: 2934,
     culture: [
       {
@@ -409,6 +414,11 @@ const DesaWisataData = () => [
       city: "bali",
       share: "https://maps.app.goo.gl/ApMFAnABR8pfzMfH8",
       address: "Jl. Airsanih - Tejakula, Bondalem, Kec. Tejakula, Kabupaten Buleleng, Bali 81173",
+    },
+    slogan: {
+      en: "The beauty of beautiful marine life especially for you",
+      jp: "美しい海洋生物の美しさを特別にあなたに",
+      id: "Keindahan biota laut yang indah khusus untuk anda",
     },
     visitors: 8574,
     culture: [

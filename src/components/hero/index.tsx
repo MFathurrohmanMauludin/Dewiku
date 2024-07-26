@@ -17,6 +17,9 @@ import { Link as ExternalLink } from "@nextui-org/react";
 import { AnimatePresence, motion } from "framer-motion";
 
 const Hero = () => {
+  const localStorageKey = "selectedLanguage";
+  const storedLanguage = localStorage.getItem(localStorageKey) || "en";
+  
   // data
   const desa = DesaWisataData();
 
@@ -85,29 +88,42 @@ const Hero = () => {
         {/* left content */}
         <div className="absolute flex flex-col items-start xs:items-center top-50 left-8 xs:left-0 xs:px-4 xs:top-50">
           <div className="flex flex-row items-center justify-between gap-x-1 px-2 py-2 bg-gray-900/30 rounded-md min-w-[246px]">
-          <div className="min-w-[246px]">
-            <AnimatePresence>
-              {isVisible && (
-                <motion.div
-                  className="text-lg text-white capitalize"
-                  initial={{ opacity: 0, translateY: 20 }}
-                  animate={{ opacity: 1, translateY: 0 }}
-                  exit={{ opacity: 0, translateY: -20 }}
-                >
-                  {detail.name}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+            <div className="min-w-[246px]">
+              <AnimatePresence>
+                {isVisible && (
+                  <motion.div
+                    className="text-lg text-white capitalize"
+                    initial={{ opacity: 0, translateY: 20 }}
+                    animate={{ opacity: 1, translateY: 0 }}
+                    exit={{ opacity: 0, translateY: -20 }}
+                  >
+                    {detail.name}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
 
             <VerifycationModal
               link={detail.verification.link}
               name={detail.name}
             />
           </div>
-          <p className="text-5xl xs:text-2xl xs:text-center text-left text-white font-semibold max-w-[600px] tracking-wider leading-tight xs:leading-snug py-3">
-            Hilangkan penatmu dengan desa wisata kami yang hebat
-          </p>
+
+          <div className="min-h-[212px]">
+            <AnimatePresence>
+              {isVisible && (
+                <motion.div
+                  className="text-5xl xs:text-2xl xs:text-center text-left text-white font-semibold max-w-[600px] tracking-wider leading-tight xs:leading-snug py-3"
+                  initial={{ opacity: 1, x: 110 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -100 }}
+                  transition={{type: "tween", duration: .2}}
+                >
+                  {detail.slogan[storedLanguage]}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
 
           {/* rating */}
           <div className="flex flex-row items-center gap-x-2">
@@ -186,14 +202,18 @@ const Hero = () => {
         {/* right */}
         <div className="absolute flex flex-row gap-x-2 top-30 right-8 xs:bottom-10 xs:right-4">
           <Button
-            className="bg-white/20 backdrop-blur-sm text-gray-600"
+            className={`bg-white/20 backdrop-blur-sm ${
+              isSlide <= 0 ? "text-gray-600" : "text-white"
+            }`}
             startContent={<FontAwesomeIcon icon={faArrowLeft} fontSize={16} />}
             isDisabled={isSlide <= 0}
             onPress={handlePrevSlide}
             isIconOnly
           />
           <Button
-            className="bg-white/20 backdrop-blur-sm text-white hover:text-green-300"
+            className={`bg-white/20 backdrop-blur-sm ${
+              isSlide === desa.length - 1 ? "text-gray-600" : "text-white"
+            }`}
             startContent={<FontAwesomeIcon icon={faArrowRight} fontSize={16} />}
             onPress={handleNextSlide}
             isDisabled={isSlide === desa.length - 1}
