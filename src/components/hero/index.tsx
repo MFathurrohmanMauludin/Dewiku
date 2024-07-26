@@ -19,7 +19,7 @@ import { AnimatePresence, motion } from "framer-motion";
 const Hero = () => {
   const localStorageKey = "selectedLanguage";
   const storedLanguage = localStorage.getItem(localStorageKey) || "en";
-  
+
   // data
   const desa = DesaWisataData();
 
@@ -117,7 +117,7 @@ const Hero = () => {
                   initial={{ opacity: 1, x: 110 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -100 }}
-                  transition={{type: "tween", duration: .2}}
+                  transition={{ type: "tween", duration: 0.2 }}
                 >
                   {detail.slogan[storedLanguage]}
                 </motion.div>
@@ -135,6 +135,7 @@ const Hero = () => {
               />
               <span className="text-white">{getAverageRating([detail])}</span>
             </div>
+
             <AvatarGroup
               classNames={{ count: "bg-white text-green-700 text-md" }}
               max={3}
@@ -169,35 +170,43 @@ const Hero = () => {
         </div>
 
         {/* center content */}
-        <div
-          className={`absolute flex flex-col gap-y-4 top-5 right-50 xs:top-16 xs:right-5 ${
-            isScroll ? "z-0" : "z-[999]"
-          }`}
-        >
-          <Tooltip
-            content={
-              <span className="capitalize">
-                {weatherName} | {cityName}
-              </span>
-            }
-            placement="bottom"
-            showArrow
-          >
-            {/* weather */}
-            <div className="flex flex-row items-center gap-1 px-2 bg-white/20 backdrop-blur-sm w-fit rounded-full cursor-default">
-              <Image
-                className="h-[36px] w-[36px]"
-                src={weatherCodeIcon}
-                width={56}
-                alt={weatherCodeIcon}
-              />
-              <span className="text-sm text-white">
-                {kelvinToCelsius(temperature || 0)}
-                <sup className="text-[10px]">o</sup>C
-              </span>
-            </div>
-          </Tooltip>
-        </div>
+        <AnimatePresence>
+          {isVisible && (
+            <motion.div
+              className={`absolute flex flex-col gap-y-4 top-5 right-50 xs:top-16 xs:right-5 ${
+                isScroll ? "z-0" : "z-[999]"
+              }`}
+              initial={{ opacity: .5, scale: .5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: .5, scale: .5 }}
+              transition={{ type: "spring", duration: 0.3 }}
+            >
+              <Tooltip
+                content={
+                  <span className="capitalize">
+                    {weatherName} | {cityName}
+                  </span>
+                }
+                placement="bottom"
+                showArrow
+              >
+                {/* weather */}
+                <div className="flex flex-row items-center gap-1 px-2 bg-white/20 backdrop-blur-sm w-fit rounded-full cursor-default">
+                  <Image
+                    className="h-[36px] w-[36px]"
+                    src={weatherCodeIcon}
+                    width={56}
+                    alt={weatherCodeIcon}
+                  />
+                  <span className="text-sm text-white">
+                    {kelvinToCelsius(temperature || 0)}
+                    <sup className="text-[10px]">o</sup>C
+                  </span>
+                </div>
+              </Tooltip>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* right */}
         <div className="absolute flex flex-row gap-x-2 top-30 right-8 xs:bottom-10 xs:right-4">
