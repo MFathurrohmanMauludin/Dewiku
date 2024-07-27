@@ -71,5 +71,7 @@
     "facility": "facility",
     "checkNow": "check now",
     "call": "get in touch",
-    "touristVillage": "Tourist Village in"
+    "touristVillage": "Tourist Village in",
+    "favoriteEmpty": "No tourist villages are saved",
+    "touristVillageYou": "Your Tourist Village"
 }

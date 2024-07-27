@@ -2,24 +2,13 @@ import { useTranslation } from "react-i18next";
 import { getHours, getToday, timeStringToMinutes } from "../utils/changeDate";
 import { DesaWisataData } from "../utils/data";
 import { DesaCard } from "../components/card";
-import { useLocation } from "react-router-dom";
 
 const DewiPopularAll = () => {
   const localStorageKey = "selectedLanguage";
   const storedLanguage = localStorage.getItem(localStorageKey) || "en";
 
   const data = DesaWisataData();
-  const { search } = useLocation();
-
-  const regex = /(?:\?|&)kota=([^&]+)/;
-  const match = search.match(regex);
-  const nameValue = match
-    ? decodeURIComponent(match[1]).replace(/\+/g, " ")
-    : "";
-
-  const searchData = data.filter(
-    (data: any) => data.visitors >= 5000
-  );
+  const filterData = data.filter((desa) => desa.visitors >= 5000);
 
   // jam buka dan tutup operasional
   const filterOpenHoursByDay = (data: any, day: string) => {
@@ -51,15 +40,13 @@ const DewiPopularAll = () => {
   return (
     <div className="space-y-2 px-6 xs:px-2 pt-[80px]">
       <div className="flex items-center justify-between">
-        <span className="text-xl font-semibold tracking-wider capitalize">
-          {storedLanguage === "jp"
-            ? `${nameValue}${t("touristVillage")}`
-            : `${t("touristVillage")} ${nameValue}`}
+        <span className="text-xl font-semibold tracking-wider">
+          {t("dewiAnother")}
         </span>
       </div>
 
       <div className="grid grid-cols-4 lg:grid-cols-3 xs:grid-cols-1 md:grid-cols-2 gap-4">
-        {searchData.map((desa: any, index: number) => (
+        {filterData.map((desa: any, index: number) => (
           <DesaCard
             key={index}
             name={desa.name}
@@ -72,6 +59,10 @@ const DewiPopularAll = () => {
             testimony={desa.testimony.length}
             openhours={isOpen()}
             schedule={desa.openHours[storedLanguage]}
+            control={{
+              save: null,
+              delete: null,
+            }}
           />
         ))}
       </div>

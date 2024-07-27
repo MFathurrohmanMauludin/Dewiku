@@ -20,13 +20,19 @@ const Brands = () => {
       imgUrl:
         "https://upload.wikimedia.org/wikipedia/id/thumb/5/55/BNI_logo.svg/320px-BNI_logo.svg.png",
     },
+    {
+      name: "starlink",
+      imgUrl:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Starlink_Logo.svg/1200px-Starlink_Logo.svg.png",
+    },
   ];
 
   return (
     <>
       <div className="flex flex-row flex-wrap items-center justify-center gap-x-16 gap-y-8 px-6 pt-[40px]">
-        {data.flatMap((logo) => (
+        {data.flatMap((logo, index) => (
           <Image
+            key={index}
             className="h-[42px] bg-cover w-full grayscale !opacity-70 hover:grayscale-0 hover:!opacity-100"
             src={logo.imgUrl}
             height={64}

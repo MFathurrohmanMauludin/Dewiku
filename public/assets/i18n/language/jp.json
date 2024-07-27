@@ -71,5 +71,7 @@
   "facility": "施設",
   "checkNow": "すぐに確認してください",
   "call": "連絡する",
-  "touristVillage": "島の観光村"
+  "touristVillage": "島の観光村",
+  "favoriteEmpty": "観光村は保存されません",
+  "touristVillageYou": "あなたの観光村"
 }

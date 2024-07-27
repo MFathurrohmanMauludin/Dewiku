@@ -13,15 +13,15 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
+import { FavoriteProps } from "../dewi-popular";
 
-const DewiLainnya = () => {
+const DewiLainnya = (favorite: FavoriteProps) => {
   const localStorageKey = "selectedLanguage";
   const storedLanguage = localStorage.getItem(localStorageKey) || "en";
 
   const data = DesaWisataData();
-  const filterData = data.filter(
-    (data: any) => data.visitors <= 5000
-  );
+  const filterData = data.filter((data: any) => data.visitors <= 5000);
+  const limitedData = filterData.slice(0, 4);
 
   // jam buka dan tutup operasional
   const filterOpenHoursByDay = (data: any, day: string) => {
@@ -53,7 +53,7 @@ const DewiLainnya = () => {
   return (
     <div className="space-y-2 px-6 xs:px-2 py-[24px]">
       <div className="flex items-center justify-between">
-        <span className="text-xl font-semibold tracking-wider">
+        <span className="text-xl xs:text-medium font-semibold tracking-wider">
           {t("dewiAnother")}
         </span>
 
@@ -76,7 +76,7 @@ const DewiLainnya = () => {
       </div>
 
       <div className="grid grid-cols-4 lg:grid-cols-3 xs:grid-cols-1 md:grid-cols-2 gap-4">
-        {filterData.map((desa: any, index: number) => (
+        {limitedData.map((desa: any, index: number) => (
           <DesaCard
             key={index}
             name={desa.name}
@@ -89,6 +89,10 @@ const DewiLainnya = () => {
             testimony={desa.testimony.length}
             openhours={isOpen()}
             schedule={desa.openHours[storedLanguage]}
+            control={{
+              save: favorite.control.saveFavorite,
+              delete: favorite.control.deleteFavorite,
+            }}
           />
         ))}
       </div>

@@ -71,5 +71,7 @@
   "facility": "fasilitas",
   "checkNow": "cek segera",
   "call": "hubungi",
-  "touristVillage": "desa wisata di"
+  "touristVillage": "desa wisata di",
+  "favoriteEmpty": "Tidak ada Desa Wisata yang disimpan",
+  "touristVillageYou": "Desa Wisata Anda"
 }
