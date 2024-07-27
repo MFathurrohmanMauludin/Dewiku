@@ -44,6 +44,7 @@ import Rating from "react-rating";
 import { DesaWisataData } from "../../utils/data";
 import { useTranslation } from "react-i18next";
 import { getWeatherData } from "../../utils/weather";
+import { useFavoriteStore } from "../../utils/saveDewi";
 
 interface GaleryProps {
   title: string;
@@ -326,6 +327,7 @@ const GaleryCard = (data: GaleryProps) => {
 const DesaCard = (data: DesaCardProps) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [isLike, setIsLike] = useState(false);
+  const { favorite } = useFavoriteStore();
 
   // translate
   const { t } = useTranslation();
@@ -341,6 +343,11 @@ const DesaCard = (data: DesaCardProps) => {
   const [cityName, setCityName] = useState<string>("");
   const [weatherName, setWeatherName] = useState<string>("");
   const [weatherCodeIcon, setWeatherCodeIcon] = useState<string>("");
+
+  useEffect(() => {
+    const status = getData.filter((desa) => favorite.includes(desa.name))
+    setIsLike(status.length > 0);
+  }, [setIsLike])
 
   useEffect(() => {
     const fetchWeather = async () => {
