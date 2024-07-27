@@ -49,6 +49,7 @@ import {
 } from "../../utils/changeNumber";
 import { useTranslation } from "react-i18next";
 import { getWeatherData } from "../../utils/weather";
+import { useFavoriteStore } from "../../utils/saveDewi";
 
 interface Props {
   desa: any;
@@ -77,6 +78,9 @@ const InfoDewi = (info: Props) => {
   const localStorageKey = "selectedLanguage";
   const storedLanguage = localStorage.getItem(localStorageKey) || "en";
 
+  // favorite control
+  const { favorite, addFavorite, removeFavorite } = useFavoriteStore();
+
   // translate
   const { t } = useTranslation(["language"]);
 
@@ -92,7 +96,6 @@ const InfoDewi = (info: Props) => {
   ];
 
   const getData = info.desa;
-
   const { search, pathname } = useLocation();
 
   const regex = /(?:\?|&)name=([^&]+)/;
@@ -121,6 +124,13 @@ const InfoDewi = (info: Props) => {
     data.type.includes(isType)
   );
 
+  // like 
+  useEffect(() => {
+    const status = getData.filter((desa: any) => favorite.includes(desa.name))
+    setIsLike(status.length > 0);
+  }, [setIsLike])
+
+  // get width
   useEffect(() => {
     const handleResize = () => {
       setDeviceWidth(window.innerWidth);
@@ -149,7 +159,9 @@ const InfoDewi = (info: Props) => {
         );
         setCityName(getData.name);
         setWeatherName(getData.weather[0].description);
-        setWeatherCodeIcon(`https://openweathermap.org/img/wn/${getData.weather[0].icon}.png`);
+        setWeatherCodeIcon(
+          `https://openweathermap.org/img/wn/${getData.weather[0].icon}.png`
+        );
         setTemperature(getData.main.temp);
       } catch (err) {
         console.log("Failed to fetch weather data");
@@ -226,25 +238,34 @@ const InfoDewi = (info: Props) => {
 
                 <div className="flex items-center gap-x-2">
                   <Button
-                    className={`bg-white/10 backdrop-blur-sm text-white text-sm ${
+                    className={`bg-white/10 backdrop-blur-sm text-white text-md z-[50] ${
                       isLike ? "text-rose-700" : "text-white"
                     } hover:text-rose-700`}
                     startContent={
-                      <div className="flex items-center gap-x-2">
-                        <FontAwesomeIcon
-                          icon={isLike ? faHeartSolid : faHeart}
-                          fontSize={16}
-                        />
-                        <span>
-                          {isLike
-                            ? formatNumberShort(detail.like + 1)
-                            : formatNumberShort(detail.like)}
-                        </span>
-                      </div>
+                      <Tooltip
+                        content={!isLike ? t("like") : t("unlike")}
+                        placement="bottom"
+                      >
+                        <div className="flex items-center text-sm gap-x-2">
+                          <FontAwesomeIcon
+                            icon={isLike ? faHeartSolid : faHeart}
+                            fontSize={16}
+                          />
+                          <span>
+                            {isLike
+                              ? formatNumberShort(detail.like + 1)
+                              : formatNumberShort(detail.like)}
+                          </span>
+                        </div>
+                      </Tooltip>
                     }
-                    onClick={() => setIsLike(!isLike)}
+                    onClick={() => {
+                      setIsLike(!isLike);
+                      addFavorite(detail.name);
+                      isLike && removeFavorite(detail.name);
+                    }}
                     variant="solid"
-                    size="md"
+                    size="sm"
                     radius="full"
                   />
 
@@ -554,7 +575,11 @@ const InfoDewi = (info: Props) => {
             <ul>
               {detail.facility[storedLanguage].map((data: any) => (
                 <li className="flex items-center capitalize gap-x-1">
-                  <FontAwesomeIcon className="text-green-600" icon={faCheckSquare} fontSize={14} /> 
+                  <FontAwesomeIcon
+                    className="text-green-600"
+                    icon={faCheckSquare}
+                    fontSize={14}
+                  />
                   <span>{data}</span>
                 </li>
               ))}
