@@ -83,7 +83,7 @@ interface DesaCardProps {
   control: {
     save: any;
     delete: any;
-  }
+  };
 }
 
 interface EventProps {
@@ -345,9 +345,11 @@ const DesaCard = (data: DesaCardProps) => {
   const [weatherCodeIcon, setWeatherCodeIcon] = useState<string>("");
 
   useEffect(() => {
-    const desa:any = getData.filter((desa) => favorite.includes(desa.name));
-    setIsLike(desa === data.name);
-  }, [setIsLike])
+    if (favorite.length > 0) {
+      const desa: any = getData.filter((desa) => favorite.includes(desa.name));
+      setIsLike(desa[0].name === data.name || desa.length > 1);
+    }
+  }, [setIsLike]);
 
   useEffect(() => {
     const fetchWeather = async () => {
@@ -429,11 +431,10 @@ const DesaCard = (data: DesaCardProps) => {
               </Tooltip>
             }
             onClick={() => {
-              setIsLike(!isLike)
+              setIsLike(!isLike);
               data.control.save(data.name);
               isLike && data.control.delete(data.name);
-            }
-          }
+            }}
             variant="solid"
             size="sm"
             radius="full"

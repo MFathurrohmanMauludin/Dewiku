@@ -124,11 +124,15 @@ const InfoDewi = (info: Props) => {
     data.type.includes(isType)
   );
 
-  // like 
+  // like
   useEffect(() => {
-    const status = getData.filter((desa: any) => favorite.includes(desa.name))
-    setIsLike(status === info.fullname);
-  }, [setIsLike])
+    if (favorite.length > 0) {
+      const desa: any = getData.filter((data: any) =>
+        favorite.includes(data.name)
+      );
+      setIsLike(desa[0].name === detail.name);
+    }
+  }, [setIsLike]);
 
   // get width
   useEffect(() => {
