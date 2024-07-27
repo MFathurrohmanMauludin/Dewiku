@@ -11,12 +11,10 @@ import { I18nextProvider } from 'react-i18next';
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import i18n from "./utils/i18n";
-import Favorite from "./pages/Favorite";
 import DewiPopularAll from "./pages/DewiPopularAll";
 import DewiAnotherAll from "./pages/DewiAnotherAll";
 import DewiSearch from "./pages/DewiSearch";
-
-
+import SaveFavorite from "./pages/SaveFavorite";
 
 const App = () => {
   const { t } = useTranslation(['language']);
@@ -38,7 +36,7 @@ const App = () => {
         <Routes>
           <Route path="/" Component={Home} />
           <Route path="/info-dewi" Component={DetailDewi} />
-          <Route path="/favorit" Component={Favorite} />
+          <Route path="/favorit" Component={SaveFavorite} />
           <Route path="/syarat-&-ketentuan" Component={Syarat_Ketentuan} />
           <Route path="/desa-wisata-populer" Component={DewiPopularAll}/>
           <Route path="/desa-wisata-lainnya" Component={DewiAnotherAll}/>
