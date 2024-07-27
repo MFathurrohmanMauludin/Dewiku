@@ -36,6 +36,7 @@ import { SearchCard } from "../card";
 import { useTranslation } from "react-i18next";
 import useStore from "../../utils/store";
 import { useLocation } from "react-router-dom";
+import searchNowImg from "../../assets/search-now.png";
 
 interface FormProps {
   photo: string;
@@ -469,7 +470,7 @@ const SearchModal = (data: searchProps) => {
                   <div className="flex flex-col gap-y-2 justify-center items-center h-[300px] overflow-y-auto">
                     <Image
                       className="max-w-[260px]"
-                      src="https://img.freepik.com/free-vector/curiosity-search-concept-illustration_114360-11031.jpg"
+                      src={searchNowImg}
                       width={300}
                       alt="search-desa"
                     />
