@@ -345,7 +345,7 @@ const DesaCard = (data: DesaCardProps) => {
   const [weatherCodeIcon, setWeatherCodeIcon] = useState<string>("");
 
   useEffect(() => {
-    const desa = getData.filter((desa) => favorite.includes(desa.name))
+    const desa:any = getData.filter((desa) => favorite.includes(desa.name));
     setIsLike(desa === data.name);
   }, [setIsLike])
 
