@@ -41,7 +41,7 @@ const DewiPopularAll = () => {
     <div className="space-y-2 px-6 xs:px-2 pt-[80px]">
       <div className="flex items-center justify-between">
         <span className="text-xl font-semibold tracking-wider">
-          {t("dewiAnother")}
+          {t("dewiPopular")}
         </span>
       </div>
 
