@@ -2,8 +2,9 @@ import { useTranslation } from "react-i18next";
 import { getHours, getToday, timeStringToMinutes } from "../utils/changeDate";
 import { DesaWisataData } from "../utils/data";
 import { DesaCard } from "../components/card";
+import { FavoriteProps } from "../components/dewi-popular";
 
-const DewiPopularAll = () => {
+const DewiPopularAll = (favorite: FavoriteProps) => {
   const localStorageKey = "selectedLanguage";
   const storedLanguage = localStorage.getItem(localStorageKey) || "en";
 
@@ -59,6 +60,10 @@ const DewiPopularAll = () => {
             testimony={desa.testimony.length}
             openhours={isOpen()}
             schedule={desa.openHours[storedLanguage]}
+            control={{
+              save: favorite.control.saveFavorite,
+              delete: favorite.control.deleteFavorite,
+            }}
           />
         ))}
       </div>
