@@ -127,7 +127,7 @@ const InfoDewi = (info: Props) => {
   // like 
   useEffect(() => {
     const status = getData.filter((desa: any) => favorite.includes(desa.name))
-    setIsLike(status.length > 0);
+    setIsLike(status === info.fullname);
   }, [setIsLike])
 
   // get width
