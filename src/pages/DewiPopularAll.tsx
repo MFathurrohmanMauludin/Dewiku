@@ -2,10 +2,12 @@ import { useTranslation } from "react-i18next";
 import { getHours, getToday, timeStringToMinutes } from "../utils/changeDate";
 import { DesaWisataData } from "../utils/data";
 import { DesaCard } from "../components/card";
+import { useFavoriteStore } from "../utils/saveDewi";
 
 const DewiPopularAll = () => {
   const localStorageKey = "selectedLanguage";
   const storedLanguage = localStorage.getItem(localStorageKey) || "en";
+  const { addFavorite, removeFavorite } = useFavoriteStore();
 
   const data = DesaWisataData();
   const filterData = data.filter((desa) => desa.visitors >= 5000);
@@ -60,8 +62,8 @@ const DewiPopularAll = () => {
             openhours={isOpen()}
             schedule={desa.openHours[storedLanguage]}
             control={{
-              save: null,
-              delete: null,
+              save: addFavorite,
+              delete: removeFavorite,
             }}
           />
         ))}
