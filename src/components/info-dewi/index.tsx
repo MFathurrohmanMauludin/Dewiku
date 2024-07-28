@@ -497,7 +497,7 @@ const InfoDewi = (info: Props) => {
               </div>
 
               <div className="grid grid-cols-3 xs:grid-cols-1 sm:grid-cols-2 gap-4 mt-3 overflow-y-auto max-h-[500px]">
-                {detail.testimony.flatMap((data: any, index: number) => (
+                {info.testimony.flatMap((data: any, index: number) => (
                   <RatingCard key={index} {...data} />
                 ))}
               </div>
